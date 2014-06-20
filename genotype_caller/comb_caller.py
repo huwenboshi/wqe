@@ -156,6 +156,13 @@ class comb_caller:
                     v[1+(dim-1)*(dim-1)+2*num_pah+i*dim+j] = 1.0
                     v[1+(dim-1)*(dim-1)+2*num_pah+j*dim+i] = -1.0
                     A_t.append(v)
+        for i in xrange(dim-1):
+            for j in xrange(i, dim-1):
+                if(i != j):
+                    v = [0.0]*(num_vars)
+                    v[1+i*(dim-1)+j] = 1.0
+                    v[1+j*(dim-1)+i] = -1.0
+                    A_t.append(v)
         A = matrix(A_t).trans()
         b = matrix([0.0]*A.size[0],(A.size[0],1))
         
