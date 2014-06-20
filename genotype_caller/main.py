@@ -1,4 +1,5 @@
 from maxsep_caller import *
+from comb_caller import *
 
 # load training data
 train_data_file = open('../test_data/SNP_A-1643086_train.txt', 'r')
@@ -13,5 +14,8 @@ for line in train_data_file:
     else:
         pb.append([float(cols[0]), float(cols[1])])
 
-a = maxsep_caller('SNP_A-1643086', pa, pb)
+c1 = 1
+c2 = 10
+c3 = 100
+a = comb_caller('SNP_A-1643086', pa, pb, c1, c2, c3)
 a.find_ellipsoid()

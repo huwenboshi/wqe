@@ -1,4 +1,6 @@
 from cvxopt import matrix, solvers
+solvers.options['show_progress'] = False
+
 import math
 
 # genotype calling using maxsep
@@ -68,7 +70,6 @@ class maxsep_caller:
                 v[i] = -0.5
                 v[cpos*dim+rpos] = -0.5
             Gs.append(v)
-            print matrix(v,(dim,dim))
         Gs = [matrix(Gs)]
         hs = [matrix([0.0]*(dim*dim),(dim,dim))]
         
