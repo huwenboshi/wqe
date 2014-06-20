@@ -1,7 +1,12 @@
-from cvxopt import matrix, solvers
-solvers.options['show_progress'] = False
-
+from cvxopt import matrix, spmatrix, solvers
+from cvxopt.lapack import gesv, getrs
+from numpy import array
+import numpy
 import math
+import time
+
+# quiet cvxopt
+solvers.options['show_progress'] = False
 
 # genotype calling using maxsep
 class maxsep_caller:
@@ -87,5 +92,34 @@ class maxsep_caller:
         b = matrix([0.0]*A.size[0],(A.size[0],1))
         
         # solve it
-        sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
-        print(sol['x'])
+        passed = False
+        ntime = 1000
+        while(passed == False and ntime > 0):
+            try:
+                sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
+                passed = True
+            except ZeroDivisionError:
+                time.sleep(0.001)
+                ntime = ntime-1
+        if(passed == False):
+            return None
+
+        # parse out solution
+        x = sol['x']
+        k = x[0]
+        E_hat = matrix(x[1:], (dim,dim))
+        F = E_hat[1:,1:]
+        v = E_hat[1:,0]
+        s = E_hat[0,0]
+        ipiv = matrix(0, (dim-1,1))
+        gesv(-F, v, ipiv)
+        c = v
+        btm = 1-(s-c.trans()*F*c)
+        for i in xrange(F.size[0]):
+            for j in xrange(F.size[1]):
+                F[i,j] = F[i,j]/btm
+        E = F
+        rho = k
+        
+        # function return
+        return (c, E, rho)

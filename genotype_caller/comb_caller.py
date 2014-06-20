@@ -168,14 +168,24 @@ class comb_caller:
         b = matrix([0.0]*A.size[0],(A.size[0],1))
         
         # solve it
-        sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
-        x = sol['x']
+        passed = False
+        ntime = 1000
+        while(passed == False and ntime > 0):
+            try:
+                sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
+                passed = True
+            except ZeroDivisionError:
+                time.sleep(0.001)
+                ntime = ntime-1
+        if(passed == False):
+            return None
         
         # parse out solution
+        x = sol['x']
         k = x[0]
         E_hat = matrix(x[1+(dim-1)*(dim-1)+2*num_pah:], (dim,dim))
         F = E_hat[1:,1:]
-        v = E_hat[1:,1]
+        v = E_hat[1:,0]
         s = E_hat[0,0]
         ipiv = matrix(0, (dim-1,1))
         gesv(-F, v, ipiv)
