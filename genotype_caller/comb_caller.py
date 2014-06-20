@@ -1,10 +1,11 @@
 from cvxopt import matrix, spmatrix, solvers
+from cvxopt.lapack import gesv, getrs
 from numpy import array
-
-#solvers.options['show_progress'] = False
-
 import numpy
 import math
+
+# quiet cvxopt
+solvers.options['show_progress'] = False
 
 # genotype calling using maxsep
 class comb_caller:
@@ -168,4 +169,23 @@ class comb_caller:
         
         # solve it
         sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
-        print(sol['x'])
+        x = sol['x']
+        
+        # parse out solution
+        k = x[0]
+        E_hat = matrix(x[1+(dim-1)*(dim-1)+2*num_pah:], (dim,dim))
+        F = E_hat[1:,1:]
+        v = E_hat[1:,1]
+        s = E_hat[0,0]
+        ipiv = matrix(0, (dim-1,1))
+        gesv(-F, v, ipiv)
+        c = v
+        btm = 1-(s-c.trans()*F*c)
+        for i in xrange(F.size[0]):
+            for j in xrange(F.size[1]):
+                F[i,j] = F[i,j]/btm
+        E = F
+        rho = k
+        
+        # function return
+        return (c, E, rho)
