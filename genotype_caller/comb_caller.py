@@ -1,6 +1,9 @@
 from cvxopt import matrix, spmatrix, solvers
+from numpy import array
+
 #solvers.options['show_progress'] = False
 
+import numpy
 import math
 
 # genotype calling using maxsep
@@ -42,6 +45,7 @@ class comb_caller:
         num_vars = 1+(dim-1)*(dim-1)+2*num_pah+dim*dim
         c = matrix([0.0]*num_vars, (num_vars,1))
         c[0,0] = -self.c1
+        
         for i in xrange(dim-1):
             for j in xrange(dim-1):
                 if(i == j):
@@ -57,7 +61,8 @@ class comb_caller:
         # separation constraint
         Gl_t = []
         for i in xrange(num_pah):
-            row = [0.0]*(1+(dim-1)*(dim-1)+num_pah)+[-1.0]*num_pah
+            row = [0.0]*(1+(dim-1)*(dim-1)+num_pah)+[0.0]*num_pah
+            row[(1+(dim-1)*(dim-1)+num_pah)+i] = -1.0
             for j in xrange(dim):
                 for k in xrange(dim):
                     row.append(pah[j,i]*pah[k,i])
@@ -79,6 +84,7 @@ class comb_caller:
             row[1+(dim-1)*(dim-1)+i] = -1.0
             row[1+(dim-1)*(dim-1)+num_pah+i] = 1.0
             Gl_t.append(row)
+        # construct Gl and hl
         Gl = matrix(Gl_t).trans()
         col = [0.0]*(num_pah+num_pbh)+[-1.0]*num_pah+[1.0]*num_pah
         hl = matrix(col,(3*num_pah+num_pbh,1))
@@ -101,6 +107,7 @@ class comb_caller:
             Gs.append(v)
         Gs = [matrix(Gs)]
         hs = [matrix([0.0]*(dim*dim),(dim,dim))]
+        
         # block matrix must be positive semidefinite
         Gs2 = []
         Gs2.append([0.0]*(((dim-1)*2)*((dim-1)*2)))
@@ -109,11 +116,12 @@ class comb_caller:
             rpos = int(math.floor(float(i)/float(dim-1)))
             cpos = i % (dim-1)
             if(rpos == cpos):
-                v[(dim-1)*(dim-1)*2+(dim-1)+rpos*(dim-1)+cpos] = -1.0
+                v[(rpos+dim-1)*(dim-1)*2+(dim-1)+cpos] = -1.0
             else:
-                v[(dim-1)*(dim-1)*2+(dim-1)+rpos*(dim-1)+cpos] = -0.5
-                v[(dim-1)*(dim-1)*2+(dim-1)+cpos*(dim-1)+rpos] = -0.5
+                v[(rpos+dim-1)*(dim-1)*2+(dim-1)+cpos] = -0.5
+                v[(cpos+dim-1)*(dim-1)*2+(dim-1)+rpos] = -0.5
             Gs2.append(v)
+            
         for i in xrange(2*num_pah):
             Gs2.append([0.0]*(((dim-1)*2)*((dim-1)*2)))
         for i in xrange(dim*dim):
@@ -126,11 +134,12 @@ class comb_caller:
                 rpos = rpos-1
                 cpos = cpos-1
                 if(rpos == cpos):
-                    v[rpos*(dim-1)+cpos] = -1.0
+                    v[rpos*(dim-1)*2+cpos] = -1.0
                 else:
-                    v[rpos*(dim-1)+cpos] = -0.5
-                    v[cpos*(dim-1)+rpos] = -0.5
+                    v[rpos*(dim-1)*2+cpos] = -0.5
+                    v[cpos*(dim-1)*2+rpos] = -0.5
                 Gs2.append(v)
+            
         Gs.append(matrix(Gs2))
         zero_block = matrix([0.0]*((dim-1)*(dim-1)),((dim-1), (dim-1)))
         eye_block = spmatrix(1.0, range(dim-1), range(dim-1))
