@@ -7,15 +7,13 @@ import math
 # quiet cvxopt
 solvers.options['show_progress'] = False
 
-# genotype calling using maxsep
-class comb_caller:
+# ellipsoidal separation using robsep
+class robsep:
     
-    # initialize the maxsep_caller
-    # snpid - the id of the snp
+    # initialize the robsep
     # pa - na*dim matrix containing points to be included in the ellipsoid
     # pb - nb*dim matrix containing points to be excluded in the ellipsoid
-    def __init__(self, snpid, pa, pb, c1, c2, c3):
-        self.snpid = snpid
+    def __init__(self, pa, pb, c1, c2, c3):
         self.pa = matrix(pa)
         self.pb = matrix(pb)
         self.c1 = c1

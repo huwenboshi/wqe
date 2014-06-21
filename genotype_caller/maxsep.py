@@ -8,15 +8,13 @@ import time
 # quiet cvxopt
 solvers.options['show_progress'] = False
 
-# genotype calling using maxsep
-class maxsep_caller:
+# ellipsoidal separation using maxsep
+class maxsep:
     
-    # initialize the maxsep_caller
-    # snpid - the id of the snp
+    # initialize the maxsep
     # pa - na*dim matrix containing points to be included in the ellipsoid
     # pb - nb*dim matrix containing points to be excluded in the ellipsoid
-    def __init__(self, snpid, pa, pb):
-        self.snpid = snpid
+    def __init__(self, pa, pb):
         self.pa = matrix(pa)
         self.pb = matrix(pb)
     
