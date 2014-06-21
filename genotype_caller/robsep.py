@@ -10,15 +10,25 @@ solvers.options['show_progress'] = False
 # ellipsoidal separation using robsep
 class robsep:
     
-    # initialize the robsep
-    # pa - na*dim matrix containing points to be included in the ellipsoid
-    # pb - nb*dim matrix containing points to be excluded in the ellipsoid
-    def __init__(self, pa, pb, c1, c2, c3):
-        self.pa = matrix(pa)
-        self.pb = matrix(pb)
+    # setter for parameters
+    def set_param(self, c1, c2, c3):
         self.c1 = c1
         self.c2 = c2
         self.c3 = c3
+    
+    # setter for data
+    def set_data(self, pa, pb):
+        self.pa = matrix(pa)
+        self.pb = matrix(pb)
+    
+    # initialize the robsep
+    # pa - na*dim matrix containing points to be included in the ellipsoid
+    # pb - nb*dim matrix containing points to be excluded in the ellipsoid
+    def __init__(self, pa=None, pb=None, c1=None, c2=None, c3=None):
+        if(pa != None and pb != None):
+            self.set_data(pa, pb)
+        if(c1 != None and c2 != None and c3 != None):
+            self.set_param( c1, c2, c3)
     
     # transform into homogeneous coordinate
     # add a row of 1 vector to p

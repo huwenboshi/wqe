@@ -11,12 +11,20 @@ solvers.options['show_progress'] = False
 # ellipsoidal separation using maxsep
 class maxsep:
     
+    # default constructor
+    def __init__(self):
+        return
+    
+    # setter for parameters
+    def set_param(self, pa, pb):
+        self.pa = matrix(pa)
+        self.pb = matrix(pb)
+    
     # initialize the maxsep
     # pa - na*dim matrix containing points to be included in the ellipsoid
     # pb - nb*dim matrix containing points to be excluded in the ellipsoid
     def __init__(self, pa, pb):
-        self.pa = matrix(pa)
-        self.pb = matrix(pb)
+        self.set_param(pa, pb)
     
     # transform into homogeneous coordinate
     # add a row of 1 vector to p
