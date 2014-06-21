@@ -21,6 +21,6 @@ for line in train_data_file:
 c1 = 1
 c2 = 10
 c3 = 100
-st = socal_trainer('SNP_A-1643086', paa, pab, pbb, c1, c2, c3)
-st.train()
-
+trainer = socal_trainer('SNP_A-1643086', paa, pab, pbb, c1, c2, c3)
+trainer.train()
+trainer.rescue()

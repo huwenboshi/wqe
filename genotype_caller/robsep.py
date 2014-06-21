@@ -42,6 +42,10 @@ class robsep:
     
     # obtain ellipsoid using cvxopt
     def find_ellipsoid(self):
+    
+        # return None if not enough data is available
+        if(self.pa.size[1] < 3):
+            return None
         
         # homogenize coordinates
         pah = self.homogenize(self.pa)
@@ -206,4 +210,4 @@ class robsep:
         rho = k
         
         # function return
-        return (c, E, rho)
+        return {'c':c, 'E':E, 'rho':rho}
