@@ -162,7 +162,6 @@ class socal_trainer:
             scalar = 2*np.dot((e_aa_c-e_ab_c).trans(),major_ab_vec_u)
             e_bb_c += scalar*major_ab_vec_u
             e_bb['c'] = matrix(e_bb_c)
-            e_bb['c'] = e_ab_c = e_ab['c']
             
             # copy the ab ellipsoid to aa
             rot_ab_mat = rot_mat(ang_aa_ab)
