@@ -1,5 +1,6 @@
 from maxsep import *
 from robsep import *
+from utils import *
 import numpy as np
 
 # trainer for socal using ellipsoidal separation
@@ -64,29 +65,77 @@ class socal_trainer:
         # rescue the following situations
         # aa cluster missing
         if(self.ellipsoids['aa'] == None):
+        
             # rescure using bb cluster and ab cluster
+            e_bb = self.ellipsoids['bb']
+            e_ab = self.ellipsoids['ab']
+            
+            # initialize
+            e_aa = dict()
+            
+            # get ellipsoids' orientation
+            (u_bb, s_bb, v_bb) = np.linalg.svd(e_bb['E'])
+            major_bb_vec = u_bb[:,1]
+            (u_ab, s_ab, v_ab) = np.linalg.svd(e_ab['E'])
+            major_ab_vec = u_ab[:,1]
+            ang_bb_ab = angle(major_bb_vec, major_ab_vec)
+            
+            # estimate center
+            major_ab_vec_u = get_unit_vec(major_ab_vec)
+            e_bb_c = e_bb['c']
+            e_ab_c = e_ab['c']
+            e_aa_c = -e_bb_c+2*e_ab_c
+            scalar = 2*np.dot((e_bb_c-e_ab_c).trans(),major_ab_vec_u)
+            e_aa_c += scalar*major_ab_vec_u
+            e_aa['c'] = matrix(e_aa_c)
+            
+            # copy the ab ellipsoid to aa
+            rot_ab_mat = rot_mat(-ang_bb_ab)
+            e_aa['E'] = e_ab['E']*rot_ab_mat
+            e_aa['rho'] = e_ab['rho']
+            
+            # save the rescue
+            self.ellipsoids['aa'] = e_aa
+            
             return
         
         # ab cluster missing
         if(self.ellipsoids['ab'] == None):
+            
             # rescure using aa cluster and bb cluster
             e_aa = self.ellipsoids['aa']
             e_bb = self.ellipsoids['bb']
+            
             # initialize
             e_ab = dict()
+            
             # estimate center
             e_ab['c'] = (e_aa['c']+e_bb['c'])/2.0
+            
             # get ellipsoids' orientation
             (u_aa, s_aa, v_aa) = np.linalg.svd(e_aa['E'])
-            major_aa = u_aa[:,1]
+            major_aa_vec = u_aa[:,1]
             (u_bb, s_bb, v_bb) = np.linalg.svd(e_bb['E'])
-            major_bb = u_bb[:,1]
-            print major_aa
-            print major_bb
+            major_bb_vec = u_bb[:,1]
+            ang_aa_bb = angle(major_aa_vec, major_bb_vec)
+            ang_aa_bb_half = ang_aa_bb/2
             
-            (U, s, V) = np.linalg.svd(e_bb['E'])
-            # apply rescue
+            # copy the ellipsoid with smaller major axis length
+            major_aa_len = 1/math.sqrt(s_aa[1])
+            major_bb_len = 1/math.sqrt(s_bb[1])
+            if(major_aa_len <= major_bb_len):
+                rot_aa_mat = rot_mat(ang_aa_bb_half)
+                e_ab['E'] = e_aa['E']*rot_aa_mat
+                e_ab['rho'] = e_aa['rho']
+            else:
+                rot_aa_mat = rot_mat(-ang_aa_bb_half)
+                e_ab['E'] = e_bb['E']*rot_bb_mat
+                e_ab['rho'] = e_bb['rho']
+            
+            # save the rescue
             self.ellipsoids['ab'] = e_ab
+            
+            return
         
         # bb cluster missing
         if(self.ellipsoids['bb'] == None):
