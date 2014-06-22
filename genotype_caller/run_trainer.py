@@ -22,6 +22,12 @@ if(fullfile_nm == None or trainpct_str == None):
     sys.stderr.write("\tUse -t to specify trainpct\n")
     sys.exit()
 
+# files for saving the result
+tvinf_file_nm = 'trainpct_'+trainpct_str+'_tvinfo.txt'
+tvinf_file = open(tvinf_file_nm, 'w')
+ellipsoid_file_nm = 'trainpct_'+trainpct_str+'_ellipsoids.txt'
+ellipsoid_file = open(ellipsoid_file_nm,'w')
+
 # read in data
 indv_list = []
 fullfile = open(fullfile_nm, 'r')
@@ -73,7 +79,9 @@ for line in fullfile:
     tindv = used_indv[0:tn]
     vindv = used_indv[tn:len(used_indv)]
     
-    
+    # write to tvinf_file
+    tvinf_line = snp+'\t'+','.join(tindv)+'\t'+','.join(vindv)+'\n'
+    tvinf_file.write(tvinf_line)
     
     # train socal
     paa = []
@@ -96,7 +104,9 @@ for line in fullfile:
     trainer.rescue()
     ellipsoids = trainer.get_ellipsoids()
     
-    # save the result
+    # write to ellipsoid file
+    ellipsoid_line = snp+'\t'+str(freq)+'\t'
+    """
     e_aa = ellipsoids['aa']
     if(e_aa != None):
         print e_aa['c']
@@ -111,5 +121,10 @@ for line in fullfile:
     if(e_bb != None):
         print e_bb['c']
         print e_bb['E']
-fullfile.close()
+    """
+    ellipsoid_line += '\n'
+    ellipsoid_file.write(ellipsoid_line)
 
+fullfile.close()
+tvinf_file.close()
+ellipsoid_file.close()
