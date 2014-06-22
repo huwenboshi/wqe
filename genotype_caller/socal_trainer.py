@@ -1,5 +1,6 @@
 from maxsep import *
 from robsep import *
+import numpy as np
 
 # trainer for socal using ellipsoidal separation
 class socal_trainer:
@@ -59,15 +60,33 @@ class socal_trainer:
         # 2 or more clusters are missing
         if(nmiss >= 2):
             return
-        # the ab genotype cluster is missing
-        if(self.ellipsoids['ab'] == None):
-            return
         
         # rescue the following situations
         # aa cluster missing
         if(self.ellipsoids['aa'] == None):
             # rescure using bb cluster and ab cluster
             return
+        
+        # ab cluster missing
+        if(self.ellipsoids['ab'] == None):
+            # rescure using aa cluster and bb cluster
+            e_aa = self.ellipsoids['aa']
+            e_bb = self.ellipsoids['bb']
+            # initialize
+            e_ab = dict()
+            # estimate center
+            e_ab['c'] = (e_aa['c']+e_bb['c'])/2.0
+            # get ellipsoids' orientation
+            (u_aa, s_aa, v_aa) = np.linalg.svd(e_aa['E'])
+            major_aa = u_aa[:,1]
+            (u_bb, s_bb, v_bb) = np.linalg.svd(e_bb['E'])
+            major_bb = u_bb[:,1]
+            print major_aa
+            print major_bb
+            
+            (U, s, V) = np.linalg.svd(e_bb['E'])
+            # apply rescue
+            self.ellipsoids['ab'] = e_ab
         
         # bb cluster missing
         if(self.ellipsoids['bb'] == None):
