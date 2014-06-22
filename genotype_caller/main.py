@@ -11,9 +11,9 @@ for line in train_data_file:
     line = line.strip()
     cols = line.split(',')
     genotype = cols[2]
-    if(genotype == '2'):
+    if(genotype == '1'):
         paa.append([float(cols[0]), float(cols[1])])
-    elif(genotype == '1'):
+    elif(genotype == '2'):
         pab.append([float(cols[0]), float(cols[1])])
     elif(genotype == '3'):
         pbb.append([float(cols[0]), float(cols[1])])
