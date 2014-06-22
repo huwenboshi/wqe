@@ -42,7 +42,7 @@ class socal_trainer:
         self.ellipsoids = {'aa': e_aa, 'ab': e_ab, 'bb': e_bb}
 
     # get the ellipsoids
-    def get_ellipsoids():
+    def get_ellipsoids(self):
         return self.ellipsoids
 
     # rescure missing cluster
@@ -91,7 +91,7 @@ class socal_trainer:
             
             # copy the ab ellipsoid to aa
             rot_ab_mat = rot_mat(-ang_bb_ab)
-            e_aa['E'] = e_ab['E']*rot_ab_mat
+            e_aa['E'] = rot_ab_mat.trans()*e_ab['E']*rot_ab_mat
             e_aa['rho'] = e_ab['rho']
             
             # save the rescue
@@ -125,11 +125,11 @@ class socal_trainer:
             major_bb_len = 1/math.sqrt(s_bb[1])
             if(major_aa_len <= major_bb_len):
                 rot_aa_mat = rot_mat(ang_aa_bb_half)
-                e_ab['E'] = e_aa['E']*rot_aa_mat
+                e_ab['E'] = rot_aa_mat.trans()*e_aa['E']*rot_aa_mat
                 e_ab['rho'] = e_aa['rho']
             else:
-                rot_aa_mat = rot_mat(-ang_aa_bb_half)
-                e_ab['E'] = e_bb['E']*rot_bb_mat
+                rot_bb_mat = rot_mat(-ang_aa_bb_half)
+                e_ab['E'] = rot_bb_mat.trans()*e_bb['E']*rot_bb_mat
                 e_ab['rho'] = e_bb['rho']
             
             # save the rescue
@@ -139,5 +139,37 @@ class socal_trainer:
         
         # bb cluster missing
         if(self.ellipsoids['bb'] == None):
+        
             # rescure using aa cluster and ab cluster
+            e_aa = self.ellipsoids['aa']
+            e_ab = self.ellipsoids['ab']
+            
+            # initialize
+            e_bb = dict()
+            
+            # get ellipsoids' orientation
+            (u_aa, s_aa, v_aa) = np.linalg.svd(e_aa['E'])
+            major_aa_vec = u_aa[:,1]
+            (u_ab, s_ab, v_ab) = np.linalg.svd(e_ab['E'])
+            major_ab_vec = u_ab[:,1]
+            ang_aa_ab = angle(major_aa_vec, major_ab_vec)
+            
+            # estimate center
+            major_ab_vec_u = get_unit_vec(major_ab_vec)
+            e_aa_c = e_aa['c']
+            e_ab_c = e_ab['c']
+            e_bb_c = -e_aa_c+2*e_ab_c
+            scalar = 2*np.dot((e_aa_c-e_ab_c).trans(),major_ab_vec_u)
+            e_bb_c += scalar*major_ab_vec_u
+            e_bb['c'] = matrix(e_bb_c)
+            e_bb['c'] = e_ab_c = e_ab['c']
+            
+            # copy the ab ellipsoid to aa
+            rot_ab_mat = rot_mat(ang_aa_ab)
+            e_bb['E'] = rot_ab_mat.trans()*e_ab['E']*rot_ab_mat
+            e_bb['rho'] = e_ab['rho']
+            
+            # save the rescue
+            self.ellipsoids['bb'] = e_bb
+            
             return

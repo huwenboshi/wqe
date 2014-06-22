@@ -12,8 +12,9 @@ def angle(v1, v2):
     return math.acos(dotproduct(v1, v2) / (length(v1) * length(v2)))
   
 def rot_mat(ang):
-    return np.matrix([[math.cos(ang), -math.sin(ang)],
-                      [math.sin(ang),  math.cos(ang)]])
+    m = matrix(np.matrix([[math.cos(ang), -math.sin(ang)],
+                          [math.sin(ang),  math.cos(ang)]]))
+    return m
 
 def get_unit_vec(vec):
     return matrix(vec/math.sqrt(np.dot(vec,vec)))
