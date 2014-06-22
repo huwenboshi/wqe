@@ -2,6 +2,7 @@ from maxsep import *
 from robsep import *
 from utils import *
 import numpy as np
+import time
 
 # trainer for socal using ellipsoidal separation
 class socal_trainer:

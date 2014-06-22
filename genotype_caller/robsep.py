@@ -3,6 +3,7 @@ from cvxopt.lapack import gesv, getrs
 from numpy import array
 import numpy
 import math
+import time
 
 # quiet cvxopt
 solvers.options['show_progress'] = False
@@ -44,7 +45,7 @@ class robsep:
     def find_ellipsoid(self):
     
         # return None if not enough data is available
-        if(self.pa.size[1] < 3):
+        if(self.pa.size[1] < 3 or self.pb.size[1] < 3):
             return None
         
         # homogenize coordinates
@@ -181,7 +182,7 @@ class robsep:
         
         # solve it
         passed = False
-        ntime = 1000
+        ntime = 5
         while(passed == False and ntime > 0):
             try:
                 sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
