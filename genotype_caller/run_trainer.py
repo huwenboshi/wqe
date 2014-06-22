@@ -5,7 +5,7 @@ from random import shuffle
 from socal_trainer import *
 import sys
 import math
-
+import time
 
 # get command line
 parser = OptionParser()
@@ -100,28 +100,56 @@ for line in fullfile:
     c2 = 10
     c3 = 100
     trainer = socal_trainer(snp, paa, pab, pbb, c1, c2, c3)
+    
+    # time execution in ms
+    t1 = time.time()
     trainer.train()
     trainer.rescue()
+    t2 = time.time()
+    dt = (t2-t1)*1000.0
+    
+    # get the ellipsoids
     ellipsoids = trainer.get_ellipsoids()
     
     # write to ellipsoid file
-    ellipsoid_line = snp+'\t'+str(freq)+'\t'
-    """
+    ellipsoid_line = snp+'\t'+str(freq)+'\t'+str(dt)+'\t'
     e_aa = ellipsoids['aa']
     if(e_aa != None):
-        print e_aa['c']
-        print e_aa['E']
-        print
+        c = e_aa['c'][0]
+        ellipsoid_line += str(c)+','
+        E = e_aa['E']
+        ellipsoid_line += str(E[0,0])+','+str(E[0,1])+','+str(E[1,0])
+        ellipsoid_line += str(E[1,1])+','
+        rho = e_aa['rho']
+        ellipsoid_line += str(rho)+'\t'
+    else:
+        ellipsoid_line += ','.join(['-1.0']*6)+'\t'
+        
     e_ab = ellipsoids['ab']
     if(e_ab != None):
-        print e_ab['c']
-        print e_ab['E']
-        print
+        c = e_ab['c'][0]
+        ellipsoid_line += str(c)+','
+        E = e_ab['E']
+        ellipsoid_line += str(E[0,0])+','+str(E[0,1])+','+str(E[1,0])
+        ellipsoid_line += str(E[1,1])+','
+        rho = e_ab['rho']
+        ellipsoid_line += str(rho)+'\t'
+    else:
+        ellipsoid_line += ','.join(['-1.0']*6)+'\t'
+        
     e_bb = ellipsoids['bb']
     if(e_bb != None):
-        print e_bb['c']
-        print e_bb['E']
-    """
+        c = e_bb['c'][0]
+        ellipsoid_line += str(c)+','
+        E = e_bb['E']
+        ellipsoid_line += str(E[0,0])+','+str(E[0,1])+','+str(E[1,0])
+        ellipsoid_line += str(E[1,1])+','
+        rho = e_bb['rho']
+        ellipsoid_line += str(rho)
+    else:
+        ellipsoid_line += ','.join(['-1.0']*6)
+    
+    # write result to file
     ellipsoid_line += '\n'
     ellipsoid_file.write(ellipsoid_line)
 

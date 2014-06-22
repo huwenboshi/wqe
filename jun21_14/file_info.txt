@@ -1,0 +1,5 @@
+ellipsoids:
+snp freq time c_aa,E_aa_11,E_aa_12,E_aa_21,E_aa_22,rho c_ab,E_ab_11,E_ab_12,E_ab_21,E_aa_22,rho c_bb,E_bb_11,E_bb_12,E_bb_21,E_bb_22,rho
+
+tvinfo:
+snp training_samples validation_samples
