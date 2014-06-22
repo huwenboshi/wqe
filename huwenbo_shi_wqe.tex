@@ -94,4 +94,45 @@ allele intensity values}
 
 %-----------------------------------------------------------------------------
 
+
+
+
+
+
+
+
+
+%-----------------------------------------------------------------------------
+% method
+\section{Method}
+
+% overview of method
+\par
+SNP allele intensities are first summarized from raw microarray data using
+SNPRMA.
+After this step, SoCal calls genotypes in two steps.
+In the first step, SoCal finds ellipsoidal regions containing each of the
+genotype of a SNP using reference genotype calls.
+In the second step, SoCal classifies samples with unknown genotypes using
+minimum distance classification.
+
+\par
+The organization of this seciton is as follows.
+First, I introduce the problem of pattern separation by ellipsoids and how
+SoCal forms ellipsoidal region for each genotype of a SNP.
+Then, I show how SoCal uses these ellipsoids to call genotypes.
+
+\subsection{Pattern separation by ellipsoids}
+
+\par
+Talk about ellipsoidal separation
+
+\subsection{Missing clusters}
+Talk about how SoCal handles missing clusters
+
+\subsection{Genotype calling and outlier detection}
+Talk about how classification and outlier detection is done
+
+%-----------------------------------------------------------------------------
+
 \end{document}
