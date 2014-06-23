@@ -117,19 +117,22 @@ genotype of a SNP using reference genotype calls.
 In the second step, SoCal classifies samples with unknown genotypes using
 minimum distance classification.
 The organization of this section is as follows.
-First, I introduce the problem of pattern separation by ellipsoids and show
+First, I introduce the problem of pattern separation by ellipsoid and show
 how SoCal forms ellipsoidal regions for each genotype of a SNP.
-Then, I show how SoCal uses these ellipsoids to call genotypes.
+Then, I show how SoCal uses these ellipsoidal regions to call genotypes.
 
 
 % pattern separation via ellipsoids
-\subsection{Pattern separation by ellipsoids}
+\subsection{Pattern separation by ellipsoid}
+
 An ellipsoid $\mathcal{E} \subseteq \mathbbm{R}^{n}$ can be expressed as
 $\mathcal{E} = \{x \in \mathbbm{R}^{n} | (x-c)^TE(x-c)\leqslant1\}$, where
-$c$ is the center of the ellipsoid, and $E$ a positive semidefinite matrix.
-Let $a_i$ be the points to be included in an ellipsoidal region, and $b_j$
-be the points to be excluded, the problem is to find a $c$ and $E$ that
-separate $a_i$ from $b_j$.
+$c$ is the center of the ellipsoid, and $E$ a positive definite matrix
+denoting the orientation of the ellipsoid.
+Let $a_i$ be the points to be included in an ellipsoid, and $b_j$
+be the points to be excluded, the problem of ellipsoidal separation is to find
+$c$ and $E$ such that $(a_i-c)^TE(a_i-c)\leqslant1, \forall i$ and
+$(b_j-c)^TE(b_j-c)>1, \forall j$.
 
 % ellipsoidal pattern separation formulation
 \subsection{Forming decision regions for each genotype}
