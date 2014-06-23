@@ -121,13 +121,23 @@ First, I introduce the problem of pattern separation by ellipsoids and show
 how SoCal forms ellipsoidal regions for each genotype of a SNP.
 Then, I show how SoCal uses these ellipsoids to call genotypes.
 
-% ellipsoidal pattern separation formulation
+
+% pattern separation via ellipsoids
 \subsection{Pattern separation by ellipsoids}
+An ellipsoid $\mathcal{E} \subseteq \mathbbm{R}^{n}$ can be expressed as
+$\mathcal{E} = \{x \in \mathbbm{R}^{n} | (x-c)^TE(x-c)\leqslant1\}$, where
+$c$ is the center of the ellipsoid, and $E$ a positive semidefinite matrix.
+Let $a_i$ be the points to be included in an ellipsoidal region, and $b_j$
+be the points to be excluded, the problem is to find a $c$ and $E$ that
+separate $a_i$ from $b_j$.
+
+% ellipsoidal pattern separation formulation
+\subsection{Forming decision regions for each genotype}
 
 Instead, COMB provides a flexible way to control outlier effect using an
 approach that combines the previous two methods with an additional $l_1$-norm
 regularization.
-The method of COMB can be expressed as a convex programming problem:
+The method of COMB can be expressed as a conic programming problem:
 \begin{gather*}
     \mathrm{minimize}\;-{\beta_{1}}k+{\beta_{2}} trace(T)+\beta_{3} \|u-1\|_1 \\  
     \mathrm{subject\;to}\;\;
@@ -148,7 +158,7 @@ The method of COMB can be expressed as a convex programming problem:
             F & I \\
             I & T
         \end{array}
-    \right] \succeq 0,
+    \right] \succeq 0
 \end{gather*}
 where $\beta_{i} > 0$ are the weights assigned to each sub-objectives:
 maximizing separation ratio, minimizing ellipsoid volume, and controlling
