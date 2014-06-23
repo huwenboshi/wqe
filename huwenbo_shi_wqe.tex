@@ -131,38 +131,38 @@ $c$ is the center of the ellipsoid, and $E$ a positive definite matrix
 denoting the orientation of the ellipsoid.
 Let $a_i$ be the points to be included in an ellipsoid, and $b_j$
 be the points to be excluded, the problem of ellipsoidal separation is to find
-$c$ and $E$ such that $(a_i-c)^TE(a_i-c)\leqslant1, \forall i$ and
-$(b_j-c)^TE(b_j-c)>1, \forall j$.
+$c$ and $E$ such that $(a_i-c)^TE(a_i-c)\leqslant1 \, \forall i$ and
+$(b_j-c)^TE(b_j-c)>1 \, \forall j$.
 
 % ellipsoidal pattern separation formulation
-\subsection{Forming decision regions for each genotype}
+\subsection{Forming ellipsoidal decision regions for each genotype}
 
 Instead, COMB provides a flexible way to control outlier effect using an
 approach that combines the previous two methods with an additional $l_1$-norm
 regularization.
 The method of COMB can be expressed as a conic programming problem:
-\begin{gather*}
-    \mathrm{minimize}\;-{\beta_{1}}k+{\beta_{2}} trace(T)+\beta_{3} \|u-1\|_1 \\  
-    \mathrm{subject\;to}\;\;
-    (1,a_i)^T\tilde{E}(1,a_i)\leqslant u_i \; \forall i \\
-    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
-    (1,b_j)^T\tilde{E}(1,b_j) \ge k \; \forall j \\
-    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
-    \tilde{E}=
+\begin{equation*}
+\begin{aligned}
+& \text{minimize}
+&& -{\beta_{1}}k+{\beta_{2}} trace(T)+\beta_{3} \|u-\mathbbm{1}\|_1 \\  
+& \text{subject to}
+&& (1,a_i)^T\tilde{E}(1,a_i)\leqslant u_i \; \forall i \\
+&&&(1,b_j)^T\tilde{E}(1,b_j) \ge k \; \forall j \\
+&&&\tilde{E}=
     \left[
         \begin{array}{cc}
             s & v^T \\
             v & F
         \end{array}
     \right] \succeq 0 \\
-    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
-    \left[
+&&&\left[
         \begin{array}{cc}
             F & I \\
             I & T
         \end{array}
     \right] \succeq 0
-\end{gather*}
+\end{aligned}
+\end{equation*}
 where $\beta_{i} > 0$ are the weights assigned to each sub-objectives:
 maximizing separation ratio, minimizing ellipsoid volume, and controlling
 outliers.
@@ -172,9 +172,11 @@ $\mathcal{E}^{*}=
 where
 $c^{*}=-F^{-1}v$, $E^{*}=F/(1-s+{c^{*}}^TF{c^{*}})$.
 
+% handling missing clusters
 \subsection{Missing clusters}
 Talk about how SoCal handles missing clusters
 
+% genotype calling and outlier detection
 \subsection{Genotype calling and outlier detection}
 Talk about how classification and outlier detection is done
 
