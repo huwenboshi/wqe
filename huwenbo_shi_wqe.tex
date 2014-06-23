@@ -137,10 +137,19 @@ $(b_j-c)^TE(b_j-c)>1 \, \forall j$.
 % ellipsoidal pattern separation formulation
 \subsection{Forming ellipsoidal decision regions for each genotype}
 
-Instead, COMB provides a flexible way to control outlier effect using an
-approach that combines the previous two methods with an additional $l_1$-norm
-regularization.
-The method of COMB can be expressed as a conic programming problem:
+Let $G=\{AA,AB,BB\}$ be the set of genotypes of a SNP, and $J_{AA}$, $J_{AA}$,
+$J_{BB}$ the index set of samples with the corresponding genotype.
+Let $X=\{(log(\theta_A),log(\theta_B))_i|i=1,\cdots,
+|J_{AA}|+|J_{AB}|+|J_{BB}|\}$ be the set of log transformed allele intensities
+of all the samples, and $X_{AA}=\{x_j|x_j \in X, j \in J_{AA}\}$,
+$X_{AB}=\{x_j|x_j \in X, j \in J_{AB}\}$,
+$X_{BB}=\{x_j|x_j \in X, j \in J_{BB}\}$ the set of log transformed allele
+intensities of the corresponding genotype.
+To find the ellipsoid that includes $X_{AA}$ and excludes $X_{AB}$ and
+$X_{BB}$, one sets $\{a_i\}=X_{AA}$ and $\{b_j\}=X_{AB} \cup X_{BB}$, and
+solves the following conic programming problem.
+For the sake of space, detailed derivation of the problem formulation is not
+presented here.
 \begin{equation*}
 \begin{aligned}
 & \text{minimize}
