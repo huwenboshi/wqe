@@ -43,6 +43,7 @@ separation for Affymetrix SNP microarray}
 
 \par
 % background
+% need to add why genotype calling is important
 SNP microarray is a cost--effective approach to genotype samples for specific
 association studies. % cite
 In Affymetrix SNP microarrays, oligonucleotide probes are first used to bind
@@ -115,17 +116,48 @@ In the first step, SoCal finds ellipsoidal regions containing each of the
 genotype of a SNP using reference genotype calls.
 In the second step, SoCal classifies samples with unknown genotypes using
 minimum distance classification.
-
-\par
-The organization of this seciton is as follows.
-First, I introduce the problem of pattern separation by ellipsoids and how
-SoCal forms ellipsoidal region for each genotype of a SNP.
+The organization of this section is as follows.
+First, I introduce the problem of pattern separation by ellipsoids and show
+how SoCal forms ellipsoidal regions for each genotype of a SNP.
 Then, I show how SoCal uses these ellipsoids to call genotypes.
 
+% ellipsoidal pattern separation formulation
 \subsection{Pattern separation by ellipsoids}
 
-\par
-Talk about ellipsoidal separation
+Instead, COMB provides a flexible way to control outlier effect using an
+approach that combines the previous two methods with an additional $l_1$-norm
+regularization.
+The method of COMB can be expressed as a convex programming problem:
+\begin{gather*}
+    \mathrm{minimize}\;-{\beta_{1}}k+{\beta_{2}} trace(T)+\beta_{3} \|u-1\|_1 \\  
+    \mathrm{subject\;to}\;\;
+    (1,a_i)^T\tilde{E}(1,a_i)\leqslant u_i \; \forall i \\
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+    (1,b_j)^T\tilde{E}(1,b_j) \ge k \; \forall j \\
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+    \tilde{E}=
+    \left[
+        \begin{array}{cc}
+            s & v^T \\
+            v & F
+        \end{array}
+    \right] \succeq 0 \\
+    \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+    \left[
+        \begin{array}{cc}
+            F & I \\
+            I & T
+        \end{array}
+    \right] \succeq 0,
+\end{gather*}
+where $\beta_{i} > 0$ are the weights assigned to each sub-objectives:
+maximizing separation ratio, minimizing ellipsoid volume, and controlling
+outliers.
+The final ellipsoidal decision region $\mathcal{E}^{*}$ is defined as
+$\mathcal{E}^{*}=
+\{x \in \mathbbm{R}^{n} | (x-c^{*})^TE^{*}(x-c^{*})\leqslant2(1+k)\}$,
+where
+$c^{*}=-F^{-1}v$, $E^{*}=F/(1-s+{c^{*}}^TF{c^{*}})$.
 
 \subsection{Missing clusters}
 Talk about how SoCal handles missing clusters
