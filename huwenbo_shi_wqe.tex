@@ -21,13 +21,13 @@
 \lhead{Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
 
 % title
-\newcommand*{\TitleFont}{%
-      \usefont{\encodingdefault}{\rmdefault}{b}{n}%
-      \fontsize{16}{20}%
+\newcommand*{\TitleFont}{
+      \usefont{\encodingdefault}{\rmdefault}{b}{n}
+      \fontsize{16}{20}
       \selectfont}
-\newcommand*{\AuthorFont}{%
-      \usefont{\encodingdefault}{\rmdefault}{r}{n}%
-      \fontsize{12}{20}%
+\newcommand*{\AuthorFont}{
+      \usefont{\encodingdefault}{\rmdefault}{r}{n}
+      \fontsize{12}{20}
       \selectfont}
 \title{\TitleFont SoCal: supervised genotype calling via ellipsoidal
 separation for Affymetrix SNP microarray}
@@ -146,7 +146,7 @@ Let $X=\{(log(\theta_A),log(\theta_B))_i|i=1,\cdots,
 of all the samples, and $X_{AA}=\{x_j|x_j \in X, j \in J_{AA}\}$,
 $X_{AB}=\{x_j|x_j \in X, j \in J_{AB}\}$,
 $X_{BB}=\{x_j|x_j \in X, j \in J_{BB}\}$ the set of log transformed allele
-intensities of the corresponding genotype.
+intensities from samples having the corresponding genotype.
 
 \par
 To find the ellipsoid that includes $X_{AA}$ and excludes $X_{AB}$ and
@@ -200,15 +200,25 @@ In SoCal, $\beta_1$,$\beta_2$,$\beta_3$,$\beta_4$ are empirically set to 1,10,
 100, and 30 respectively.
 
 \par
-Similary, to find the ellipsoid that includes $X_{AB}$ and excludes $X_{AA}$ and
-$X_{BB}$, one sets $\{a_i\}=X_{AB}$ and $\{b_j\}=X_{AA} \cup X_{BB}$, and
+Similary, to find the ellipsoid that includes $X_{AB}$ and excludes $X_{AA}$
+and $X_{BB}$, one sets $\{a_i\}=X_{AB}$ and $\{b_j\}=X_{AA} \cup X_{BB}$, and
 solves the above conic programming problem.
 The same procedure also applies to finding the ellipsoid that includes $X_{BB}$
 and excludes $X_{AA}$ and $X_{AB}$.
 
 % handling missing clusters
-\subsection{Missing clusters}
-Talk about how SoCal handles missing clusters
+\subsection{Handling missing genotype clusters}
+
+\par
+If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
+that SNP are well defined, and SoCal obtains three ellipsoidal decision
+regions for that SNP, one for each genotype (Figure \ref{fig:intro_genclus}).
+If a SNP has low MAF, one genotype cluster may be missing 
+(Figure \ref{fig:intro_genclus}).
+For these SNPs, SoCal estimates the missing ellipsoid using the ellipsoids for
+the other two genotypes through simple geometric transformations.
+For SNPs with two missing genotype clusters, SoCal will not attempt to find
+any decision region.
 
 % genotype calling and outlier detection
 \subsection{Genotype calling and outlier detection}
