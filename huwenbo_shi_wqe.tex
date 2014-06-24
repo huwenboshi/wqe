@@ -125,6 +125,7 @@ Then, I show how SoCal uses these ellipsoidal regions to call genotypes.
 % pattern separation via ellipsoids
 \subsection{Pattern separation by ellipsoid}
 
+\par
 An ellipsoid $\mathcal{E} \subseteq \mathbbm{R}^{n}$ can be expressed as
 $\mathcal{E} = \{x \in \mathbbm{R}^{n} | (x-c)^TE(x-c)\leqslant1\}$, where
 $c$ is the center of the ellipsoid, and $E$ a positive definite matrix
@@ -137,6 +138,7 @@ $(b_j-c)^TE(b_j-c)>1 \, \forall j$.
 % ellipsoidal pattern separation formulation
 \subsection{Forming ellipsoidal decision regions for each genotype}
 
+\par
 Let $G=\{AA,AB,BB\}$ be the set of genotypes of a SNP, and $J_{AA}$, $J_{AA}$,
 $J_{BB}$ the index set of samples with the corresponding genotype.
 Let $X=\{(log(\theta_A),log(\theta_B))_i|i=1,\cdots,
@@ -145,6 +147,8 @@ of all the samples, and $X_{AA}=\{x_j|x_j \in X, j \in J_{AA}\}$,
 $X_{AB}=\{x_j|x_j \in X, j \in J_{AB}\}$,
 $X_{BB}=\{x_j|x_j \in X, j \in J_{BB}\}$ the set of log transformed allele
 intensities of the corresponding genotype.
+
+\par
 To find the ellipsoid that includes $X_{AA}$ and excludes $X_{AB}$ and
 $X_{BB}$, one sets $\{a_i\}=X_{AA}$ and $\{b_j\}=X_{AB} \cup X_{BB}$, and
 solves the following conic programming problem.
@@ -172,14 +176,35 @@ presented here.
     \right] \succeq 0
 \end{aligned}
 \end{equation*}
-where $\beta_{i} > 0$ are the weights assigned to each sub-objectives:
-maximizing separation ratio, minimizing ellipsoid volume, and controlling
-outliers.
-The final ellipsoidal decision region $\mathcal{E}^{*}$ is defined as
+
+\par
+In the problem formulation above $\beta_{i} > 0$ are the weights assigned to
+each sub-objectives of finding the ellipsoid---maximizing separation ratio,
+minimizing ellipsoid volume, and controlling outliers.
+
+\par
+Let 
+$\tilde{E}^{*}=\left[
+    \begin{array}{cc}
+    s & v^T \\
+    v & F
+    \end{array}
+\right]$
+be the optimal solution to the problem above.
+The separating ellipsoid $\mathcal{E}^{*}$ is defined as
 $\mathcal{E}^{*}=
-\{x \in \mathbbm{R}^{n} | (x-c^{*})^TE^{*}(x-c^{*})\leqslant2(1+k)\}$,
-where
-$c^{*}=-F^{-1}v$, $E^{*}=F/(1-s+{c^{*}}^TF{c^{*}})$.
+\{x \in \mathbbm{R}^{n}|(x-c^{*})^TE^{*}(x-c^{*})\leqslant\beta_4(1+k)\}$,
+where $c^{*}=-F^{-1}v,\;E^{*}={{F} \over {(1-s+{c^{*}}^TF{c^{*}})}}$.
+Here, $\beta_4$ is a positive constant controlling the size of the ellipsoid.
+In SoCal, $\beta_1$,$\beta_2$,$\beta_3$,$\beta_4$ are empirically set to 1,10,
+100, and 30 respectively.
+
+\par
+Similary, to find the ellipsoid that includes $X_{AB}$ and excludes $X_{AA}$ and
+$X_{BB}$, one sets $\{a_i\}=X_{AB}$ and $\{b_j\}=X_{AA} \cup X_{BB}$, and
+solves the above conic programming problem.
+The same procedure also applies to finding the ellipsoid that includes $X_{BB}$
+and excludes $X_{AA}$ and $X_{AB}$.
 
 % handling missing clusters
 \subsection{Missing clusters}
