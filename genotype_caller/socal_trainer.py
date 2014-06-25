@@ -7,7 +7,7 @@ import time
 # trainer for socal using ellipsoidal separation
 class socal_trainer:
     
-    # initialize the genotype_caller, using robsep
+    # initialize the genotype_trainer, using robsep
     def __init__(self, snpid, paa, pab, pbb, c1, c2, c3):
         self.snpid = snpid
         self.paa = paa
