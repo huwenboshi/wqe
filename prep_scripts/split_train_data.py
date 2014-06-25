@@ -73,6 +73,7 @@ for i in xrange(nparts):
     snpinp = snp_list[st:ed]
     
     for s in snpinp:
+        outline = ''
         fai = snp_indv_geno[snp]
         alleles = fai[0]
         freq = fai[1]
@@ -82,4 +83,5 @@ for i in xrange(nparts):
         for indv in indv_list:
             outline += indv_geno[indv]+'\t'
         outfile.write(outline+'\n')
+        
     outfile.close()
