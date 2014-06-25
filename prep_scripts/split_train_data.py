@@ -68,15 +68,15 @@ for i in xrange(nparts):
     outfile.write(outline)
     st = i*nspp
     ed = st+nspp
-    if(ed > len(snp_list)):
+    if(i == nparts-1):
         ed = len(snp_list)
     snpinp = snp_list[st:ed]
     
     for s in snpinp:
         outline = ''
-        fai = snp_indv_geno[snp]
-        alleles = fai[0]
-        freq = fai[1]
+        fai = snp_indv_geno[s]
+        alleles = fai[1]
+        freq = fai[0]
         indv_geno = fai[2]
         outline += s+'\t'+str(alleles)+'\t'+str(freq)+'\t'
         
