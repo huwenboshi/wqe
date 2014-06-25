@@ -1,10 +1,6 @@
 #!/usr/bin/python
 
-from socal_caller import *
-from cvxopt import matrix
 from optparse import OptionParser
-from random import shuffle
-from socal_trainer import *
 import sys
 import math
 import time
