@@ -47,12 +47,12 @@ for line in fullfile:
     # get snp id
     snp = cols[0]
 
-    outline = snp+'\t'
-
     # get snp information - alleles and frequency
     sensea = cols[1][0]
     senseb = cols[1][2]
     freq = cols[2]
+    
+    outline = snp+'\t'+freq
     
     # parse out genotype information
     used_indv = []
@@ -136,7 +136,7 @@ for line in fullfile:
         score = result[1]
         
         # write out result
-        outfile.write(truth+'/'+call+','+str(score))
+        outfile.write(truth+'/'+call+','+str(score)+','+str(dt))
         if(i != len(indv_list)-1):
             outfile.write('\t')
         else:
