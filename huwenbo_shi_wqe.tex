@@ -271,7 +271,29 @@ $E_{BB}=R^{T}E_{AB}R$, where $R$ is a rotation matrix of angle $-\alpha$.
 
 % missing genotype ab cluster
 \subsubsection{Missing genotype AB cluster}
-Mid point
+
+Although rare, SNPs with genotype $AB$ cluster missing were indeed observed in
+reference genotype calls.
+For these SNPs, SoCal first obtains, $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$,
+the ellipsoids for genotype $AA$ and $BB$ cluster, and then estimates the
+center of $\mathcal{E}_{AB}$, the ellipsoid for genotype $AB$ cluster, using
+the mid-point between the centers of $\mathcal{E}_{AA}$ and $\mathcal{E}_{AB}$.
+The orientation of $\mathcal{E}_{AB}$ is obtained by applying a rotation
+to the ellipsoid with the minimum volume between $\mathcal{E}_{AA}$ and
+$\mathcal{E}_{BB}$.
+
+\par
+Formally, let $\mathcal{E}_{AB}=
+\{x \in \mathbbm{R}^{n}|(x-c_{AB})^TE_{AB}(x-c_{AB}) \leqslant 1\}$ be the
+estimated ellipsoid for genotype $AB$ cluster, and $\alpha$ the angle between
+$n_{AA}$ and $n_{BB}$, then
+$c_{AB}=(c_{AA}+c_{BB})/2$, and
+$E_{AB}=R^{T}\hat{E}R$, where $\hat{E}$ is the center matrix of the ellipsoid
+with the minimum volumne between $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$, and
+$R$ a rotation matrix of angle $\pm\alpha/2$.
+The sign of the angle of rotation is dependent on the choise of ellipsoid on
+which rotation is applied---positive for $\mathcal{E}_{AA}$, and negative
+for $\mathcal{E}_{BB}$.
 
 % genotype calling and outlier detection
 \subsection{Genotype calling and outlier detection}
