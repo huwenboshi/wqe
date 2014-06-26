@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  24 JUN 2014 20:55
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  26 JUN 2014 12:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -451,7 +451,7 @@ File: intro_figs/intro_genotype_clusters.pdf Graphic file (type pdf)
 
 <use intro_figs/intro_genotype_clusters.pdf>
 Package pdftex.def Info: intro_figs/intro_genotype_clusters.pdf used on input l
-ine 90.
+ine 98.
 (pdftex.def)             Requested size: 283.0568pt x 228.10162pt.
  [1
 
@@ -459,12 +459,12 @@ ine 90.
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (4.01836pt too wide) in paragraph at lines 112--123
+Overfull \hbox (4.01836pt too wide) in paragraph at lines 123--130
 []\OT1/cmr/m/n/10.95 SNP al-lele in-ten-si-ties are first sum-ma-rized from raw
- mi-croar-ray data us-ing SNPRMA.
+ mi-croar-ray data us-ing SNPRMA,
  []
 
-LaTeX Font Info:    Try loading font information for U+bbm on input line 129.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 135.
 (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 )
@@ -480,7 +480,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 150.
+(scrartcl)              by `\normalfont \slshape ' on input line 156.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -494,13 +494,13 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 150.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 156.
 
 [2 <./intro_figs/intro_genotype_clusters.pdf>]
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 197.
+(amsmath)                 on input line 204.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\sl'!
@@ -514,7 +514,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 229.
+(scrartcl)              by `\normalfont \slshape ' on input line 253.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -528,9 +528,38 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 229.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 253.
 
-[3] (./huwenbo_shi_wqe.aux)
+[3]
+
+Class scrartcl Warning: Usage of deprecated font command `\sl'!
+(scrartcl)              You should note, that in 1994 font command `\sl' has
+(scrartcl)              been defined for compatiblitiy to Script 2.0 only.
+(scrartcl)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrartcl)              shouldn't use such commands any longer and within
+(scrartcl)              KOMA-Script usage of `\sl' is definitely deprecated.
+(scrartcl)              See `fntguide.pdf' for more information about
+(scrartcl)              recommended font commands.
+(scrartcl)              Note also, that KOMA-Script will remove the definition
+(scrartcl)              of `\sl' anytime until release of about version 3.20.
+(scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
+(scrartcl)              by `\normalfont \slshape ' on input line 282.
+
+
+Class scrartcl Warning: Usage of deprecated font command `\rm'!
+(scrartcl)              You should note, that in 1994 font command `\rm' has
+(scrartcl)              been defined for compatiblitiy to Script 2.0 only.
+(scrartcl)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrartcl)              shouldn't use such commands any longer and within
+(scrartcl)              KOMA-Script usage of `\rm' is definitely deprecated.
+(scrartcl)              See `fntguide.pdf' for more information about
+(scrartcl)              recommended font commands.
+(scrartcl)              Note also, that KOMA-Script will remove the definition
+(scrartcl)              of `\rm' anytime until release of about version 3.20.
+(scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
+(scrartcl)              by `\normalfont \rmfamily ' on input line 282.
+
+[4] (./huwenbo_shi_wqe.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
@@ -540,10 +569,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 4534 strings out of 494985
- 64161 string characters out of 6180357
- 167848 words of memory out of 5000000
- 7671 multiletter control sequences out of 15000+600000
+ 4535 strings out of 494985
+ 64185 string characters out of 6180357
+ 168848 words of memory out of 5000000
+ 7672 multiletter control sequences out of 15000+600000
  17843 words of font info for 61 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  46i,13n,47p,796b,259s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -562,10 +591,10 @@ fb></usr/share/texlive/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb>
 r/share/texlive/texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (3 pages, 147316 bytes).
+Output written on huwenbo_shi_wqe.pdf (4 pages, 152322 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 89 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

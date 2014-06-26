@@ -37,6 +37,14 @@ separation for Affymetrix SNP microarray}
 %-----------------------------------------------------------------------------
 
 
+
+
+
+
+
+
+
+
 %-----------------------------------------------------------------------------
 % introduction
 \section{Introduction}
@@ -103,24 +111,22 @@ allele intensity values}
 
 
 
+
 %-----------------------------------------------------------------------------
 % method
 \section{Method}
 
 % overview of method
+\subsection{Overview of SoCal's genotype calling procedure}
+
 \par
 SNP allele intensities are first summarized from raw microarray data using
-SNPRMA.
+SNPRMA, which removes non-biological effect from the data.
 After this step, SoCal calls genotypes in two steps.
 In the first step, SoCal finds ellipsoidal regions containing each of the
 genotype of a SNP using reference genotype calls.
 In the second step, SoCal classifies samples with unknown genotypes using
 minimum distance classification.
-The organization of this section is as follows.
-First, I introduce the problem of pattern separation by ellipsoid and show
-how SoCal forms ellipsoidal regions for each genotype of a SNP.
-Then, I show how SoCal uses these ellipsoidal regions to call genotypes.
-
 
 % pattern separation via ellipsoids
 \subsection{Pattern separation by ellipsoid}
@@ -129,8 +135,8 @@ Then, I show how SoCal uses these ellipsoidal regions to call genotypes.
 An ellipsoid $\mathcal{E} \subseteq \mathbbm{R}^{n}$ can be expressed as
 $\mathcal{E} = \{x \in \mathbbm{R}^{n} | (x-c)^TE(x-c)\leqslant1\}$, where
 $c$ is the center of the ellipsoid, and $E$ a positive definite matrix
-denoting the orientation of the ellipsoid.
-Let $a_i$ be the points to be included in an ellipsoid, and $b_j$
+denoting the shape and orientation of the ellipsoid.
+Let $\{a_i\}$ be the points to be included in an ellipsoid, and $\{b_j\}$
 be the points to be excluded, the problem of ellipsoidal separation is to find
 $c$ and $E$ such that $(a_i-c)^TE(a_i-c)\leqslant1 \, \forall i$ and
 $(b_j-c)^TE(b_j-c)>1 \, \forall j$.
@@ -139,7 +145,7 @@ $(b_j-c)^TE(b_j-c)>1 \, \forall j$.
 \subsection{Forming ellipsoidal decision regions for each genotype}
 
 \par
-Let $G=\{AA,AB,BB\}$ be the set of genotypes of a SNP, and $J_{AA}$, $J_{AA}$,
+Let $G=\{AA,AB,BB\}$ be the set of genotypes of a SNP, and $J_{AA}$, $J_{AB}$,
 $J_{BB}$ the index set of samples with the corresponding genotype.
 Let $X=\{(log(\theta_A),log(\theta_B))_i|i=1,\cdots,
 |J_{AA}|+|J_{AB}|+|J_{BB}|\}$ be the set of log transformed allele intensities
@@ -149,8 +155,9 @@ $X_{BB}=\{x_j|x_j \in X, j \in J_{BB}\}$ the set of log transformed allele
 intensities from samples having the corresponding genotype.
 
 \par
-To find the ellipsoid that includes $X_{AA}$ and excludes $X_{AB}$ and
-$X_{BB}$, one sets $\{a_i\}=X_{AA}$ and $\{b_j\}=X_{AB} \cup X_{BB}$, and
+To find the ellipsoid that includes $X_{AA}$ and excludes
+$X_{AB} \cup X_{BB}$, one
+sets $\{a_i\}=X_{AA}$ and $\{b_j\}=X_{AB} \cup X_{BB}$, and
 solves the following conic programming problem.
 For the sake of space, detailed derivation of the problem formulation is not
 presented here.
@@ -200,25 +207,71 @@ In SoCal, $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$ are empirically
 set to 1, 10, 100, and 30 respectively.
 
 \par
-Similary, to find the ellipsoid that includes $X_{AB}$ and excludes $X_{AA}$
-and $X_{BB}$, one sets $\{a_i\}=X_{AB}$ and $\{b_j\}=X_{AA} \cup X_{BB}$, and
-solves the above conic programming problem.
+Similaly, to find the ellipsoid that includes $X_{AB}$ and excludes
+$X_{AA} \cup X_{BB}$, one sets $\{a_i\}=X_{AB}$ and
+$\{b_j\}=X_{AA} \cup X_{BB}$, and solves the above conic programming problem.
 The same procedure also applies to finding the ellipsoid that includes $X_{BB}$
-and excludes $X_{AA}$ and $X_{AB}$.
+and excludes $X_{AA} \cup X_{AB}$.
 
 % handling missing clusters
-\subsection{Handling missing genotype clusters}
+\subsection{Rescuing missing genotype clusters}
 
 \par
 If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
 that SNP are well defined, and SoCal obtains three ellipsoidal decision
 regions for that SNP, one for each genotype (Figure \ref{fig:intro_genclus}).
-If a SNP has low MAF, one genotype cluster may be missing 
+However, if a SNP has low MAF, some genotype cluster may not be well defined 
 (Figure \ref{fig:intro_genclus}).
 For these SNPs, SoCal estimates the missing ellipsoid using the ellipsoids for
 the other two genotypes through simple geometric transformations.
-For SNPs with two missing genotype clusters, SoCal will not attempt to find
-any decision region.
+For SNPs that have only one genotype cluster present, SoCal assigns all future
+genotype calls to that cluster.
+
+% missing genotype aa cluster
+\subsubsection{Missing genotype AA or BB cluster}
+
+\par
+If the genotype $AA$ cluster of a SNP has less than 5 reference calls, SoCal
+first finds the ellipsoids for genotype $AB$ and $BB$ clusters, and then
+estimates that for genotype $AA$ cluster through simple geometric
+transformations.
+
+\par
+Let $\mathcal{E}_{AB}=
+\{x \in \mathbbm{R}^{n}|(x-c_{AB})^TE_{AB}(x-c_{AB}) \leqslant 1\}$
+and $\mathcal{E}_{BB}=
+\{x \in \mathbbm{R}^{n}|(x-c_{BB})^TE_{BB}(x-c_{BB}) \leqslant 1\}$
+be the ellipsoids obtained for genotype $AB$ and $BB$ clusters,
+and $n_{AB}$, $n_{BB}$ the unit vectors pointing in the direction of
+the major axis of the corresponding ellipsoid.
+SoCal estimates the center of $\mathcal{E}_{AA}$, the ellipsoid for genotype
+$AA$ cluster, by reflecting $c_{BB}$, the center of $\mathcal{E}_{BB}$, across
+the major axis of $\mathcal{E}_{AB}$.
+To estimate the orientation of $\mathcal{E}_{AA}$, SoCal first determines the
+angle between $n_{AB}$ and $n_{BB}$, and then applies a rotation matrix of
+that angle on $E_{AB}$.
+
+\par
+Formally, let $\mathcal{E}_{AA}=
+\{x \in \mathbbm{R}^{n}|(x-c_{AA})^TE_{AA}(x-c_{AA}) \leqslant 1\}$ be the
+estimated ellipsoid for genotype $AA$ cluster, and $\alpha$ the angle between
+$n_{AB}$ and $n_{BB}$, then
+$c_{AA}=-c_{BB}+2c_{AB}+2n_{AB}((c_{BB}-c_{AB})^{T}n_{AB})$, and
+$E_{AA}=R^{T}E_{AB}R$, where $R$ is a rotation matrix of angle $\alpha$.
+
+\par
+If genotype $BB$ cluster is missing, the center and orientation of the
+ellipsoid for that cluster is estimated in a similar way.
+Formally, let $\mathcal{E}_{BB}=
+\{x \in \mathbbm{R}^{n}|(x-c_{BB})^TE_{BB}(x-c_{BB}) \leqslant 1\}$ be the
+estimated ellipsoid for genotype $BB$ cluster, and $\alpha$ the angle between
+$n_{AB}$ and $n_{AA}$, then
+$c_{BB}=-c_{AA}+2c_{AB}+2n_{AB}((c_{AA}-c_{AB})^{T}n_{AB})$, and
+$E_{BB}=R^{T}E_{AB}R$, where $R$ is a rotation matrix of angle $-\alpha$.
+
+% missing genotype ab cluster
+\subsubsection{Missing genotype AB cluster}
+Mid point
 
 % genotype calling and outlier detection
 \subsection{Genotype calling and outlier detection}
