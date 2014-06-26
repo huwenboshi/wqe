@@ -139,8 +139,7 @@ for line in fullfile:
         outfile.write(truth+'/'+call+','+str(score)+','+str(dt))
         if(i != len(used_indv)-1):
             outfile.write('\t')
-        else:
-            outfile.write('\n')
+    outfile.write('\n')
         
 fullfile.close()
 outfile.close()
