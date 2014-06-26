@@ -92,11 +92,11 @@ class socal_trainer:
             
             # copy the ab ellipsoid to aa
             rot_ab_mat = rot_mat(-ang_bb_ab)
-            e_aa['E'] = rot_ab_mat.trans()*e_ab['E']*rot_ab_mat
+            e_aa['E'] = penalty*rot_ab_mat.trans()*e_ab['E']*rot_ab_mat
             e_aa['rho'] = e_ab['rho']
             
             # save the rescue
-            self.ellipsoids['aa'] = penalty*e_aa
+            self.ellipsoids['aa'] = e_aa
             
             return
         
@@ -130,11 +130,11 @@ class socal_trainer:
                 e_ab['rho'] = e_aa['rho']
             else:
                 rot_bb_mat = rot_mat(-ang_aa_bb_half)
-                e_ab['E'] = rot_bb_mat.trans()*e_bb['E']*rot_bb_mat
+                e_ab['E'] = penalty*rot_bb_mat.trans()*e_bb['E']*rot_bb_mat
                 e_ab['rho'] = e_bb['rho']
             
             # save the rescue
-            self.ellipsoids['ab'] = penalty*e_ab
+            self.ellipsoids['ab'] = e_ab
             
             return
         
@@ -166,10 +166,10 @@ class socal_trainer:
             
             # copy the ab ellipsoid to aa
             rot_ab_mat = rot_mat(ang_aa_ab)
-            e_bb['E'] = rot_ab_mat.trans()*e_ab['E']*rot_ab_mat
+            e_bb['E'] = penalty*rot_ab_mat.trans()*e_ab['E']*rot_ab_mat
             e_bb['rho'] = e_ab['rho']
             
             # save the rescue
-            self.ellipsoids['bb'] = penalty*e_bb
+            self.ellipsoids['bb'] = e_bb
             
             return
