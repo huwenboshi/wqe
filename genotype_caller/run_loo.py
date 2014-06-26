@@ -27,6 +27,13 @@ if(fullfile_nm == None or outfile_nm == None):
 # files for saving the result
 outfile = open(outfile_nm,'w')
 
+# parameters
+c1 = 1
+c2 = 10
+c3 = 100
+c4 = 32
+c5 = 1.5
+
 # read in data
 indv_list = []
 fullfile = open(fullfile_nm, 'r')
@@ -55,6 +62,9 @@ for line in fullfile:
     outline = snp+'\t'+freq+'\t'
     
     # parse out genotype information
+    naa = 0
+    nab = 0
+    nbb = 0
     used_indv = []
     for i in xrange(len(indv_list)):
         info = cols[i+3].split(':')
@@ -66,12 +76,16 @@ for line in fullfile:
         else:
             used_indv.append(indv_list[i])
             if(geno == sensea+sensea):
+                naa += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'aa')
             elif(geno == sensea+senseb):
+                nab += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'ab')
             else:
+                nbb += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'bb')
     
+    outline += str(naa)+','+str(nab)+','+str(nbb)+'\t'
     outline += ','.join(used_indv)+'\t'
     outfile.write(outline)
     
@@ -95,16 +109,13 @@ for line in fullfile:
                 pab.append([float(info[0]), float(info[1])])
             elif(genotype == 'bb'):
                 pbb.append([float(info[0]), float(info[1])])
-        c1 = 1
-        c2 = 10
-        c3 = 100
         
         trainer = socal_trainer(snp, paa, pab, pbb, c1, c2, c3)
         
         # time execution in ms
         t1 = time.time()
         trainer.train()
-        trainer.rescue()
+        trainer.rescue(c5)
         t2 = time.time()
         dt = (t2-t1)*1000.0
         
@@ -124,7 +135,7 @@ for line in fullfile:
         E_ab = e_ab['E']
         c_bb = e_bb['c']
         E_bb = e_bb['E']
-        sc = socal_caller(c_aa,E_aa,c_ab,E_ab,c_bb,E_ab,30)
+        sc = socal_caller(c_aa,E_aa,c_ab,E_ab,c_bb,E_ab,c4)
         
         # do validation
         info = indv_geno[vindv]

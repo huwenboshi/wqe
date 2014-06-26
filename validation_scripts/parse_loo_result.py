@@ -29,7 +29,19 @@ loofile = open(loofile_nm, 'r')
 for line in loofile:
     line = line.strip()
     cols = line.split('\t')
-    print cols[3]
-
-
+    if(len(cols) < 4):
+        continue
+    for i in xrange(3,len(cols)):
+        results = cols[i].split(',')
+        tp = results[0].split('/')
+        truth = tp[0]
+        pred = tp[1]
+        score = float(results[1])
+        
+        if(score > 0.8):
+            ntotal += 1.0
+            if(truth == pred):
+                ncorrect += 1.0
 loofile.close()
+
+print '%f/%f=%f' % (ncorrect,ntotal,ncorrect/ntotal)

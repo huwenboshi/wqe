@@ -47,7 +47,7 @@ class socal_trainer:
         return self.ellipsoids
 
     # rescure missing cluster
-    def rescue(self):
+    def rescue(self, penalty):
     
         # count the number of missing clusters
         nmiss = 0
@@ -96,7 +96,7 @@ class socal_trainer:
             e_aa['rho'] = e_ab['rho']
             
             # save the rescue
-            self.ellipsoids['aa'] = e_aa
+            self.ellipsoids['aa'] = penalty*e_aa
             
             return
         
@@ -134,7 +134,7 @@ class socal_trainer:
                 e_ab['rho'] = e_bb['rho']
             
             # save the rescue
-            self.ellipsoids['ab'] = e_ab
+            self.ellipsoids['ab'] = penalty*e_ab
             
             return
         
@@ -170,6 +170,6 @@ class socal_trainer:
             e_bb['rho'] = e_ab['rho']
             
             # save the rescue
-            self.ellipsoids['bb'] = e_bb
+            self.ellipsoids['bb'] = penalty*e_bb
             
             return
