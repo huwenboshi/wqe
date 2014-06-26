@@ -190,6 +190,9 @@ class robsep:
             except ZeroDivisionError:
                 time.sleep(0.001)
                 ntime = ntime-1
+            except Exception:
+                time.sleep(0.001)
+                ntime = ntime-1
         if(passed == False):
             return None
         
