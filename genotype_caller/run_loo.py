@@ -13,26 +13,43 @@ import time
 parser = OptionParser()
 parser.add_option("-f", "--fullfile", dest="fullfile")
 parser.add_option("-o", "--outfile", dest="outfile")
+parser.add_option("-a", "--aval", dest="aval_str")
+parser.add_option("-b", "--bval", dest="bval_str")
+parser.add_option("-c", "--cval", dest="cval_str")
+parser.add_option("-d", "--dval", dest="dval_str")
+parser.add_option("-e", "--eval", dest="eval_str")
 (options, args) = parser.parse_args()
 fullfile_nm = options.fullfile
 outfile_nm = options.outfile
+aval = options.aval_str
+bval = options.bval_str
+cval = options.cval_str
+dval = options.dval_str
+evalu = options.eval_str
 
 # check command line
-if(fullfile_nm == None or outfile_nm == None):
+if(fullfile_nm == None or outfile_nm == None or
+   aval == None or bval == None or cval == None or
+   dval == None or evalu == None):
     sys.stderr.write("Usage:\n")
     sys.stderr.write("\tUse -f to specify fullfile\n")
     sys.stderr.write("\tUse -o to specify outfile\n")
+    sys.stderr.write("\tUse -a to specify aval\n")
+    sys.stderr.write("\tUse -b to specify bval\n")
+    sys.stderr.write("\tUse -c to specify cval\n")
+    sys.stderr.write("\tUse -d to specify dval\n")
+    sys.stderr.write("\tUse -e to specify eval\n")
     sys.exit()
 
 # files for saving the result
 outfile = open(outfile_nm,'w')
 
 # parameters
-c1 = 1
-c2 = 10
-c3 = 100
-c4 = 32
-c5 = 1.5
+c1 = float(aval)
+c2 = float(bval)
+c3 = float(cval)
+c4 = float(dval)
+c5 = float(evalu)
 
 # read in data
 indv_list = []
