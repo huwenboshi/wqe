@@ -29,9 +29,9 @@ loofile = open(loofile_nm, 'r')
 for line in loofile:
     line = line.strip()
     cols = line.split('\t')
-    if(len(cols) < 4):
+    if(len(cols) < 5):
         continue
-    for i in xrange(3,len(cols)):
+    for i in xrange(4,len(cols)):
         results = cols[i].split(',')
         tp = results[0].split('/')
         truth = tp[0]
