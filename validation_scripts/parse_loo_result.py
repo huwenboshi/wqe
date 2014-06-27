@@ -30,8 +30,6 @@ for line in loofile:
     line = line.strip()
     cols = line.split('\t')
     cnts = cols[2].split(',')
-    if(cnts[1] == '0'):
-        continue
     if(len(cols) < 5):
         continue
     for i in xrange(4,len(cols)):
