@@ -272,14 +272,14 @@ $E_{BB}=R^{T}E_{AB}R$, where $R$ is a rotation matrix of angle $-\alpha$.
 % missing genotype ab cluster
 \subsubsection{Missing genotype AB cluster}
 
-Although rare, SNPs with genotype $AB$ cluster missing were indeed observed in
-reference genotype calls.
-For these SNPs, SoCal first obtains, $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$,
+Although SNPs with genotype $AB$ cluster missing were not observed in HapMap
+reference genotype calls, for completeness, for these SNPs SoCal first
+obtains, $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$,
 the ellipsoids for genotype $AA$ and $BB$ cluster, and then estimates the
-center of $\mathcal{E}_{AB}$, the ellipsoid for genotype $AB$ cluster, using
-the mid-point between the centers of $\mathcal{E}_{AA}$ and $\mathcal{E}_{AB}$.
+center of $\mathcal{E}_{AB}$, the ellipsoid for the missing cluster, using
+the mid-point between the centers of $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$.
 The orientation of $\mathcal{E}_{AB}$ is obtained by applying a rotation
-to the ellipsoid with the minimum volume between $\mathcal{E}_{AA}$ and
+to the ellipsoid with the minimum volume among $\mathcal{E}_{AA}$ and
 $\mathcal{E}_{BB}$.
 
 \par
@@ -288,16 +288,66 @@ Formally, let $\mathcal{E}_{AB}=
 estimated ellipsoid for genotype $AB$ cluster, and $\alpha$ the angle between
 $n_{AA}$ and $n_{BB}$, then
 $c_{AB}=(c_{AA}+c_{BB})/2$, and
-$E_{AB}=R^{T}\hat{E}R$, where $\hat{E}$ is the center matrix of the ellipsoid
-with the minimum volumne between $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$, and
+$E_{AB}=R^{T}\hat{E}R$, where $\hat{E}$ is the matrix of the ellipsoid
+with the minimum volumne among $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$, and
 $R$ a rotation matrix of angle $\pm\alpha/2$.
 The sign of the angle of rotation is dependent on the choise of ellipsoid on
-which rotation is applied---positive for $\mathcal{E}_{AA}$, and negative
+which rotation is applied---positive for $\mathcal{E}_{AA}$ and negative
 for $\mathcal{E}_{BB}$.
 
 % genotype calling and outlier detection
-\subsection{Genotype calling and outlier detection}
-Talk about how classification and outlier detection is done
+\subsection{Genotype calling}
+
+\par
+After the ellipsoidal decision regions,
+$\mathcal{E}_{g}=
+\{x \in \mathbbm{R}^{n} | (x-c_g)^TE_g(x-c_g) \leqslant 1\},
+\forall g\in\{AA,AB,BB\}$ of a SNP are obtained, SoCal uses them to classify
+samples with unknown genotypes using minimum distance classification.
+
+\par
+If a sample has allele intensity $\theta_A$ and $\theta_B$ at SNP $n$,
+SoCal first computes
+$D_g=\sqrt{(x-c_g)^TE_g(x-c_g)}$,
+where $x=(log(\theta_A), log(\theta_B))$, for each $g\in\{AA,AB,BB\}$.
+SoCal then calls the genotype, $\mathcal{G}$, of that sample at SNP $n$
+as the genotype having the minimum $D_g$, that is,
+$\mathcal{G}=\operatorname*{arg\,min}_{g\in \{AA,AB,BB\}}D_g$.
+SoCal defines $\lambda=1-D_{\mathcal{G}}/(D_{AA}+D_{AB}+D_{BB})$ to quantify
+the confidence of each genotype call, . 
+%-----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+%-----------------------------------------------------------------------------
+% data
+
+\section{Data}
+TODO: Write data section
+
+%-----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+%-----------------------------------------------------------------------------
+% result
+
+\section{Result}
+TODO: Write result section
 
 %-----------------------------------------------------------------------------
 

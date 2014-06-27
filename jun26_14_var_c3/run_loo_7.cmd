@@ -19,4 +19,4 @@ module load python/2.7.3
 python ../genotype_caller/run_loo.py \
     -f ../affy100k_training_data_full/affy100_hind_training_full.txt.$i \
     -o ./loo_out_7/loo_out_7.$i \
-    -a 1 -b 10 -c 100 -d 30 -e 4.0
+    -a 1 -b 10 -c 80 -d 30 -e 4.0

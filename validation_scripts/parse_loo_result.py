@@ -38,7 +38,7 @@ for line in loofile:
         truth = tp[0]
         pred = tp[1]
         score = float(results[1])
-        if(score > 0.9):
+        if(score > 0.95):
             ntotal += 1.0
             if(truth == pred):
                 ncorrect += 1.0
