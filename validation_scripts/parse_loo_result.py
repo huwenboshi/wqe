@@ -29,6 +29,9 @@ loofile = open(loofile_nm, 'r')
 for line in loofile:
     line = line.strip()
     cols = line.split('\t')
+    cnts = cols[2].split(',')
+    if(cnts[1] == '0'):
+        continue
     if(len(cols) < 5):
         continue
     for i in xrange(4,len(cols)):
@@ -37,8 +40,7 @@ for line in loofile:
         truth = tp[0]
         pred = tp[1]
         score = float(results[1])
-        
-        if(score > 0.8):
+        if(score > 0.9):
             ntotal += 1.0
             if(truth == pred):
                 ncorrect += 1.0

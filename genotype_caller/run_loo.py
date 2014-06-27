@@ -95,7 +95,7 @@ for line in fullfile:
             if(geno == sensea+sensea):
                 naa += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'aa')
-            elif(geno == sensea+senseb):
+            elif(geno == sensea+senseb or geno == senseb+sensea):
                 nab += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'ab')
             else:

@@ -58,7 +58,7 @@ for line in fullfile:
             used_indv.append(indv_list[i])
             if(geno == sensea+sensea):
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,1)
-            elif(geno == sensea+senseb):
+            elif(geno == sensea+senseb or geno == senseb+sensea):
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,2)
             else:
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,3)
