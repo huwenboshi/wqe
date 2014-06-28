@@ -136,6 +136,10 @@ for line in fullfile:
         t2 = time.time()
         dt = (t2-t1)*1000.0
         
+        # get truth
+        info = indv_geno[vindv]
+        truth = info[2]
+        
         # get the ellipsoids - skip the ellipsoid if any cluster can't be
         # estimated
         ellipsoids = trainer.get_ellipsoids()
@@ -143,7 +147,7 @@ for line in fullfile:
         e_ab = ellipsoids['ab']
         e_bb = ellipsoids['bb']
         if(e_aa == None or e_ab == None or e_bb == None):
-            outfile.write('NN/NN')
+            outfile.write(truth+'/NN')
             if(i != len(used_indv)-1):
                 outfile.write('\t')
             continue
@@ -158,8 +162,6 @@ for line in fullfile:
         sc = socal_caller(c_aa,E_aa,c_ab,E_ab,c_bb,E_ab,c4)
         
         # do validation
-        info = indv_geno[vindv]
-        truth = info[2]
         x = matrix([float(info[0]),float(info[1])],(2,1))
         result = sc.mindist(x)
         
