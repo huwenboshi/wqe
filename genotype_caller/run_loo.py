@@ -143,6 +143,9 @@ for line in fullfile:
         e_ab = ellipsoids['ab']
         e_bb = ellipsoids['bb']
         if(e_aa == None or e_ab == None or e_bb == None):
+            outfile.write('NN/NN')
+            if(i != len(used_indv)-1):
+                outfile.write('\t')
             continue
         
         # run the caller
@@ -159,6 +162,12 @@ for line in fullfile:
         truth = info[2]
         x = matrix([float(info[0]),float(info[1])],(2,1))
         result = sc.mindist(x)
+        
+        if(result == None):
+            outfile.write('NN/NN')
+            if(i != len(used_indv)-1):
+                outfile.write('\t')
+            continue
         
         call = result[0]
         score = result[1]
