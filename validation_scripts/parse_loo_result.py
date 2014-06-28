@@ -27,6 +27,8 @@ ntotal = 0
 
 loofile = open(loofile_nm, 'r')
 for line in loofile:
+    ncps = 0.0
+    ntps = 0.0
     line = line.strip()
     cols = line.split('\t')
     cnts = cols[2].split(',')
@@ -38,10 +40,17 @@ for line in loofile:
         truth = tp[0]
         pred = tp[1]
         score = float(results[1])
-        if(score > 0.0):
+        if(score > 0.83):
             ntotal += 1.0
+            ntps += 1.0
             if(truth == pred):
                 ncorrect += 1.0
+                ncps += 1.0
+    if(ntps != 0):
+        accps = ncps/ntps
+        if(accps < 1.0):
+            line = cols[0]+'\t'+cols[1]+'\t'+str(ncps/ntps)
+            print line
 loofile.close()
 
 print '%f/%f=%f' % (ncorrect,ntotal,ncorrect/ntotal)
