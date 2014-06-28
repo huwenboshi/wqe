@@ -43,8 +43,11 @@ nbbaa = 0.0
 nbbab = 0.0
 nbbbb = 0.0
 
-nnc = 0.0
+naanc = 0.0
+nabnc = 0.0
+nbbnc = 0.0
 
+nnc = 0.0
 ntot = 0.0
 
 loofile = open(loofile_nm, 'r')
@@ -80,7 +83,14 @@ for line in loofile:
         ntot += 1.0
     
         # skip no call
-        if(cols[i] == 'NN/NN'):
+        if(cols[i].count('NN') > 0):
+            pre = cols[i][0:2]
+            if(pre == 'aa'):
+                naanc += 1.0
+            elif(pre == 'ab'):
+                nabnc += 1.0
+            elif(pre == 'bb'):
+                nbbnc += 1.0
             nnc += 1.0
             continue
     
@@ -113,9 +123,9 @@ for line in loofile:
                 nnc += 1.0
 loofile.close()
 
-print '%f\t%f\t%f' % (naaaa, naaab, naabb)
-print '%f\t%f\t%f' % (nabaa, nabab, nabbb)
-print '%f\t%f\t%f' % (nbbaa, nbbab, nbbbb)
+print '%f\t%f\t%f\t%f' % (naaaa, naaab, naabb, naanc)
+print '%f\t%f\t%f\t%f' % (nabaa, nabab, nabbb, nabnc)
+print '%f\t%f\t%f\t%f' % (nbbaa, nbbab, nbbbb, nbbnc)
 
 # compute overall accuracy
 tot1 = naaaa+naaab+naabb
