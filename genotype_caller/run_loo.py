@@ -164,7 +164,7 @@ for line in fullfile:
         result = sc.mindist(x)
         
         if(result == None):
-            outfile.write('NN/NN')
+            outfile.write(truth+'/NN')
             if(i != len(used_indv)-1):
                 outfile.write('\t')
             continue
