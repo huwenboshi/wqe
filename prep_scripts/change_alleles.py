@@ -65,10 +65,20 @@ for line in hapmart:
         print '\t'.join(indv_list)
         continue
     snp = cols[0]
+    
     hap_allele = tuple(cols[1].split('/'))
     freq = cols[2]
     affy_allele = snp_allele[snp]
+  
+    affy_allele_str = affy_allele[0]+affy_allele[1]
+
+    if(affy_allele_str == 'CG' or affy_allele_str == 'GC' or
+       affy_allele_str == 'AT' or affy_allele_str == 'TA'):
+       continue
+
     encode = fix_encoding(affy_allele, hap_allele)
+
+
     new_hap_allele = (encode[hap_allele[0]], encode[hap_allele[1]])
     out = snp+'\t'+new_hap_allele[0]+'/'+new_hap_allele[1]+'\t'+freq+'\t'
     for i in xrange(3, len(cols)):
