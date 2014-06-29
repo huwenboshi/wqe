@@ -45,7 +45,7 @@ class robsep:
     def find_ellipsoid(self):
     
         # return None if not enough data is available
-        if(self.pa.size[1] < 3 or self.pb.size[1] < 3):
+        if(self.pa.size[1] < 5 or self.pb.size[1] < 5):
             return None
         
         # homogenize coordinates
