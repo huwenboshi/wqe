@@ -2,6 +2,7 @@ from cvxopt import matrix, spmatrix, solvers
 from cvxopt.lapack import gesv, getrs
 from numpy import array
 from maxsep import *
+from utils import *
 import numpy
 import math
 import time
@@ -46,8 +47,13 @@ class robsep:
     def find_ellipsoid(self):
     
         # return None if not enough data is available
-        if(self.pa.size[1] < 3 or self.pb.size[1] < 3):
-            return None
+        if(self.pa.size[1] < 3 or self.pb.size[1] < 2):
+            tmp_nrow = self.pa.size[0]
+            tmp_c = mean_ps(self.pa).trans()
+            tmp_E = matrix(spmatrix(1.0, range(tmp_nrow), range(tmp_nrow)))
+            tmp_rho = 1.0
+            return {'c':tmp_c, 'E':tmp_E, 'rho':tmp_rho}
+            #return None
         
         # homogenize coordinates
         pah = self.homogenize(self.pa)
@@ -195,9 +201,14 @@ class robsep:
                 time.sleep(0.001)
                 ntime = ntime-1
         if(passed == False):
+            tmp_nrow = self.pa.size[0]
+            tmp_c = mean_ps(self.pa).trans()
+            tmp_E = matrix(spmatrix(1.0, range(tmp_nrow), range(tmp_nrow)))
+            tmp_rho = 1.0
+            return {'c':tmp_c, 'E':tmp_E, 'rho':tmp_rho}
             # use maxsep
-            mxsp = maxsep(self.pa, self.pb)
-            return mxsp.find_ellipsoid()
+            #mxsp = maxsep(self.pa, self.pb)
+            #return mxsp.find_ellipsoid()
         
         # parse out solution
         x = sol['x']
@@ -209,7 +220,7 @@ class robsep:
         ipiv = matrix(0, (dim-1,1))
         gesv(-F, v, ipiv)
         c = v
-        btm = 1-(s-c.trans()*F*c)
+        btm = 1-(s-c.trans()*F*c)+0.00000001
         for i in xrange(F.size[0]):
             for j in xrange(F.size[1]):
                 F[i,j] = F[i,j]/btm

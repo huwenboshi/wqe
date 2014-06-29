@@ -18,3 +18,14 @@ def rot_mat(ang):
 
 def get_unit_vec(vec):
     return matrix(vec/math.sqrt(np.dot(vec,vec)))
+    
+def mean_ps(ps):
+    nrow = ps.size[0]
+    ncol = ps.size[1]
+
+    means = [0.0]*nrow    
+    for i in xrange(0, ncol):
+        for j in xrange(0, nrow):
+            means[j] += ps[j,i]/float(ncol)
+    
+    return matrix(means, (1,nrow))

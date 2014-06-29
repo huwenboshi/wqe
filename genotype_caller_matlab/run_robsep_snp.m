@@ -2,14 +2,15 @@
 
 % parameters
 c1 = 1;
-c2 = 1000;
-c3 = 100000;
-c4 = 30;
+c2 = 1000000;
+c3 = 1000;
+c4 = 2;
 
 train_file = '/home/huwenbo/Dropbox/Spring14/wqe/jun28_problem_snps/SNP_A-1518245_data.txt';
 
 % read in training data
 train_data = dlmread(train_file);
+%train_data(85,3) = 1;
 
 % plot train data
 train_aa_idx = train_data(:,3)==1;

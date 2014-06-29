@@ -123,7 +123,7 @@ class maxsep:
         ipiv = matrix(0, (dim-1,1))
         gesv(-F, v, ipiv)
         c = v
-        btm = 1-(s-c.trans()*F*c)
+        btm = 1-(s-c.trans()*F*c)+0.00000001
         for i in xrange(F.size[0]):
             for j in xrange(F.size[1]):
                 F[i,j] = F[i,j]/btm

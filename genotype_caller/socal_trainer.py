@@ -77,6 +77,7 @@ class socal_trainer:
             # get ellipsoids' orientation
             (u_bb, s_bb, v_bb) = np.linalg.svd(e_bb['E'])
             major_bb_vec = u_bb[:,1]
+            
             (u_ab, s_ab, v_ab) = np.linalg.svd(e_ab['E'])
             major_ab_vec = u_ab[:,1]
             ang_bb_ab = angle(major_bb_vec, major_ab_vec)
