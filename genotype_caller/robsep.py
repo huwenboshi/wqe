@@ -48,12 +48,7 @@ class robsep:
     
         # return None if not enough data is available
         if(self.pa.size[1] < 3 or self.pb.size[1] < 2):
-            tmp_nrow = self.pa.size[0]
-            tmp_c = mean_ps(self.pa).trans()
-            tmp_E = matrix(spmatrix(1.0, range(tmp_nrow), range(tmp_nrow)))
-            tmp_rho = 1.0
-            return {'c':tmp_c, 'E':tmp_E, 'rho':tmp_rho}
-            #return None
+            return None
         
         # homogenize coordinates
         pah = self.homogenize(self.pa)

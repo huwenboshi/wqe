@@ -24,6 +24,7 @@ class socal_caller:
         # compute distance to aa
         c_aa = self.c_aa
         E_aa = self.E_aa
+        
         val = ((x-c_aa).trans()*E_aa*(x-c_aa))[0]
         if(val < 0):
             return None
