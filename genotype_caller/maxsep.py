@@ -99,12 +99,15 @@ class maxsep:
         
         # solve it
         passed = False
-        ntime = 1000
+        ntime = 10
         while(passed == False and ntime > 0):
             try:
                 sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
                 passed = True
             except ZeroDivisionError:
+                time.sleep(0.001)
+                ntime = ntime-1
+            except Exception:
                 time.sleep(0.001)
                 ntime = ntime-1
         if(passed == False):
@@ -128,4 +131,4 @@ class maxsep:
         rho = k
         
         # function return
-        return (c, E, rho)
+        return {'c':c, 'E':E, 'rho':rho}

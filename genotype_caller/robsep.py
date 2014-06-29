@@ -1,6 +1,7 @@
 from cvxopt import matrix, spmatrix, solvers
 from cvxopt.lapack import gesv, getrs
 from numpy import array
+from maxsep import *
 import numpy
 import math
 import time
@@ -182,7 +183,7 @@ class robsep:
         
         # solve it
         passed = False
-        ntime = 5
+        ntime = 10
         while(passed == False and ntime > 0):
             try:
                 sol = solvers.sdp(c, Gl, hl, Gs, hs, A, b)
@@ -194,7 +195,9 @@ class robsep:
                 time.sleep(0.001)
                 ntime = ntime-1
         if(passed == False):
-            return None
+            # use maxsep
+            mxsp = maxsep(self.pa, self.pb)
+            return mxsp.find_ellipsoid()
         
         # parse out solution
         x = sol['x']

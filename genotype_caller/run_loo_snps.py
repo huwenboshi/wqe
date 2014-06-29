@@ -92,10 +92,6 @@ for line in fullfile:
     
     outline = snp+'\t'+freq+'\t'
     
-    paa = []
-    pab = []
-    pbb = []
-    
     # parse out genotype information
     naa = 0
     nab = 0
@@ -113,22 +109,12 @@ for line in fullfile:
             if(geno == sensea+sensea):
                 naa += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'aa')
-                paa.append((sensea_int,senseb_int))
             elif(geno == sensea+senseb or geno == senseb+sensea):
                 nab += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'ab')
-                pab.append((sensea_int,senseb_int))
             else:
                 nbb += 1
                 indv_geno[indv_list[i]] = (sensea_int,senseb_int,'bb')
-                pbb.append((sensea_int,senseb_int))
-    
-    for p in paa:
-        print '%s,%s,%s' % (str(p[0]),str(p[1]),'1')
-    for p in pab:
-        print '%s,%s,%s' % (str(p[0]),str(p[1]),'2')
-    for p in pbb:
-        print '%s,%s,%s' % (str(p[0]),str(p[1]),'3')
     
     outline += str(naa)+','+str(nab)+','+str(nbb)+'\n'
     outline += ','.join(used_indv)+'\n'
