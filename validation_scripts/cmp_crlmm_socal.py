@@ -7,39 +7,23 @@ import time
 
 # get command line
 parser = OptionParser()
-parser.add_option("-a", "--hapmart", dest="hapmartfile")
+parser.add_option("-r", "--crlmm", dest="crlmmfile")
 parser.add_option("-c", "--socal", dest="socalfile")
 parser.add_option("-s", "--snps", dest="snpsfile")
-parser.add_option("-m", "--map", dest="mapfile")
 
 (options, args) = parser.parse_args()
 
-hapmartfile_nm = options.hapmartfile
+crlmmfile_nm = options.crlmmfile
 socalfile_nm = options.socalfile
 snpsfile_nm = options.snpsfile
-mapfile_nm = options.mapfile
 
 # check command line
-if(hapmartfile_nm == None or socalfile_nm == None or
-   snpsfile_nm == None or mapfile_nm == None):
+if(crlmmfile_nm == None or socalfile_nm == None or snpsfile_nm == None):
     sys.stderr.write("Usage:\n")
-    sys.stderr.write("\tUse -a to specify hapmartfile\n")
+    sys.stderr.write("\tUse -r to specify crlmmfile\n")
     sys.stderr.write("\tUse -c to specify socalfile\n")
     sys.stderr.write("\tUse -s to specify snpsfile\n")
-    sys.stderr.write("\tUse -m to specify mapfile\n")
     sys.exit()
-
-# read in map file
-snp_map = dict()
-mapfile = open(mapfile_nm, 'r')
-for line in mapfile:
-    line = line.strip()
-    cols = line.split()
-    snpid = cols[0]
-    allele_a = cols[2]
-    allele_b = cols[3]
-    snp_map[snpid] = (allele_a,allele_b)
-mapfile.close()
 
 # read in snps of interest
 snps_set = set()
@@ -75,7 +59,7 @@ for line in socalfile:
         socal_snp_indv_geno[snpid][socal_indv_list[i]] = genotype
 socalfile.close()
 
-# compare with hapmart
+# compare with crlmm
 naaaa = 0.0
 naaab = 0.0
 naabb = 0.0
@@ -91,71 +75,70 @@ nbbbb = 0.0
 ntot = 0.0
 ncorrect = 0.0
 
-hapmartfile = open(hapmartfile_nm, 'r')
+crlmmfile = open(crlmmfile_nm, 'r')
 flr = False
-hapmart_indv_list = []
-for line in hapmartfile:
+crlmm_indv_list = []
+for line in crlmmfile:
     line = line.strip()
     if(flr == False):
-        hapmart_indv_list = line.split()
+        crlmm_indv_list = line.split()
+        for i in xrange(len(crlmm_indv_list)):
+            tmp = crlmm_indv_list[i].split('_')[1]
+            crlmm_indv_list[i] = tmp
         flr = True
         continue
+
     cols = line.split()
     snpid = cols[0]
-    alleles = snp_map[snpid]
-    a = alleles[0]
-    b = alleles[1]
-    
+
     if(snpid not in snps_set):
         continue
     
     # read individual genotype
-    hapmart_indv_geno = dict()
-    for i in xrange(len(hapmart_indv_list)):
-        genotype = cols[i+3]
-        if(genotype == 'NN'):
-            continue
-        if(genotype == a+a):
+    crlmm_indv_geno = dict()
+    for i in xrange(len(crlmm_indv_list)):
+        genotype = cols[i+1]
+        if(genotype == '1'):
             genotype = 'aa'
-        elif(genotype == a+b or genotype == b+a):
+        elif(genotype == '2'):
             genotype = 'ab'
-        elif(genotype == b+b):
+        elif(genotype == '3'):
             genotype = 'bb'
-        hapmart_indv_geno[hapmart_indv_list[i]] = genotype
+        crlmm_indv_geno[crlmm_indv_list[i]] = genotype
     
     # compare with socal
     socal_indv_geno = socal_snp_indv_geno[snpid]
     for indv in socal_indv_geno:
-        if(indv not in hapmart_indv_geno):
+        if(indv not in crlmm_indv_geno):
             continue
         socal_call = socal_indv_geno[indv]
-        hapmart_call = hapmart_indv_geno[indv]
+        crlmm_call = crlmm_indv_geno[indv]
         
-        if(hapmart_call == 'aa' and socal_call == 'aa'):
+        if(crlmm_call == 'aa' and socal_call == 'aa'):
             naaaa += 1.0
-        elif(hapmart_call == 'aa' and socal_call == 'ab'):
+        elif(crlmm_call == 'aa' and socal_call == 'ab'):
             naaab += 1.0
-        elif(hapmart_call == 'aa' and socal_call == 'bb'):
+        elif(crlmm_call == 'aa' and socal_call == 'bb'):
             naabb += 1.0
         
-        elif(hapmart_call == 'ab' and socal_call == 'aa'):
+        elif(crlmm_call == 'ab' and socal_call == 'aa'):
             nabaa += 1.0
-        elif(hapmart_call == 'ab' and socal_call == 'ab'):
+        elif(crlmm_call == 'ab' and socal_call == 'ab'):
             nabab += 1.0
-        elif(hapmart_call == 'ab' and socal_call == 'bb'):
+        elif(crlmm_call == 'ab' and socal_call == 'bb'):
             nabbb += 1.0
         
-        elif(hapmart_call == 'bb' and socal_call == 'aa'):
+        elif(crlmm_call == 'bb' and socal_call == 'aa'):
             nbbaa += 1.0
-        elif(hapmart_call == 'bb' and socal_call == 'ab'):
+        elif(crlmm_call == 'bb' and socal_call == 'ab'):
             nbbab += 1.0
-        elif(hapmart_call == 'bb' and socal_call == 'bb'):
+        elif(crlmm_call == 'bb' and socal_call == 'bb'):
             nbbbb += 1.0
-hapmartfile.close()
+crlmmfile.close()
 
 
 
-print 'HapMap\SoCal\tAA\tAB\tBB'
+print 'CRLMM\SoCal\tAA\tAB\tBB'
 print 'AA\t\t%d\t%d\t%d' % (naaaa, naaab, naabb)
 print 'AB\t\t%d\t%d\t%d' % (nabaa, nabab, nabbb)
 print 'BB\t\t%d\t%d\t%d' % (nbbaa, nbbab, nbbbb)
