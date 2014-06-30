@@ -201,9 +201,6 @@ class robsep:
             tmp_E = matrix(spmatrix(1.0, range(tmp_nrow), range(tmp_nrow)))
             tmp_rho = 1.0
             return {'c':tmp_c, 'E':tmp_E, 'rho':tmp_rho}
-            # use maxsep
-            #mxsp = maxsep(self.pa, self.pb)
-            #return mxsp.find_ellipsoid()
         
         # parse out solution
         x = sol['x']
