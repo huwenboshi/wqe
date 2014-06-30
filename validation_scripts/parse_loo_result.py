@@ -47,7 +47,6 @@ naanc = 0.0
 nabnc = 0.0
 nbbnc = 0.0
 
-nnc = 0.0
 ntot = 0.0
 
 loofile = open(loofile_nm, 'r')
@@ -59,17 +58,13 @@ for line in loofile:
     snpid= cols[0]
     freq = float(cols[1])
     
-    # skip monomorphic snps
-    #if(freq >= 0.99 or freq <= 0.01):
-    #    continue
-
     # get data counts    
     cnts = cols[2].split(',')
     
     # count the number of missing clusters
     nmissing = 0
     for i in xrange(len(cnts)):
-        if(int(cnts[i]) < 5):
+        if(int(cnts[i]) < 3):
             nmissing += 1
     
     # if missing 2 or more clusters, skip
@@ -84,14 +79,13 @@ for line in loofile:
     
         # skip no call
         if(cols[i].count('NN') > 0):
-            pre = cols[i][0:2]
-            if(pre == 'aa'):
+            truth = cols[i][0:2]
+            if(truth == 'aa'):
                 naanc += 1.0
-            elif(pre == 'ab'):
+            elif(truth == 'ab'):
                 nabnc += 1.0
-            elif(pre == 'bb'):
+            elif(truth == 'bb'):
                 nbbnc += 1.0
-            nnc += 1.0
             continue
     
         # parse result with call
@@ -119,8 +113,14 @@ for line in loofile:
                 nbbab += 1.0
             elif(truth == 'bb' and pred == 'bb'):
                 nbbbb += 1.0
-            else:
-                nnc += 1.0
+        else:
+            if(truth == 'aa'):
+                naanc += 1.0
+            elif(truth == 'ab'):
+                nabnc += 1.0
+            elif(truth == 'bb'):
+                nbbnc += 1.0
+            
 loofile.close()
 
 print '%f\t%f\t%f\t%f' % (naaaa, naaab, naabb, naanc)
