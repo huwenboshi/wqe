@@ -40,6 +40,8 @@ class socal_caller:
         
         if(self.aa_state != None and self.aa_state != None):
             val = ((x-c_aa).trans()*E_aa*(x-c_aa))[0]
+            if(val < 0):
+                val = 0
             dist_aa = math.sqrt(val)
         else:
             dist_aa = 9999999999.0
@@ -51,6 +53,8 @@ class socal_caller:
         E_ab = self.E_ab
         if(self.ab_state != None and self.ab_state != None):
             val = ((x-c_ab).trans()*E_ab*(x-c_ab))[0]
+            if(val < 0):
+                val = 0
             dist_ab = math.sqrt(val)
         else:
             dist_ab = 9999999999.0
@@ -63,6 +67,8 @@ class socal_caller:
         E_bb = self.E_bb
         if(self.bb_state != None and self.bb_state != None):
             val = ((x-c_bb).trans()*E_bb*(x-c_bb))[0]
+            if(val < 0):
+                val = 0
             dist_bb = math.sqrt(val)
         else:
             dist_bb = 9999999999.0
