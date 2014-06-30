@@ -27,8 +27,12 @@ if(loofile_nm == None or outfile_nm == None):
     sys.stderr.write("\tUse -t to specify score threshold\n")
     sys.exit()
 
+outfile = open(outfile_nm, 'w')
+
 # parse threshold
 threshold = float(threshold_str)
+
+print 'threshold: %f' % threshold
 
 # result
 naaaa = 0.0
@@ -70,6 +74,8 @@ for line in loofile:
     # if missing 2 or more clusters, skip
     if(nmissing >= 2):
         continue
+    
+    outfile.write(snpid+'\n')
     
     # parse result
     for i in xrange(4,len(cols)):
@@ -123,9 +129,10 @@ for line in loofile:
             
 loofile.close()
 
-print '%f\t%f\t%f\t%f' % (naaaa, naaab, naabb, naanc)
-print '%f\t%f\t%f\t%f' % (nabaa, nabab, nabbb, nabnc)
-print '%f\t%f\t%f\t%f' % (nbbaa, nbbab, nbbbb, nbbnc)
+print 'HapMap\SoCal\tAA\tAB\tBB\tNC'
+print 'AA\t\t%d\t%d\t%d\t%d' % (naaaa, naaab, naabb, naanc)
+print 'AB\t\t%d\t%d\t%d\t%d' % (nabaa, nabab, nabbb, nabnc)
+print 'BB\t\t%d\t%d\t%d\t%d' % (nbbaa, nbbab, nbbbb, nbbnc)
 
 # compute overall accuracy
 tot1 = naaaa+naaab+naabb
@@ -136,3 +143,5 @@ overallacc = (naaaa+nabab+nbbbb)/(tot1+tot2+tot3)
 
 print 'call rate: %f' % call_rate
 print 'overall accuracy: %f' % overallacc
+
+outfile.close()
