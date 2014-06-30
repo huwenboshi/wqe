@@ -72,6 +72,12 @@ for line in fullfile:
 
     # get snp id
     snp = cols[0]
+    
+    # get snp alleles
+    sensea = cols[1][0]
+    senseb = cols[1][2]
+    
+    # write out snp ids
     outfile_call.write(snp+'\t')
     outfile_conf.write(snp+'\t')
 
@@ -88,11 +94,11 @@ for line in fullfile:
             continue
         else:
             if(geno == sensea+sensea):
-                paa.append((sensea_int, senseb_int))
+                paa.append([sensea_int, senseb_int])
             elif(geno == sensea+senseb or geno == senseb+sensea):
-                pab.append((sensea_int, senseb_int))
+                pab.append([sensea_int, senseb_int])
             else:
-                pbb.append((sensea_int, senseb_int))
+                pbb.append([sensea_int, senseb_int])
     
     # train caller
     trainer = socal_trainer(snp, paa, pab, pbb, c1, c2, c3)
@@ -106,6 +112,24 @@ for line in fullfile:
     e_ab = ellipsoids['ab']
     e_bb = ellipsoids['bb']
     
+    # create the caller
+    c_aa = None
+    E_aa = None
+    c_ab = None
+    E_ab = None
+    c_bb = None
+    E_bb = None
+    if(e_aa != None):
+        c_aa = e_aa['c']
+        E_aa = e_aa['E']
+    if(e_ab != None):
+        c_ab = e_ab['c']
+        E_ab = e_ab['E']
+    if(e_bb != None):
+        c_bb = e_bb['c']
+        E_bb = e_bb['E']
+    sc = socal_caller(c_aa,E_aa,c_ab,E_ab,c_bb,E_bb,c4,e_aa,e_ab,e_bb)
+    
     # run the caller
     for i in xrange(len(indv_list)):
         info = cols[i+3].split(':')
@@ -113,17 +137,8 @@ for line in fullfile:
         sensea_int = float(info[0].split('/')[0])
         senseb_int = float(info[0].split('/')[1])
         
-        # run the caller
-        c_aa = e_aa['c']
-        E_aa = e_aa['E']
-        c_ab = e_ab['c']
-        E_ab = e_ab['E']
-        c_bb = e_bb['c']
-        E_bb = e_bb['E']
-        sc = socal_caller(c_aa,E_aa,c_ab,E_ab,c_bb,E_ab,c4)
-        
         # do calling
-        x = matrix([float(info[0]),float(info[1])],(2,1))
+        x = matrix([sensea_int, senseb_int],(2,1))
         result = sc.mindist(x)
         call = result[0]
         score = result[1]
