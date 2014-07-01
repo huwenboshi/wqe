@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  1 JUL 2014 00:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  1 JUL 2014 02:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -339,8 +339,40 @@ Package: parskip 2001/04/09 non-zero parskip adjustments
 (/usr/share/texlive/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
-(./subfigure.sty
-\c@subfigure=\count108
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen115
+\captionmargin@=\dimen116
+\captionwidth=\dimen117
+\caption@tempdima=\dimen118
+\caption@indent=\dimen119
+\caption@parindent=\dimen120
+\caption@hangindent=\dimen121
+)
+Package caption Info: KOMA-Script document class.
+\c@ContinuedFloat=\count108
+Package caption Info: float package is loaded.
+)
+\c@KVtest=\count109
+\sf@farskip=\skip51
+\sf@captopadj=\dimen122
+\sf@capskip=\skip52
+\sf@nearskip=\skip53
+\c@subfigure=\count110
+\c@subfigure@save=\count111
+\c@lofdepth=\count112
+\c@subtable=\count113
+\c@subtable@save=\count114
+\c@lotdepth=\count115
+\sf@top=\skip54
+\sf@bottom=\skip55
 )
 
 Class scrartcl Warning: Usage of package `fancyhdr' together
@@ -348,53 +380,50 @@ Class scrartcl Warning: Usage of package `fancyhdr' together
 (scrartcl)              I'd suggest to use 
 (scrartcl)              package `scrpage2' or `scrlayer-scrpage'.
 (scrartcl)              Nevertheless, using requested
-(scrartcl)              package `fancyhdr' on input line 12.
+(scrartcl)              package `fancyhdr' on input line 13.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip51
-\f@ncyO@elh=\skip52
-\f@ncyO@erh=\skip53
-\f@ncyO@olh=\skip54
-\f@ncyO@orh=\skip55
-\f@ncyO@elf=\skip56
-\f@ncyO@erf=\skip57
-\f@ncyO@olf=\skip58
-\f@ncyO@orf=\skip59
+\fancy@headwidth=\skip56
+\f@ncyO@elh=\skip57
+\f@ncyO@erh=\skip58
+\f@ncyO@olh=\skip59
+\f@ncyO@orh=\skip60
+\f@ncyO@elf=\skip61
+\f@ncyO@erf=\skip62
+\f@ncyO@olf=\skip63
+\f@ncyO@orf=\skip64
 )
 (./huwenbo_shi_wqe.aux
 
 LaTeX Warning: Label `table:cmp_hapmap_socal' multiply defined.
 
-
-LaTeX Warning: Label `fig:intro_genclus' multiply defined.
-
 )
 \openout1 = `huwenbo_shi_wqe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen115
+\scratchcounter=\count116
+\scratchdimen=\dimen123
 \scratchbox=\box31
-\nofMPsegments=\count110
-\nofMParguments=\count111
+\nofMPsegments=\count117
+\nofMParguments=\count118
 \everyMPshowfont=\toks22
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen116
-\MPnumerator=\count113
-\makeMPintoPDFobject=\count114
+\MPscratchCnt=\count119
+\MPscratchDim=\dimen124
+\MPnumerator=\count120
+\makeMPintoPDFobject=\count121
 \everyMPtoPDFconversion=\toks23
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -444,20 +473,24 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+
 
 LaTeX Font Warning: Font shape `OT1/cmr/b/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 38.
+(Font)              size <17.28> substituted on input line 39.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/r/n' undefined
-(Font)              using `OT1/cmr/m/n' instead on input line 38.
+(Font)              using `OT1/cmr/m/n' instead on input line 39.
 
 <intro_figs/intro_genotype_clusters.pdf, id=1, 377.41pt x 304.13625pt>
 File: intro_figs/intro_genotype_clusters.pdf Graphic file (type pdf)
 
 <use intro_figs/intro_genotype_clusters.pdf>
 Package pdftex.def Info: intro_figs/intro_genotype_clusters.pdf used on input l
-ine 98.
+ine 99.
 (pdftex.def)             Requested size: 283.0568pt x 228.10162pt.
  [1
 
@@ -465,12 +498,12 @@ ine 98.
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (4.01836pt too wide) in paragraph at lines 123--130
+Overfull \hbox (4.01836pt too wide) in paragraph at lines 124--131
 []\OT1/cmr/m/n/10.95 SNP al-lele in-ten-si-ties are first sum-ma-rized from raw
  mi-croar-ray data us-ing SNPRMA,
  []
 
-LaTeX Font Info:    Try loading font information for U+bbm on input line 135.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 136.
 (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 )
@@ -486,7 +519,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 156.
+(scrartcl)              by `\normalfont \slshape ' on input line 159.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -500,13 +533,29 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 156.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 159.
 
 [2 <./intro_figs/intro_genotype_clusters.pdf>]
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 204.
+(amsmath)                 on input line 205.
+
+<method_figs/defined_cluster.pdf, id=25, 374.39874pt x 304.13625pt>
+File: method_figs/defined_cluster.pdf Graphic file (type pdf)
+
+<use method_figs/defined_cluster.pdf>
+Package pdftex.def Info: method_figs/defined_cluster.pdf used on input line 235
+.
+(pdftex.def)             Requested size: 187.19891pt x 152.06775pt.
+
+<method_figs/sparse_cluster.pdf, id=26, 377.41pt x 304.13625pt>
+File: method_figs/sparse_cluster.pdf Graphic file (type pdf)
+
+<use method_figs/sparse_cluster.pdf>
+Package pdftex.def Info: method_figs/sparse_cluster.pdf used on input line 239.
+
+(pdftex.def)             Requested size: 188.70453pt x 152.06775pt.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\sl'!
@@ -520,7 +569,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 253.
+(scrartcl)              by `\normalfont \slshape ' on input line 244.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -534,7 +583,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 253.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 244.
 
 [3]
 
@@ -549,7 +598,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 369.
+(scrartcl)              by `\normalfont \slshape ' on input line 299.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -563,18 +612,47 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 369.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 299.
 
-[4]
-<result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf, id=38, 374.39874p
-t x 305.14pt>
+[4 <./method_figs/defined_cluster.pdf> <./method_figs/sparse_cluster.pdf>]
+
+Class scrartcl Warning: Usage of deprecated font command `\sl'!
+(scrartcl)              You should note, that in 1994 font command `\sl' has
+(scrartcl)              been defined for compatiblitiy to Script 2.0 only.
+(scrartcl)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrartcl)              shouldn't use such commands any longer and within
+(scrartcl)              KOMA-Script usage of `\sl' is definitely deprecated.
+(scrartcl)              See `fntguide.pdf' for more information about
+(scrartcl)              recommended font commands.
+(scrartcl)              Note also, that KOMA-Script will remove the definition
+(scrartcl)              of `\sl' anytime until release of about version 3.20.
+(scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
+(scrartcl)              by `\normalfont \slshape ' on input line 399.
+
+
+Class scrartcl Warning: Usage of deprecated font command `\rm'!
+(scrartcl)              You should note, that in 1994 font command `\rm' has
+(scrartcl)              been defined for compatiblitiy to Script 2.0 only.
+(scrartcl)              Now, after two decades of LaTeX2e and NFSS2, you
+(scrartcl)              shouldn't use such commands any longer and within
+(scrartcl)              KOMA-Script usage of `\rm' is definitely deprecated.
+(scrartcl)              See `fntguide.pdf' for more information about
+(scrartcl)              recommended font commands.
+(scrartcl)              Note also, that KOMA-Script will remove the definition
+(scrartcl)              of `\rm' anytime until release of about version 3.20.
+(scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
+(scrartcl)              by `\normalfont \rmfamily ' on input line 399.
+
+[5]
+<result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf, id=58, 413.545pt 
+x 304.13625pt>
 File: result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf Graphic file 
 (type pdf)
 
 <use result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_ac
-c.pdf used on input line 389.
-(pdftex.def)             Requested size: 280.79837pt x 228.85442pt.
+c.pdf used on input line 404.
+(pdftex.def)             Requested size: 310.15797pt x 228.10162pt.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\sl'!
@@ -588,7 +666,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 401.
+(scrartcl)              by `\normalfont \slshape ' on input line 462.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -602,9 +680,9 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 401.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 462.
 
-[5 <./result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf>]
+[6 <./result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf>]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
 
@@ -620,7 +698,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 475.
+(scrartcl)              by `\normalfont \slshape ' on input line 490.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -634,9 +712,9 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 475.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 490.
 
-[6] (./huwenbo_shi_wqe.aux)
+[7] (./huwenbo_shi_wqe.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
@@ -649,13 +727,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4553 strings out of 494985
- 64633 string characters out of 6180357
- 168916 words of memory out of 5000000
- 7688 multiletter control sequences out of 15000+600000
- 17843 words of font info for 61 fonts, out of 8000000 for 9000
+ 5712 strings out of 494985
+ 85846 string characters out of 6180357
+ 191799 words of memory out of 5000000
+ 8836 multiletter control sequences out of 15000+600000
+ 18142 words of font info for 62 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 46i,13n,47p,796b,259s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,13n,54p,796b,377s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/huwenbo/.texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
@@ -664,18 +742,19 @@ fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss
-bx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (6 pages, 175661 bytes).
+m/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/mathabx-type1/mathx10.pfb>
+Output written on huwenbo_shi_wqe.pdf (7 pages, 218234 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
+ 132 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

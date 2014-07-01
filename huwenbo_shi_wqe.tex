@@ -7,7 +7,8 @@
 \usepackage{float}
 \usepackage{parskip}
 \usepackage{indentfirst}
-\usepackage{subfigure}
+%\usepackage{subfigure}
+\usepackage{subfig}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \setlength{\parskip}{0em}
@@ -75,7 +76,7 @@ If a sample has genotype AB, the intensities, $\theta_A$ and $\theta_B$,
 will be similar.
 If one plots $log(\theta_A)$ versus $log(\theta_B)$ of a SNP for a number of
 samples, normally 3 ellipsoidal clusters are observed, one for each genotype,
-as shown in Figure \ref{fig:intro_genclus}.
+as shown in Figure~\ref{fig:intro_genclus}.
 Many genotype calling algorithms use model--based unsupervised clustering
 methods to identify clusters and then assign genotypes to each cluster.
 To estimate model parameters, these methods use the EM algorithm, which is
@@ -219,13 +220,27 @@ and excludes $X_{AA} \cup X_{AB}$.
 \par
 If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
 that SNP are well defined, and SoCal obtains three ellipsoidal decision
-regions for that SNP, one for each genotype (Figure \ref{fig:intro_genclus}).
-However, if a SNP has low MAF, some genotype cluster may not be well defined 
-(Figure \ref{fig:intro_genclus}).
+regions for that SNP, one for each genotype (Figure \ref{fig:defined_cluster}).
+However, if a SNP has lower MAF, some genotype cluster may not be well defined 
+(Figure \ref{fig:sparse_cluster}).
 For these SNPs, SoCal estimates the missing ellipsoid using the ellipsoids for
 the other two genotypes through simple geometric transformations.
 For SNPs that have only one genotype cluster present, SoCal assigns all future
 genotype calls to that cluster.
+
+\begin{figure}[H]
+    \subfloat[SNP with well defined genotype clusters] {
+        \includegraphics[scale=0.5]{method_figs/defined_cluster.pdf}
+        \label{fig:defined_cluster}
+    }
+    \subfloat[SNP with sparse BB genotype cluster] {
+        \includegraphics[scale=0.5]{method_figs/sparse_cluster.pdf}
+        \label{fig:sparse_cluster}
+    }
+    \caption{SNPs with moderate MAF have well defined genotype clusters,
+             whereas SNPs with lower MAF may have sparse genotype clusters.}
+    \label{fig:defined_sparse_cluster}
+\end{figure}
 
 % missing genotype aa cluster
 \subsubsection{Missing genotype AA or BB cluster}
@@ -389,11 +404,11 @@ in the leave-one-out cross-validation with HapMap reference calls.}
 {result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf}
 \caption{Concordance rate of SoCal in the leave-one-out cross-validation with
 HapMap reference calls as a function of call rate.}
-\label{fig:intro_genclus}
+\label{fig:result_sh_crvacc}
 \end{figure}
 
 
-\subsection{Comparison with CRLMM}
+\subsection{Comparison with CRLMM calls}
 TODO: Compare with CRLMM
 concordance rate
 call rate

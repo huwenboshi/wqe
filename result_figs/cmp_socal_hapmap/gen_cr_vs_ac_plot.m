@@ -1,8 +1,8 @@
 tbl = dlmread('cr_vs_ac.txt');
-data = tbl(:,2);
+data = tbl(:,2)*100;
 figure;
 bar(data);
-ylim([0.985 1.0]);
+ylim([98.5 100]);
 xlabel('call rate (%)');
 ylabel('concordance rate (%)');
 set(gca, 'XTickLabel', {'100','95','90','85','80','75','70','65','60',...
