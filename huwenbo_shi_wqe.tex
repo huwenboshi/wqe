@@ -349,10 +349,49 @@ filter out monomorphic snps
 
 \section{Result}
 
-\subsection{Comparison with HapMap calls}
-TODO: Compare my call with hapmap call
-concordance rate
-call rate
+% result for comparing socal with hapmap calls
+\subsection{Comparison with HapMap reference calls}
+
+% 100% call rate result
+\begin{table}[H]
+\centering
+\begin{tabular}{l*{5}{r}r}
+    \hline
+    HapMap/SoCal  & AA       & AB      & BB      & No Call \\ \hline
+    AA            & 360,289  & 2,282   & 1,058   & 0  \\
+    AB            & 2,667    & 341,012 & 2,257   & 0  \\
+    BB            & 851      & 2,347   & 368,556 & 0  \\ \hline
+\end{tabular}
+\caption{At a call rate of 100\%, SoCal achieved 98.94\% concordance rate
+in the leave-one-out cross-validation with HapMap reference calls.}
+\label{table:cmp_hapmap_socal}
+\end{table}
+
+% 95% call rate result
+\begin{table}[H]
+\centering
+\begin{tabular}{l*{5}{r}r}
+    \hline
+    HapMap/SoCal  & AA       & AB      & BB      & No Call \\ \hline
+    AA            & 348,221  & 390     & 298     & 14,720  \\
+    AB            & 710      & 319,394 & 775     & 25,057  \\
+    BB            & 410      & 427     & 357,627 & 13,290  \\ \hline
+\end{tabular}
+\caption{At a call rate of 95\%, SoCal achieved 99.71\% concordance rate
+in the leave-one-out cross-validation with HapMap reference calls.}
+\label{table:cmp_hapmap_socal}
+\end{table}
+
+% accuracy as function of call rate
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.75]
+{result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf}
+\caption{Concordance rate of SoCal in the leave-one-out cross-validation with
+HapMap reference calls as a function of call rate.}
+\label{fig:intro_genclus}
+\end{figure}
+
 
 \subsection{Comparison with CRLMM}
 TODO: Compare with CRLMM
