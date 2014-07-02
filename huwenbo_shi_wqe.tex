@@ -221,10 +221,10 @@ and excludes $X_{AA} \cup X_{AB}$.
 If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
 that SNP are well defined, and SoCal obtains three ellipsoidal decision
 regions for that SNP, one for each genotype (Figure \ref{fig:defined_cluster}).
-However, if a SNP has lower MAF, some genotype cluster may not be well defined 
-(Figure \ref{fig:sparse_cluster}).
+However, if a SNP has lower MAF, some genotype cluster may not be well defined.
 For these SNPs, SoCal estimates the missing ellipsoid using the ellipsoids for
-the other two genotypes through simple geometric transformations.
+the other two genotypes through simple geometric transformations
+(Figure \ref{fig:sparse_cluster}).
 For SNPs that have only one genotype cluster present, SoCal assigns all future
 genotype calls to that cluster.
 
@@ -239,8 +239,9 @@ genotype calls to that cluster.
         \includegraphics[scale=0.75]{method_figs/sparse_cluster.pdf}
         \label{fig:sparse_cluster}
     }
-    \caption{SNPs with moderate MAF have well defined genotype clusters,
-             whereas SNPs with lower MAF may have sparse genotype clusters.}
+    \caption{Each dot in the plots above represents a sample, with
+             samples having HapMap reference genotype calls marked red.
+             The ellipsoids were obtained using only the reference calls.}
     \label{fig:defined_sparse_cluster}
 \end{figure}
 

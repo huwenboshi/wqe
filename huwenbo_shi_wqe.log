@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.21)  1 JUL 2014 11:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.21)  1 JUL 2014 17:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -541,21 +541,21 @@ Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 205.
 
-<method_figs/defined_cluster.pdf, id=25, 374.39874pt x 304.13625pt>
+<method_figs/defined_cluster.pdf, id=25, 368.37625pt x 299.1175pt>
 File: method_figs/defined_cluster.pdf Graphic file (type pdf)
 
 <use method_figs/defined_cluster.pdf>
 Package pdftex.def Info: method_figs/defined_cluster.pdf used on input line 236
 .
-(pdftex.def)             Requested size: 280.79837pt x 228.10162pt.
+(pdftex.def)             Requested size: 276.2815pt x 224.33757pt.
 
-<method_figs/sparse_cluster.pdf, id=26, 377.41pt x 304.13625pt>
+<method_figs/sparse_cluster.pdf, id=26, 368.37625pt x 299.1175pt>
 File: method_figs/sparse_cluster.pdf Graphic file (type pdf)
 
 <use method_figs/sparse_cluster.pdf>
 Package pdftex.def Info: method_figs/sparse_cluster.pdf used on input line 241.
 
-(pdftex.def)             Requested size: 283.0568pt x 228.10162pt.
+(pdftex.def)             Requested size: 276.2815pt x 224.33757pt.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\sl'!
@@ -569,7 +569,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 246.
+(scrartcl)              by `\normalfont \slshape ' on input line 247.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -583,7 +583,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 246.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 247.
 
 [3]
 
@@ -598,7 +598,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 255.
+(scrartcl)              by `\normalfont \slshape ' on input line 256.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -612,7 +612,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 255.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 256.
 
 [4 <./method_figs/defined_cluster.pdf> <./method_figs/sparse_cluster.pdf>]
 
@@ -627,7 +627,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 336.
+(scrartcl)              by `\normalfont \slshape ' on input line 337.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -641,7 +641,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 336.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 337.
 
 [5]
 <result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf, id=57, 413.545pt 
@@ -651,7 +651,7 @@ File: result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf Graphic file
 
 <use result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_ac
-c.pdf used on input line 406.
+c.pdf used on input line 407.
 (pdftex.def)             Requested size: 310.15797pt x 228.10162pt.
 
 
@@ -666,7 +666,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 411.
+(scrartcl)              by `\normalfont \slshape ' on input line 412.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -680,7 +680,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 411.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 412.
 
 [6]
 
@@ -695,7 +695,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 473.
+(scrartcl)              by `\normalfont \slshape ' on input line 474.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -709,7 +709,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 473.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 474.
 
 [7 <./result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf>]
 Missing character: There is no Ã in font cmr10!
@@ -727,7 +727,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 492.
+(scrartcl)              by `\normalfont \slshape ' on input line 493.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -741,7 +741,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 492.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 493.
 
 [8] (./huwenbo_shi_wqe.aux)
 
@@ -780,7 +780,7 @@ live/texmf-dist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (8 pages, 217392 bytes).
+Output written on huwenbo_shi_wqe.pdf (8 pages, 223684 bytes).
 PDF statistics:
  135 PDF objects out of 1000 (max. 8388607)
  94 compressed objects within 1 object stream
