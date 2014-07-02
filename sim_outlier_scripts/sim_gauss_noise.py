@@ -114,9 +114,11 @@ for line in fullfile:
     geno_aa = sensea+sensea
     geno_ab = sensea+senseb
     geno_bb = senseb+senseb
-    outfile.write(line+'\t'+str(noise_aa[0])+'/'+str(noise_aa[1])+':'+geno_aa)
-    outfile.write(line+'\t'+str(noise_ab[0])+'/'+str(noise_ab[1])+':'+geno_ab)
-    outfile.write(line+'\t'+str(noise_bb[0])+'/'+str(noise_bb[1])+':'+geno_bb)
+    
+    outfile.write(line)
+    outfile.write('\t'+str(noise_aa[0])+'/'+str(noise_aa[1])+':'+geno_aa)
+    outfile.write('\t'+str(noise_ab[0])+'/'+str(noise_ab[1])+':'+geno_ab)
+    outfile.write('\t'+str(noise_bb[0])+'/'+str(noise_bb[1])+':'+geno_bb)
     outfile.write('\n')
 
 # finishing up
