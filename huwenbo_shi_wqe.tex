@@ -417,12 +417,25 @@ HapMap reference calls as a function of call rate.}
 \begin{figure}[H]
     \centering
     \subfloat[Decision regions found by SoCal when there is no outlier] {
-        \includegraphics[scale=0.5]{method_figs/defined_cluster.pdf}
-        \label{fig:defined_cluster}
+        \includegraphics[scale=0.5]
+            {result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf}
+        \label{fig:socal_region_no_noise}
     }
-    \subfloat[SNP with sparse BB genotype cluster] {
-        \includegraphics[scale=0.5]{method_figs/sparse_cluster.pdf}
-        \label{fig:sparse_cluster}
+    \subfloat[Decision regions found by RLMM when there is no outlier] {
+        \includegraphics[scale=0.5]
+            {result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf}
+        \label{fig:gauss_region_no_noise}
+    }
+    \\
+    \subfloat[Decision regions found by SoCal when there is no outlier] {
+        \includegraphics[scale=0.5]
+            {result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf}
+        \label{fig:socal_region_no_noise}
+    }
+    \subfloat[Decision regions found by RLMM when there is no outlier] {
+        \includegraphics[scale=0.5]
+            {result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf}
+        \label{fig:gauss_region_no_noise}
     }
     \caption{Each dot in the plots above represents a sample, with
              samples having HapMap reference genotype calls marked red.

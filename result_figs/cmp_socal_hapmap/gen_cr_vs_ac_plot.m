@@ -1,11 +1,8 @@
 tbl = dlmread('cr_vs_ac.txt');
-data = tbl(:,2)*100;
-figure;
-bar(data);
-ylim([98.5 100]);
+tbl(:,2) = tbl(:,2)*100;
+plot(tbl(:,1),tbl(:,2),'b.-');
+ylim([98.8 100]);
 xlabel('call rate (%)');
 ylabel('concordance rate (%)');
-set(gca, 'XTickLabel', {'100','95','90','85','80','75','70','65','60',...
-                        '55','50'});
+set(gca, 'xdir','reverse');
 
-%plot(tbl(:,1),tbl(:,2));
