@@ -412,6 +412,24 @@ HapMap reference calls as a function of call rate.}
 % comparison with rlmm
 \subsection{Comparison with RLMM}
 
+
+% figure to illustrate socal vs gauss in terms of noise
+\begin{figure}[H]
+    \centering
+    \subfloat[Decision regions found by SoCal when there is no outlier] {
+        \includegraphics[scale=0.5]{method_figs/defined_cluster.pdf}
+        \label{fig:defined_cluster}
+    }
+    \subfloat[SNP with sparse BB genotype cluster] {
+        \includegraphics[scale=0.5]{method_figs/sparse_cluster.pdf}
+        \label{fig:sparse_cluster}
+    }
+    \caption{Each dot in the plots above represents a sample, with
+             samples having HapMap reference genotype calls marked red.
+             The ellipsoids were obtained using only the reference calls.}
+    \label{fig:defined_sparse_cluster}
+\end{figure}
+
 % accuracy as function of noise variance
 \begin{figure}[H]
 \centering
