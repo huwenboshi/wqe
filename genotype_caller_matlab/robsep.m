@@ -34,9 +34,6 @@ function [c, E, rho] = robsep(pa, pb, c1, c2, c3)
     
     F = E_hat(2:end,2:end);
     v = E_hat(2:end, 1);
-    
-    disp(v)
-    
     s = E_hat(1, 1);
     c = -F\v;
     E = F ./ (1-(s-c'*F*c));

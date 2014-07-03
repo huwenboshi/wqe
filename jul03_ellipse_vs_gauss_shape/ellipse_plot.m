@@ -105,7 +105,7 @@ end
 if strcmp(Type,'2D'),
     plot(X(1,:),X(2,:),'k');
     hold on;
-    plot(C(1),C(2),'ko');
+    plot(C(1),C(2),'ko','MarkerFaceColor',[1 1 1]);
     axis equal
 else
     mesh(XX,YY,ZZ);
