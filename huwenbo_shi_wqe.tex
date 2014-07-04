@@ -7,7 +7,6 @@
 \usepackage{float}
 \usepackage{parskip}
 \usepackage{indentfirst}
-%\usepackage{subfigure}
 \usepackage{subfig}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -26,13 +25,17 @@
       \usefont{\encodingdefault}{\rmdefault}{b}{n}
       \fontsize{16}{20}
       \selectfont}
+      
 \newcommand*{\AuthorFont}{
       \usefont{\encodingdefault}{\rmdefault}{r}{n}
       \fontsize{12}{20}
       \selectfont}
+      
 \title{\TitleFont SoCal: supervised genotype calling via ellipsoidal
 separation for Affymetrix SNP microarray}
+
 \author{\AuthorFont Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
+
 \date{}
 \maketitle
 %-----------------------------------------------------------------------------
@@ -78,18 +81,20 @@ SoCal achieves an accuracy of $97.5\%$ during validation.
 \section{Introduction}
 
 \par
-% background
-% need to add why genotype calling is important
-SNP microarray is a cost--effective approach to genotype samples for specific
-association studies. % cite
-In Affymetrix SNP microarrays, oligonucleotide probes are first used to bind
-DNA fragments containing SNPs. % cite
-Then, for each SNP, a fluorescence scanner quantifies perfect match (PM) and
-mismatch (MM) for each of the two alleles, denoted by A and B, on
-each strand of the DNA fragment. %cite
-The genotype calling procedure for SNP microarray consists of two steps.
+% broad background
+Accurate genotyping of SNPs is essential to discovering true signals in
+association studies.
+Although next generation sequencing technology provides cheap whole--genome
+sequences for genotyping SNPs, SNP microarray is still a cost--effective
+genotyping technology for many specific association studies.
+In Affymetrix SNP microarrays, oligonucleotide probes are used to match and
+bind DNA fragments containing biallelic SNPs.
+Then a fluorescence scanner scans the microarray to quantify perfect 
+match and mismatch of these fragments.
+Most genotype calling procedures for SNP microarray consists of two steps.
 In the first step, information from microarray is summarized to obtain the
-intensities, $\theta_A$ and $\theta_B$, of the two alleles of each SNP.
+intensities, $\theta_A$ and $\theta_B$, of the two alleles, denoted by A and B,
+of each SNP.
 In the second step, SNPs are classified into genotype AA, AB, or BB based on
 the allele intensities they generate.
 The focus of this article is on the second step of the genotype calling
@@ -438,7 +443,6 @@ HapMap reference calls as a function of call rate.}
 
 % comparison with rlmm
 \subsection{Comparison with RLMM}
-
 
 % figure to illustrate socal vs gauss in terms of noise
 \begin{figure}[H]
