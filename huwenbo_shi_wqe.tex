@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass{proc}
 \usepackage{etoolbox}
 \usepackage{bbm}
 \usepackage{amsmath}
@@ -20,21 +20,10 @@
 % header
 \lhead{Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
 
-% title
-\newcommand*{\TitleFont}{
-      \usefont{\encodingdefault}{\rmdefault}{b}{n}
-      \fontsize{16}{20}
-      \selectfont}
-      
-\newcommand*{\AuthorFont}{
-      \usefont{\encodingdefault}{\rmdefault}{r}{n}
-      \fontsize{12}{20}
-      \selectfont}
-      
-\title{\TitleFont SoCal: supervised genotype calling via ellipsoidal
+\title{SoCal: supervised genotype calling via ellipsoidal
 separation for Affymetrix SNP microarray}
 
-\author{\AuthorFont Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
+\author{Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
 
 \date{}
 \maketitle
@@ -52,10 +41,6 @@ separation for Affymetrix SNP microarray}
 %-----------------------------------------------------------------------------
 % abstract
 \begin{abstract}
-    \begin{center}
-        ABSTRACT
-    \end{center}
-    
 \par
 In this article, I present SoCal, a supervised genotype calling algorithm for
 Affymetrix SNP microarray.
@@ -87,7 +72,7 @@ association studies.
 Although next generation sequencing technology provides cheap whole--genome
 sequences for genotyping SNPs, SNP microarray is still a cost--effective
 genotyping technology for many specific association studies.
-In Affymetrix SNP microarrays, oligonucleotide probes are used to match and
+In an Affymetrix SNP microarray, oligonucleotide probes are used to match and
 bind DNA fragments containing biallelic SNPs.
 Then a fluorescence scanner scans the microarray to quantify perfect 
 match and mismatch of these fragments.
@@ -109,36 +94,42 @@ will be similar.
 If one plots $log(\theta_A)$ versus $log(\theta_B)$ of a SNP for a number of
 samples, normally 3 ellipsoidal clusters can be observed, one for each
 genotype, as shown in Figure~\ref{fig:intro_genclus}.
-
-\par
 % state the problem
 Many genotype calling algorithms use model--based unsupervised clustering
-methods to identify clusters and then assign genotypes to each cluster.
-Although these methods are generally applicable to a wide range of SNPs and
-
+methods to identify these clusters and then assign genotypes to each cluster.
+Although these methods are applicable to a wide range of microarrays, they
+don't take advantage of genotype calls that are already available.
+Also, these methods use EM algorithm to estimate model parameters, which is
+sensitive to starting parameters and slow to converge.
 To utilize reference genotype calls, Rabbee et al. proposed the RLMM algorithm,
-a supervised genotype calling method that uses reference genotype calls to form decision regions for each
+a supervised genotype calling method that uses reference genotype calls to form
+Gaussian decision regions for each genotype.
+These Gaussian decision regions are then used to call SNPs with unknown
 genotype.
-These decision regions are then used to call SNPs with unknown genotype.
-All of the methods above assume that the log allele intensities generated
-by SNPs follow bivariate Gaussian distributions.
-
-
-\par
-% problem
-As the number of probes on SNP microarrays and the number of individuals involved
-in association studies continue to increase, both fast and accurate genotype
-calling algorithms are needed.
+However, fitting a Gaussian distribution is known to be sensitive to outliers,
+which, for SNP microarrays, can be caused by genomic structural variations.
 
 % intro genotype cluster figure
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.75]{intro_figs/intro_genotype_clusters.pdf}
+\includegraphics[scale=0.5]{intro_figs/intro_genotype_clusters.pdf}
 \caption{Genotype clusters obtained from Affymetrix SNP array
 allele intensity values}
 \label{fig:intro_genclus}
 \end{figure}
 
+\par
+% state my solution
+In this article, I present SoCal, a supervised genotype calling algorithm
+for Affymetrix SNP microarrays.
+Instead of fitting Gaussian distributions on allele intensities with reference
+genotype calls, SoCal efficiently finds ellipsoidal decision regions for each
+of the three genotypes of a SNP by solving a conic programming problem.
+SoCal can control the effect of outliers by assigning different weights to each
+of the criteria of finding the ellipsoids---separation ratio, ellipsoid
+volume, and number of enclosed points. 
+After the ellipsoidal decision regions are obtained, they are used to call
+genotypes for the same SNP in linear time.
 %-----------------------------------------------------------------------------
 
 
@@ -250,10 +241,8 @@ $X_{AA} \cup X_{BB}$, one sets $\{a_i\}=X_{AB}$ and
 $\{b_j\}=X_{AA} \cup X_{BB}$, and solves the above conic programming problem.
 The same procedure also applies to finding the ellipsoid that includes $X_{BB}$
 and excludes $X_{AA} \cup X_{AB}$.
-
 % handling missing clusters
 \subsection{Rescuing missing genotype clusters}
-
 \par
 If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
 that SNP are well defined, and SoCal obtains three ellipsoidal decision
@@ -271,6 +260,7 @@ genotype calls to that cluster.
         \includegraphics[scale=0.5]{method_figs/defined_cluster.pdf}
         \label{fig:defined_cluster}
     }
+    \\
     \subfloat[SNP with sparse BB genotype cluster] {
         \includegraphics[scale=0.5]{method_figs/sparse_cluster.pdf}
         \label{fig:sparse_cluster}
@@ -382,11 +372,9 @@ the confidence of each genotype call.
 
 %-----------------------------------------------------------------------------
 % data
-
 \section{Data}
 TODO: Write data section
 filter out monomorphic snps
-
 %-----------------------------------------------------------------------------
 
 
@@ -439,7 +427,7 @@ in the leave-one-out cross-validation with HapMap reference calls.}
 % accuracy as function of call rate
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.75]
+\includegraphics[scale=0.5]
 {result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf}
 \caption{Concordance rate of SoCal in the leave-one-out cross-validation with
 HapMap reference calls as a function of call rate.}
@@ -457,6 +445,7 @@ HapMap reference calls as a function of call rate.}
             {result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf}
         \label{fig:socal_region_no_noise}
     }
+    \\
     \subfloat[Decision regions found by RLMM when there is no outlier] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf}
@@ -468,6 +457,7 @@ HapMap reference calls as a function of call rate.}
             {result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf}
         \label{fig:socal_region_no_noise}
     }
+    \\
     \subfloat[Decision regions found by RLMM when there is no outlier] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf}
@@ -482,7 +472,7 @@ HapMap reference calls as a function of call rate.}
 % accuracy as function of noise variance
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.75]
+\includegraphics[scale=0.5]
 {result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf}
 \caption{Concordance rate of SoCal and RLMM in the leave-one-out
 cross-validation with HapMap reference calls as a function of noise variance.}
