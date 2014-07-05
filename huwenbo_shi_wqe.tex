@@ -96,14 +96,15 @@ samples, normally 3 ellipsoidal clusters can be observed, one for each
 genotype, as shown in Figure~\ref{fig:intro_genclus}.
 % state the problem
 Many genotype calling algorithms use model--based unsupervised clustering
-methods to identify these clusters and then assign genotypes to each cluster.
+to identify these clusters and then assign genotypes to each cluster.
 Although these methods are applicable to a wide range of microarrays, they
 don't take advantage of genotype calls that are already available.
-Also, these methods use EM algorithm to estimate model parameters, which is
+Also, these methods use the EM algorithm to estimate model parameters, which is
 sensitive to starting parameters and slow to converge.
 To utilize reference genotype calls, Rabbee et al. proposed the RLMM algorithm,
 a supervised genotype calling method that uses reference genotype calls to form
-Gaussian decision regions for each genotype.
+decision regions by fitting bivariate Gaussian distributions on observed
+allele intensities for each genotype.
 These Gaussian decision regions are then used to call SNPs with unknown
 genotype.
 However, fitting a Gaussian distribution is known to be sensitive to outliers,
@@ -124,12 +125,20 @@ In this article, I present SoCal, a supervised genotype calling algorithm
 for Affymetrix SNP microarrays.
 Instead of fitting Gaussian distributions on allele intensities with reference
 genotype calls, SoCal efficiently finds ellipsoidal decision regions for each
-of the three genotypes of a SNP by solving a conic programming problem.
+genotype of a SNP by solving a conic programming problem.
 SoCal can control the effect of outliers by assigning different weights to each
-of the criteria of finding the ellipsoids---separation ratio, ellipsoid
+of the criteria for finding the ellipsoids---separation ratio, ellipsoid
 volume, and number of enclosed points. 
-After the ellipsoidal decision regions are obtained, they are used to call
-genotypes for the same SNP in linear time.
+After SoCal finds the ellipsoidal decision regions for each genotype of
+a SNP, it uses them to call the same SNP with unknown genotype.
+
+\par
+% state the result
+Using reference genotype calls from the HapMap Project as training and
+validation data, SoCal achieved $99.71\%$ accuracy at a call rate of $95\%$
+during leave-one-out cross-validation.
+Furthermore, SoCal shows more robustness than the RLMM method when there are
+outliers in the training data.
 %-----------------------------------------------------------------------------
 
 
@@ -150,11 +159,11 @@ genotypes for the same SNP in linear time.
 
 \par
 SNP allele intensities are first summarized from raw microarray data using
-SNPRMA, which removes non-biological effect from the data.
+SNPRMA, which removes non--biological effect from the data.
 After this step, SoCal calls genotypes in two steps.
-In the first step, SoCal finds ellipsoidal regions containing each of the
+In the first step, SoCal finds ellipsoidal decision regions for each of the
 genotype of a SNP using reference genotype calls.
-In the second step, SoCal classifies samples with unknown genotypes using
+In the second step, SoCal classifies SNPs with unknown genotypes using
 minimum distance classification.
 
 % pattern separation via ellipsoids
@@ -215,8 +224,10 @@ presented here.
 
 \par
 In the problem formulation above $\beta_{i} > 0$ are the weights assigned to
-each sub-objectives of finding the ellipsoid---maximizing separation ratio,
-minimizing ellipsoid volume, and controlling outliers.
+each criteria of finding the ellipsoid---separation ratio, ellipsoid volume,
+and number of enclosed points.
+In SoCal, $\beta_1$, $\beta_2$, $\beta_3$ are empirically set to 1, $10^4$,
+and $10^2$ respectively.
 
 \par
 Let 
@@ -229,14 +240,11 @@ $\tilde{E}^{*}=\left[
 be the optimal solution to the problem above.
 The separating ellipsoid $\mathcal{E}^{*}$ is defined as
 $\mathcal{E}^{*}=
-\{x \in \mathbbm{R}^{n}|(x-c^{*})^TE^{*}(x-c^{*})\leqslant\beta_4(1+k)\}$,
+\{x \in \mathbbm{R}^{n}|(x-c^{*})^TE^{*}(x-c^{*})\leqslant2(1+k)\}$,
 where $c^{*}=-F^{-1}v,\;E^{*}={{F} \over {(1-s+{c^{*}}^TF{c^{*}})}}$.
-Here, $\beta_4$ is a positive constant controlling the size of the ellipsoid.
-In SoCal, $\beta_1$, $\beta_2$, $\beta_3$, $\beta_4$ are empirically
-set to 1, 10, 100, and 30 respectively.
 
 \par
-Similaly, to find the ellipsoid that includes $X_{AB}$ and excludes
+To find the ellipsoid that includes $X_{AB}$ and excludes
 $X_{AA} \cup X_{BB}$, one sets $\{a_i\}=X_{AB}$ and
 $\{b_j\}=X_{AA} \cup X_{BB}$, and solves the above conic programming problem.
 The same procedure also applies to finding the ellipsoid that includes $X_{BB}$
@@ -248,11 +256,9 @@ If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
 that SNP are well defined, and SoCal obtains three ellipsoidal decision
 regions for that SNP, one for each genotype (Figure \ref{fig:defined_cluster}).
 However, if a SNP has lower MAF, some genotype cluster may not be well defined.
-For these SNPs, SoCal estimates the missing ellipsoid using the ellipsoids for
-the other two genotypes through simple geometric transformations
-(Figure \ref{fig:sparse_cluster}).
-For SNPs that have only one genotype cluster present, SoCal assigns all future
-genotype calls to that cluster.
+For these SNPs, SoCal estimates the ellipsoid for the missing genotype cluster
+using the ellipsoids for the other two genotypes through simple geometric
+transformations (Figure \ref{fig:sparse_cluster}).
 
 \begin{figure}[H]
     \centering
@@ -275,7 +281,7 @@ genotype calls to that cluster.
 \subsubsection{Missing genotype AA or BB cluster}
 
 \par
-If the genotype $AA$ cluster of a SNP has less than 5 reference calls, SoCal
+If genotype $AA$ cluster of a SNP has less than 3 reference calls, SoCal
 first finds the ellipsoids for genotype $AB$ and $BB$ clusters, and then
 estimates that for genotype $AA$ cluster through simple geometric
 transformations.
@@ -347,7 +353,7 @@ After the ellipsoidal decision regions,
 $\mathcal{E}_{g}=
 \{x \in \mathbbm{R}^{n} | (x-c_g)^TE_g(x-c_g) \leqslant 1\},
 \forall g\in\{AA,AB,BB\}$ of a SNP are obtained, SoCal uses them to classify
-samples with unknown genotypes using minimum distance classification.
+SNPs with unknown genotypes using minimum distance classification.
 
 \par
 If a sample has allele intensity $\theta_A$ and $\theta_B$ at SNP $n$,

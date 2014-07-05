@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  4 JUL 2014 23:31
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  5 JUL 2014 13:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -424,10 +424,10 @@ File: intro_figs/intro_genotype_clusters.pdf Graphic file (type pdf)
 
 <use intro_figs/intro_genotype_clusters.pdf>
 Package pdftex.def Info: intro_figs/intro_genotype_clusters.pdf used on input l
-ine 115.
+ine 116.
 (pdftex.def)             Requested size: 188.70453pt x 152.06775pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--117
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
 []\OT1/cmr/m/n/10 Figure 1: |Geno-type clus-ters ob-tained from
  []
 
@@ -435,24 +435,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--117
 
 
  <./intro_figs/intro_genotype_clusters.pdf>]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 164.
- (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+Underfull \hbox (badness 1931) in paragraph at lines 137--143
+\OT1/cmr/m/n/10 Project as train-ing and val-i-da-tion data, So-Cal
+ []
+
+LaTeX Font Info:    Try loading font information for U+bbm on input line 173.
+(/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 )
-Underfull \hbox (badness 1297) in paragraph at lines 174--174
+Underfull \hbox (badness 1297) in paragraph at lines 183--183
 []\OT1/cmr/bx/n/12 Forming el-lip-soidal de-ci-sion re-
+ []
+
+
+Underfull \hbox (badness 1248) in paragraph at lines 226--231
+[]\OT1/cmr/m/n/10 In the prob-lem for-mu-la-tion above $\OML/cmm/m/it/10 ^^L[] 
+\U/matha/m/n/10 ¡ \OT1/cmr/m/n/10 0$
  []
 
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 233.
+(amsmath)                 on input line 244.
 
 <method_figs/defined_cluster.pdf, id=20, 368.37625pt x 299.1175pt>
 File: method_figs/defined_cluster.pdf Graphic file (type pdf)
 
 <use method_figs/defined_cluster.pdf>
-Package pdftex.def Info: method_figs/defined_cluster.pdf used on input line 262
+Package pdftex.def Info: method_figs/defined_cluster.pdf used on input line 268
 .
 (pdftex.def)             Requested size: 184.18767pt x 149.55838pt.
 
@@ -460,14 +470,14 @@ Package pdftex.def Info: method_figs/defined_cluster.pdf used on input line 262
 File: method_figs/sparse_cluster.pdf Graphic file (type pdf)
 
 <use method_figs/sparse_cluster.pdf>
-Package pdftex.def Info: method_figs/sparse_cluster.pdf used on input line 267.
+Package pdftex.def Info: method_figs/sparse_cluster.pdf used on input line 273.
 
 (pdftex.def)             Requested size: 184.18767pt x 149.55838pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-Underfull \hbox (badness 3108) in paragraph at lines 353--363
+Underfull \hbox (badness 3108) in paragraph at lines 359--369
 \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 x \U/matha/m/n/10 ^^P p\OML/cmm/m/it/10
  log\U/matha/m/n/10 p\OML/cmm/m/it/10 ^^R[]\U/matha/m/n/10 q\OML/cmm/m/it/10 ; 
 log\U/matha/m/n/10 p\OML/cmm/m/it/10 ^^R[]\U/matha/m/n/10 qq$\OT1/cmr/m/n/10 , 
@@ -478,12 +488,12 @@ for each $\OML/cmm/m/it/10 g \U/matha/m/n/10 P
 Underfull \vbox (badness 6284) has occurred while \output is active []
 
  [3 <./method_figs/defined_cluster.pdf> <./method_figs/sparse_cluster.pdf>]
-Overfull \hbox (29.82903pt too wide) in paragraph at lines 400--408
+Overfull \hbox (29.82903pt too wide) in paragraph at lines 406--414
  [][] 
  []
 
 
-Overfull \hbox (29.82903pt too wide) in paragraph at lines 415--423
+Overfull \hbox (29.82903pt too wide) in paragraph at lines 421--429
  [][] 
  []
 
@@ -495,7 +505,7 @@ File: result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf Graphic file
 
 <use result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_ac
-c.pdf used on input line 431.
+c.pdf used on input line 437.
 (pdftex.def)             Requested size: 187.70079pt x 150.06026pt.
 
 <result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf, id=54, 368.37625
@@ -505,7 +515,7 @@ File: result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf Graphic file
 
 <use result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noi
-se.pdf used on input line 447.
+se.pdf used on input line 453.
 (pdftex.def)             Requested size: 184.18767pt x 149.55838pt.
 
 <result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf, id=55, 374.39874pt
@@ -515,7 +525,7 @@ type pdf)
 
 <use result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise
-.pdf used on input line 453.
+.pdf used on input line 459.
 (pdftex.def)             Requested size: 187.19891pt x 152.06775pt.
 
 <result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf, id=56, 368.37625pt 
@@ -524,7 +534,7 @@ File: result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf Graphic file (t
 ype pdf)
  <use result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.
-pdf used on input line 459.
+pdf used on input line 465.
 (pdftex.def)             Requested size: 184.18767pt x 151.56587pt.
 
 <result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf, id=57, 365.365pt x 30
@@ -533,7 +543,7 @@ File: result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf Graphic file (typ
 e pdf)
  <use result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pd
-f used on input line 465.
+f used on input line 471.
 (pdftex.def)             Requested size: 182.68205pt x 152.06775pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -554,7 +564,7 @@ File: result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf Graphic file
 
 <use result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_nois
-e.pdf used on input line 476.
+e.pdf used on input line 482.
 (pdftex.def)             Requested size: 185.69328pt x 152.06775pt.
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
@@ -567,7 +577,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  4496 strings out of 494985
  65233 string characters out of 6180357
- 130790 words of memory out of 5000000
+ 131790 words of memory out of 5000000
  7626 multiletter control sequences out of 15000+600000
  16050 words of font info for 55 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -590,7 +600,7 @@ mf-dist/fonts/type1/public/mathabx-type1/matha5.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/mathabx-type1/matha7.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (5 pages, 315754 bytes).
+Output written on huwenbo_shi_wqe.pdf (5 pages, 315885 bytes).
 PDF statistics:
  169 PDF objects out of 1000 (max. 8388607)
  114 compressed objects within 2 object streams
