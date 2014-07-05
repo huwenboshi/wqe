@@ -375,8 +375,23 @@ And reference genotype calls were obtained using HapMart.
 \par
 After removing strand-ambiguous SNPs and SNPs not present on HapMart from
 the microarry, 16,387 SNPs were left.
-Monomorphic SNPs and SNPs with two genotype clusters having less than 3
-reference genotype calls were further removed from the microarry.
+Figure~\ref{fig:data_maf_dist} shows the minor allele frequency distribution
+for these SNPs.
+
+% maf distribution figure
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.75]
+{data_figs/maf_dist.pdf}
+\caption{Minor allele frequency distribution for the 16,387 SNPs.}
+\label{fig:data_maf_dist}
+\end{figure}
+
+
+\par
+4,064 SNPs with two genotype clusters having less than 3 reference genotype
+calls were further removed from the microarry.
+Among these SNPs, 3,596 are monomorphic SNPs.
 In total, 12,323 SNPs were left for evaluation.
 %-----------------------------------------------------------------------------
 
