@@ -92,32 +92,37 @@ bind DNA fragments containing biallelic SNPs.
 Then a fluorescence scanner scans the microarray to quantify perfect 
 match and mismatch of these fragments.
 Most genotype calling procedures for SNP microarray consists of two steps.
-In the first step, information from microarray is summarized to obtain the
+In the first step, raw information from microarray is summarized to obtain the
 intensities, $\theta_A$ and $\theta_B$, of the two alleles, denoted by A and B,
 of each SNP.
 In the second step, SNPs are classified into genotype AA, AB, or BB based on
 the allele intensities they generate.
 The focus of this article is on the second step of the genotype calling
-procedure---genotype classification using summarized allele intensities.
+procedure---genotype calling using summarized allele intensities.
 
 \par
 % specific background
-For a specific SNP, if a sample has genotype AA or BB, the intensity,
+For a specific SNP, if a sample has genotype AA or BB, the allele intensity,
 $\theta_A$ or $\theta_B$, will be higher respectively. 
 If a sample has genotype AB, the intensities, $\theta_A$ and $\theta_B$,
 will be similar.
 If one plots $log(\theta_A)$ versus $log(\theta_B)$ of a SNP for a number of
-samples, normally 3 ellipsoidal clusters are observed, one for each genotype,
-as shown in Figure~\ref{fig:intro_genclus}.
+samples, normally 3 ellipsoidal clusters can be observed, one for each
+genotype, as shown in Figure~\ref{fig:intro_genclus}.
+
+\par
+% state the problem
 Many genotype calling algorithms use model--based unsupervised clustering
 methods to identify clusters and then assign genotypes to each cluster.
-To estimate model parameters, these methods use the EM algorithm, which is
-sensitive to starting parameters and slow to converge.
-Rabbee et al. proposed the RLMM algorithm, a supervised genotype calling
-method that uses reference genotype calls to form Gaussian decision
-boundaries for each genotype.
-This method involves fitting a linear mixed model, which can be computationally
-intensive.
+Although these methods are generally applicable to a wide range of SNPs and
+
+To utilize reference genotype calls, Rabbee et al. proposed the RLMM algorithm,
+a supervised genotype calling method that uses reference genotype calls to form decision regions for each
+genotype.
+These decision regions are then used to call SNPs with unknown genotype.
+All of the methods above assume that the log allele intensities generated
+by SNPs follow bivariate Gaussian distributions.
+
 
 \par
 % problem
