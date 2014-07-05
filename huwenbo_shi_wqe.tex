@@ -1,4 +1,4 @@
-\documentclass{proc}
+\documentclass{scrartcl}
 \usepackage{etoolbox}
 \usepackage{bbm}
 \usepackage{amsmath}
@@ -20,19 +20,21 @@
 % header
 \lhead{Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
 
-\title{SoCal: supervised genotype calling via ellipsoidal
+% title
+\newcommand*{\TitleFont}{
+      \usefont{\encodingdefault}{\rmdefault}{b}{n}
+      \fontsize{16}{20}
+      \selectfont}
+\newcommand*{\AuthorFont}{
+      \usefont{\encodingdefault}{\rmdefault}{r}{n}
+      \fontsize{12}{20}
+      \selectfont}
+\title{\TitleFont SoCal: supervised genotype calling via ellipsoidal
 separation for Affymetrix SNP microarray}
-
-\author{Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
-
+\author{\AuthorFont Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
 \date{}
 \maketitle
 %-----------------------------------------------------------------------------
-
-
-
-
-
 
 
 
@@ -51,11 +53,6 @@ Using only a small portion of training genotype calls from the HapMap Project,
 SoCal achieves an accuracy of $97.5\%$ during validation.
 \end{abstract}
 %-----------------------------------------------------------------------------
-
-
-
-
-
 
 
 
@@ -113,7 +110,7 @@ which, for SNP microarrays, can be caused by genomic structural variations.
 % intro genotype cluster figure
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{intro_figs/intro_genotype_clusters.pdf}
+\includegraphics[scale=0.75]{intro_figs/intro_genotype_clusters.pdf}
 \caption{Genotype clusters obtained from Affymetrix SNP array
 allele intensity values}
 \label{fig:intro_genclus}
@@ -140,11 +137,6 @@ during leave-one-out cross-validation.
 Furthermore, SoCal shows more robustness than the RLMM method when there are
 outliers in the training data.
 %-----------------------------------------------------------------------------
-
-
-
-
-
 
 
 
@@ -266,7 +258,6 @@ transformations (Figure \ref{fig:sparse_cluster}).
         \includegraphics[scale=0.5]{method_figs/defined_cluster.pdf}
         \label{fig:defined_cluster}
     }
-    \\
     \subfloat[SNP with sparse BB genotype cluster] {
         \includegraphics[scale=0.5]{method_figs/sparse_cluster.pdf}
         \label{fig:sparse_cluster}
@@ -371,22 +362,23 @@ the confidence of each genotype call.
 
 
 
-
-
-
-
-
 %-----------------------------------------------------------------------------
 % data
 \section{Data}
-TODO: Write data section
-filter out monomorphic snps
+
+\par
+The microarray used for evaluation in this project was the Affymetrix GeneChip
+Human Mapping 50K Xba Array, which contains 58,960 SNPs.
+Raw microarray data for 270 samples was obtained from HapMap FTP.
+And reference genotype calls were obtained using HapMart.
+
+\par
+After removing strand-ambiguous SNPs and SNPs not present on HapMart from
+the microarry, 16,387 SNPs were left.
+Monomorphic SNPs and SNPs with two genotype clusters having less than 3
+reference genotype calls were further removed from the microarry.
+In total, 12,323 SNPs were left for evaluation.
 %-----------------------------------------------------------------------------
-
-
-
-
-
 
 
 
@@ -394,7 +386,6 @@ filter out monomorphic snps
 
 %-----------------------------------------------------------------------------
 % result
-
 \section{Result}
 
 % result for comparing socal with hapmap calls
@@ -433,7 +424,7 @@ in the leave-one-out cross-validation with HapMap reference calls.}
 % accuracy as function of call rate
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]
+\includegraphics[scale=0.75]
 {result_figs/cmp_socal_hapmap/cmp_socal_hapmap_cr_vs_acc.pdf}
 \caption{Concordance rate of SoCal in the leave-one-out cross-validation with
 HapMap reference calls as a function of call rate.}
@@ -451,7 +442,6 @@ HapMap reference calls as a function of call rate.}
             {result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf}
         \label{fig:socal_region_no_noise}
     }
-    \\
     \subfloat[Decision regions found by RLMM when there is no outlier] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf}
@@ -463,7 +453,6 @@ HapMap reference calls as a function of call rate.}
             {result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf}
         \label{fig:socal_region_no_noise}
     }
-    \\
     \subfloat[Decision regions found by RLMM when there is no outlier] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf}
@@ -478,7 +467,7 @@ HapMap reference calls as a function of call rate.}
 % accuracy as function of noise variance
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]
+\includegraphics[scale=0.75]
 {result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf}
 \caption{Concordance rate of SoCal and RLMM in the leave-one-out
 cross-validation with HapMap reference calls as a function of noise variance.}
@@ -498,11 +487,6 @@ call rate
 
 
 
-
-
-
-
-
 %-----------------------------------------------------------------------------
 % discussion
 
@@ -510,11 +494,6 @@ call rate
 TODO: Write discussion section
 
 %-----------------------------------------------------------------------------
-
-
-
-
-
 
 
 
