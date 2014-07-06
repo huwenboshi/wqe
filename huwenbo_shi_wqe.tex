@@ -389,10 +389,11 @@ for these SNPs.
 
 
 \par
-4,064 SNPs with two genotype clusters having less than 3 reference genotype
-calls were further removed from the microarry.
+From the 16,387 SNPs, 4,064 SNPs with two genotype clusters having less than
+3 reference genotype calls were further removed from the microarry.
 Among these SNPs, 3,596 are monomorphic SNPs.
 In total, 12,323 SNPs were left for evaluation.
+On average, each of these SNPs has 83 reference genotype calls.
 %-----------------------------------------------------------------------------
 
 
@@ -404,7 +405,18 @@ In total, 12,323 SNPs were left for evaluation.
 \section{Result}
 
 % result for comparing socal with hapmap calls
-\subsection{Comparison with HapMap reference calls}
+\subsection{Cross-validation with HapMap reference calls}
+
+\par
+To evaluate the accuracy of SoCal, I compared the genotype calls made by SoCal
+and those available on HapMap through leave-one-out cross-validation.
+For each SNP, one sample was used as validation data and the rest were used
+as training data.
+The process was repeated until every sample were used as validation data
+exactly once.
+
+\par
+Table~\ref{table:cmp_hapmap_socal} shows the genotype calls made by SoCal
 
 % 100% call rate result
 \begin{table}[H]
