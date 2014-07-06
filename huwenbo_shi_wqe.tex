@@ -29,7 +29,7 @@
       \usefont{\encodingdefault}{\rmdefault}{r}{n}
       \fontsize{12}{20}
       \selectfont}
-\title{\TitleFont SoCal: supervised genotype calling via ellipsoidal
+\title{\TitleFont SoCal: supervised genotype calling via ellipsoid
 separation for Affymetrix SNP microarray}
 \author{\AuthorFont Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
 \date{}
@@ -485,14 +485,14 @@ HapMap reference calls as a function of call rate.}
 \par
 I investigated how robust SoCal is when there are outliers in the
 training data.
-As a comparison, I implemented the RLMM algorithm, which independently
+For comparison, I implemented the RLMM algorithm, which independently
 fits bivariate Gaussian distributions on the log transformed allele intensities
 of each genotype cluster and then classifies SNPs with unknown genotype into
 the distribution having minimum Mahalanobis distance. 
 
 \par
-For accurate comparison, I selected a subset of 3,442 SNPs that have more
-than 10 reference calls for each of the genotype cluster from the set of
+For fair and accurate comparison, I selected a subset of 3,442 SNPs that have
+more than 10 reference calls for each of the genotype cluster from the set of
 12,323 SNPs used for evaluation in the previous section.
 To simulate outliers, for each SNP, I first estimated $\mu_g$, the mean of
 the log transformed allele intensities of each genotype cluster, and then
@@ -500,6 +500,20 @@ drew one outlier for each genotype cluster from the Gaussian distribution
 $N(\mu_g, \gamma I)$, where $I$ is the identity matrix and $\gamma$ a
 positive constant controlling the variance of the distribution.
 By increasing $\gamma$, one increases the effect of outliers.
+
+\par
+Figure~\ref{fig:defined_sparse_cluster} shows the ellipsoidal decision regions
+obtained by SoCal and the level curves of the Gaussian decision regions
+obtained by RLMM before and after an outlier is introduced to the genotype AA
+cluster.
+Before an outlier is introduced, both SoCal and RLMM can make accurate
+genotype calls.
+However, after an outlier is introduced into the genotype AA cluster, the
+variance of the Gaussian decision region obtained by RLMM is significantly
+affected, making the classificatoin much less accurate.
+On the other hand, because SoCal not only puts penalty on outliers but also
+jointly uses data from other genotype clusters to form the decision region,
+it can still classify most SNPs into correct genotypes.
 
 % figure to illustrate socal vs gauss in terms of noise
 \begin{figure}[H]
@@ -556,9 +570,46 @@ call rate
 
 %-----------------------------------------------------------------------------
 % discussion
-
 \section{Discussion}
-TODO: Write discussion section
+
+\par
+SoCal demonstrates the possibility of using ellipsoids as decision
+regions for classifying SNPs into genotypes.
+In experiments involving HapMap data, SoCal is able to achieve $97.5\%$
+genotype calling accuracy using only a small portion of reference genotype
+calls.
+
+\par
+SoCal is different from many other genotype calling algorithms in different
+aspects.
+First, SoCal is a supervised genotype caller that uses reference genotype calls
+to form decisions regions and then call genotypes for future SNPs.
+Second, SoCal is efficient - the problem of finding separating ellipsoids
+can be formulated as a conic programming problem and solved in polynomial time,
+and is guaranteed to find a global optimum.
+Third, the decision regions of SoCal can be used repeatedly.
+Once the decision regions of a SNP for a particular SNP array are found,
+future genotype calls can repeatedly use these regions without having to
+first train a genotype caller.
+
+\par
+SoCal can be improved and extended in many ways.
+First, for a SNP with low minor allele frequencies, the ellipsoid learned 
+directly from one genotype may not be the best ellipsoid for classification
+because of limited amount of data.
+Instead, one can use the ellipsoids learned for other genotypes, which have
+more data, to infer the ellipsoid for the genotype with relatively less data.
+Second, SoCal can be extended to detect copy number variations in samples.
+Individual samples with copy number variations may have extra A's or B's at
+a SNP location. And if one plots the allele intensities $(I_A,I_B)$ for these
+individuals, these data point will appear as outliers.
+SoCal can use the ellipsoids learned from reference genotype calls to detect
+outliers and then call copy number variations accordingly.
+
+\par
+In summary, SoCal is an efficient and accurate genotype caller for Affymetrix
+SNP arrays. It can also be extended and improved to have more and
+better functionalities.
 
 %-----------------------------------------------------------------------------
 
