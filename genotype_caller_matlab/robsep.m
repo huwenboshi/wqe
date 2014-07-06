@@ -19,7 +19,7 @@ function [c, E, rho] = robsep(pa, pb, c1, c2, c3)
         variable v(num_pb)
         variable k(1)
         
-        minimize -c1*k+c2*trace(T)+c3*norm(u,1)
+        minimize -c1*k+c2*trace(T)+c3*norm(u-1,1)
         subject to
             for i = 1:num_pa
                 pah(:,i)'*E_hat*pah(:,i) <= u(i)

@@ -1,4 +1,4 @@
-addpath('../genotype_caller_matlab/');
+addpath('../../genotype_caller_matlab/');
 
 data = dlmread('SNP_A-1721275int.txt');
 train_data = dlmread('SNP_A-1721275_train.txt');
@@ -54,6 +54,9 @@ hold on;
 % add label
 xlabel('log(allele A intensity)');
 ylabel('log(allele B intensity)');
+xlim([10 15]);
+ylim([9.5 15])
+axis equal;
 
 %-------------------------------------------------------------------------
 
@@ -92,4 +95,6 @@ hold on;
 % add label
 xlabel('log(allele A intensity)');
 ylabel('log(allele B intensity)');
-
+xlim([10 15]);
+ylim([9.5 15])
+axis equal;

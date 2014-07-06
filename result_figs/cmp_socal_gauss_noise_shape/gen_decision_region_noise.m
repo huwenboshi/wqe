@@ -59,9 +59,11 @@ plot(outlier(1), outlier(2),'d','color',[0 0.75 0],'MarkerFaceColor',...
     [0 0.75 0],'MarkerSize',7.5);
 
 % add label
-ylim([10 15]);
 xlabel('log(allele A intensity)');
 ylabel('log(allele B intensity)');
+xlim([10 15]);
+ylim([9.5 15])
+axis equal;
 
 %-------------------------------------------------------------------------
 
@@ -104,4 +106,6 @@ plot(outlier(1), outlier(2),'d','color',[0 0.75 0],'MarkerFaceColor',...
 % add label
 xlabel('log(allele A intensity)');
 ylabel('log(allele B intensity)');
-
+xlim([10 15]);
+ylim([9.5 15])
+axis equal;
