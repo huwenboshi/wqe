@@ -370,7 +370,7 @@ the confidence of each genotype call.
 The microarray used for evaluation in this project was the Affymetrix GeneChip
 Human Mapping 50K Xba Array, which contains 58,960 SNPs.
 Raw microarray data for 270 samples was obtained from HapMap FTP.
-And reference genotype calls were obtained using HapMart.
+And reference genotype calls were obtained from HapMap using HapMart.
 
 \par
 After removing strand-ambiguous SNPs and SNPs not present on HapMart from
@@ -439,11 +439,11 @@ in the leave-one-out cross-validation with HapMap reference calls.}
 \end{table}
 
 \par
-By increasing the confidence score $\lambda$, SoCal can achieve higher
-concordance rate at the cost of making fewer calls.
-At a call rate of 95\%, SoCal made 1,028,258 calls in total, out of which
-1,025,242 were concordant with HapMap calls, achieving a concordance
-rate of 99.71\%.
+By increasing the threshold for the confidence score $\lambda$,
+SoCal can achieve higher concordance rate at the cost of making fewer calls.
+At $\lambda\geqslant0.863$ and call rate of 95\%, SoCal made 1,028,258 calls in
+total, out of which 1,025,242 were concordant with HapMap calls, achieving a
+concordance rate of 99.71\%.
 Table~\ref{table:cmp_hapmap_socal_95} shows the detailed comparison between
 SoCal and HapMap calls at a call rate of 95\%.
 
@@ -462,6 +462,13 @@ in the leave-one-out cross-validation with HapMap reference calls.}
 \label{table:cmp_hapmap_socal_95}
 \end{table}
 
+\par
+Figure~\ref{fig:result_sh_crvacc} shows the cordance rate of SoCal by varying
+the call rate.
+At a fixed high concordance rate, SoCal can achieve very high call rate.
+This result is comparable to the results reported by many state-of-the-art
+genotype calling methods.
+
 % accuracy as function of call rate
 \begin{figure}[H]
 \centering
@@ -473,7 +480,26 @@ HapMap reference calls as a function of call rate.}
 \end{figure}
 
 % comparison with rlmm
-\subsection{Comparison with RLMM}
+\subsection{Comparison with RLMM in the presence of outliers}
+
+\par
+I investigated how robust SoCal is when there are outliers in the
+training data.
+As a comparison, I implemented the RLMM algorithm, which independently
+fits bivariate Gaussian distributions on the log transformed allele intensities
+of each genotype cluster and then classifies SNPs with unknown genotype into
+the distribution having minimum Mahalanobis distance. 
+
+\par
+For accurate comparison, I selected a subset of 3,442 SNPs that have more
+than 10 reference calls for each of the genotype cluster from the set of
+12,323 SNPs used for evaluation in the previous section.
+To simulate outliers, for each SNP, I first estimated $\mu_g$, the mean of
+the log transformed allele intensities of each genotype cluster, and then
+drew one outlier for each genotype cluster from the Gaussian distribution
+$N(\mu_g, \gamma I)$, where $I$ is the identity matrix and $\gamma$ a
+positive constant controlling the variance of the distribution.
+By increasing $\gamma$, one increases the effect of outliers.
 
 % figure to illustrate socal vs gauss in terms of noise
 \begin{figure}[H]
@@ -512,7 +538,7 @@ HapMap reference calls as a function of call rate.}
 {result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf}
 \caption{Concordance rate of SoCal and RLMM in the leave-one-out
 cross-validation with HapMap reference calls as a function of noise variance.}
-\label{fig:result_sh_crvacc}
+\label{fig:result_cmp_noise}
 \end{figure}
 
 
