@@ -41,3 +41,6 @@ ellipse_plot(E_bb, c_bb);
 
 xlabel('log(allele A intensity)');
 ylabel('log(allele B intensity)');
+xlim([10 15]);
+ylim([9.5 15])
+axis equal;
