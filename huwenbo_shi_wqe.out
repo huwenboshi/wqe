@@ -10,7 +10,7 @@
 \BOOKMARK [1][-]{section.3}{Materials}{}% 10
 \BOOKMARK [1][-]{section.4}{Results}{}% 11
 \BOOKMARK [2][-]{subsection.4.1}{Cross-validation with HapMap reference calls}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.2}{Comparison with RLMM in the presence of outliers}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.3}{Comparison with CRLMM calls}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Comparison with CRLMM calls}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.3}{Comparison with RLMM in the presence of outliers}{section.4}% 14
 \BOOKMARK [2][-]{subsection.4.4}{Software implementation}{section.4}% 15
 \BOOKMARK [1][-]{section.5}{Discussion}{}% 16

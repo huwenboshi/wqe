@@ -480,6 +480,17 @@ HapMap reference calls as a function of call rate.}
 \label{fig:result_sh_crvacc}
 \end{figure}
 
+% comparison with crlmm
+\subsection{Comparison with CRLMM calls}
+
+\par
+As another way of evaluating the accuracy of SoCal, I compared the genotype
+calls made by SoCal and those made by CRLMM, a widely used state-or-the-art
+genotype calling method.
+I first trained SoCal using all the samples with HapMap reference calls to
+obtain the ellipsoidal decision regions, then I made genotype calls on the
+rest of the samples that are not in the reference set.
+
 % comparison with rlmm
 \subsection{Comparison with RLMM in the presence of outliers}
 
@@ -504,7 +515,7 @@ $\gamma$, one increases the effect of outliers.
 In total, I simulated 3 outliers for each SNP, one for each genotype cluster.
 
 \par
-As an example, figure~\ref{fig:cmp_shape_noise} shows the ellipsoidal decision
+As an example, Figure~\ref{fig:cmp_shape_noise} shows the ellipsoidal decision
 regions obtained by SoCal and the level curves of the Gaussian decision regions
 obtained by RLMM before and after an outlier is introduced to the genotype AA
 cluster.
@@ -549,8 +560,9 @@ it can still classify most SNPs into correct genotypes.
 
 \par
 Figure~\ref{fig:result_cmp_noise} shows the decrease in concordance rate of
-SoCal and RLMM in leave-one-out cross-validation with HapMap reference
-genotype calls as the variance of simulated outliers varies from 0 to 10.
+SoCal and RLMM at call rate of 100\% in leave-one-out cross-validation with
+HapMap reference genotype calls as the variance of simulated outliers varies
+from 0 to 10.
 Clearly, the concordance rate of SoCal decreases much more slowly than does
 the RLMM method.
 Thus, SoCal is in general more robust to outliers than RLMM.
@@ -565,12 +577,6 @@ cross-validation with HapMap reference calls as a function of outlier
 variance.}
 \label{fig:result_cmp_noise}
 \end{figure}
-
-% comparison with crlmm
-\subsection{Comparison with CRLMM calls}
-TODO: Compare with CRLMM
-concordance rate
-call rate
 
 % implementation
 \subsection{Software implementation}
