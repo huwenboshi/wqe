@@ -9,6 +9,7 @@
 \usepackage{indentfirst}
 \usepackage{subfig}
 \usepackage{fancyhdr}
+\usepackage{hyperref}
 \pagestyle{fancy}
 \setlength{\parskip}{0em}
 \setlength{\parindent}{2em}
@@ -491,7 +492,7 @@ of each genotype cluster and then classifies SNPs with unknown genotype into
 the distribution having minimum Mahalanobis distance. 
 
 \par
-For fair and accurate comparison, I selected a subset of 3,442 SNPs that have
+For accurate comparison, I selected a subset of 3,442 SNPs that have
 more than 10 reference calls for each of the genotype cluster from the set of
 12,323 SNPs used for evaluation in the previous section.
 To simulate outliers, for each SNP, I first estimated $\mu_g$, the mean of
@@ -552,7 +553,7 @@ SoCal and RLMM in leave-one-out cross-validation with HapMap reference
 genotype calls as the variance of simulated outliers varies from 0 to 10.
 Clearly, the concordance rate of SoCal decreases much more slowly than does
 the RLMM method.
-Thus, SoCal is in general more robust to outliers than RLMM. 
+Thus, SoCal is in general more robust to outliers than RLMM.
 
 % accuracy as function of noise variance
 \begin{figure}[H]
@@ -571,6 +572,13 @@ TODO: Compare with CRLMM
 concordance rate
 call rate
 
+% implementation
+\subsection{Software implementation}
+SoCal is implemented in Python.
+To solve the conic programming problem of finding separating ellipsoids,
+SoCal uses CVXOPT.
+Source code of SoCal is available at
+\url{https://github.com/huwenboshi/wqe/tree/master/genotype_caller}.
 %-----------------------------------------------------------------------------
 
 
