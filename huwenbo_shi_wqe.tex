@@ -10,7 +10,6 @@
 \usepackage{subfig}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
-%\usepackage[margin=1.25in]{geometry}
 \pagestyle{fancy}
 \setlength{\parskip}{0em}
 \setlength{\parindent}{2em}
@@ -45,6 +44,11 @@ separation for Affymetrix SNP microarray}
 %-----------------------------------------------------------------------------
 % abstract
 \begin{abstract}
+
+\centerline{ABSTRACT}
+
+\vspace*{\baselineskip}
+
 \par
 In this article, I present SoCal, a supervised genotype calling algorithm for
 Affymetrix SNP microarray.
@@ -53,6 +57,7 @@ each genotype from reference genotype calls, and then uses these regions to
 classify future SNPs into different genotypes.
 Using only a small portion of training genotype calls from the HapMap Project,
 SoCal achieves an accuracy of $97.5\%$ during validation.
+
 \end{abstract}
 %-----------------------------------------------------------------------------
 
@@ -658,7 +663,7 @@ Affymetrix SNP microarray.
 Like many supervised genotype callers, SoCal has its limitations.
 First, SoCal is not directly applicable to SNP microarrays that don't have
 reference genotype calls.
-Second, SoCal is, in general, not directly applicable to the same SNP
+Second, SoCal is, in general, also not directly applicable to the same SNP
 microarray across different laboratories because different laboratory
 protocols can generate different allele intensities for even the same
 SNP microarray.
@@ -670,12 +675,41 @@ Because SoCal is robust to outliers in the training data, the refined
 ellipsoidal decision regions can be used to accurately call genotypes for
 future SNPs.
 Another limitation of SoCal is that users need to fine tune the weights
-assigned to the criteria of finding the ellipsoids.
+($\beta_i$) assigned to the criteria of finding the ellipsoids.
 However, experiments with SoCal show that SoCal is mostly sensitive to the
 choice of $\beta_2$ and $\beta_3$.
 And optimal values for parameters can be estimated efficiently
 through experiments.
 
+\par
+SoCal is still in development, and can be improved and extended in
+many directions.
+First, the current method that SoCal uses to handle SNPs with missing genotype
+clusters is through simple and fixed geometric transformations.
+This method assumes that genotype AA cluter and genotype BB cluster are
+symmetric around genotype AB cluster.
+However, this is not true in general.
+Future efforts should be spent on how to estimate ellipsoids for missing
+genotype clusters more accurately.
+Second, currently SoCal only uses allele intensities data for reference
+genotype calls.
+However, allele intensities data for samples having structual variations is
+also available.
+A possible improvement for SoCal is to include these data in finding the
+ellipsoids for each genotype cluster to further refine the decision regions.
+These refined decision regions can then be used to detect possible structural
+variations.
+
+\par
+To summarize, SoCal presents a novel and promising method for genotype calling.
+It's efficient in that it finds decision regions by solving a conic
+programming problem, which is solvable in polynomial time with guaranteed
+global optimum.
+SoCal is also comparable in accuracy with many state-of-the-art methods.
+Although SoCal has its limitations, these limitations are also present in other
+supervised genotype callers, and have been addressed previously.
+SoCal can also be extended and improved to be more accurate and to have more
+functionality.
 %-----------------------------------------------------------------------------
 
 
@@ -683,7 +717,6 @@ through experiments.
 
 %-----------------------------------------------------------------------------
 % references
-
 \begin{thebibliography}{9}
 \bibitem{rho2010}
 Rho, S. W., Abell, G. C., Kim, K., Nam, Y., \& Bae, J. (2010).
@@ -714,7 +747,6 @@ Nature Methods, 11, 407-409.
 Glineur F. (1998). Pattern separation via ellipsoids and conic programming.
 (MS Thesis). Faculté Polytechnique de Mons, Mons, Belgium.
 \end{thebibliography}
-
 %-----------------------------------------------------------------------------
 
 \end{document}
