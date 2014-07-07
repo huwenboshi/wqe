@@ -77,7 +77,7 @@ class socal_caller:
             genotype = 'bb'
         
         # compute score
-        score = 1-min_dist/(dist_aa+dist_ab+dist_bb)
+        score = 1-min_dist/(dist_aa+dist_ab+dist_bb+0.0000001)
         
         """
         print c_aa
