@@ -490,12 +490,17 @@ genotype calling method for SNP microarrays.
 
 \par
 I first trained SoCal using all the samples with HapMap reference calls, and
-then I made genotype calls on the rest of the samples not present in the
-reference set.
-When comparing SoCal with CRLMM, I excluded the training samples, and compared
-these two methods only at samples not present in the training samples.
+then I made genotype calls on the rest of the samples not in the reference set.
+I excluded the training samples when comparing SoCal with CRLMM, and compared
+these two methods only at samples not in the training samples.
+
+\par
 Table~\ref{table:cmp_socal_crlmm} shows the detailed comparison between SoCal
 and CRLMM at a call rate of 100\%.
+In total, SoCal made 2,245,891 calls, out of which 2,134,868 were concordant
+with those made by CRLMM, achieving a concordance rate of 95.10\%.
+The high concordance rate between SoCal and CRLMM implies that SoCal has the
+potential to become an alternative genotype caller.
 
 % detail comparison between socal and crlmm
 \begin{table}[H]
@@ -507,8 +512,9 @@ and CRLMM at a call rate of 100\%.
     AB            & 22,340   & 564,280 & 22,533  & 0  \\
     BB            & 7,730    & 24,771  & 788,685 & 0  \\ \hline
 \end{tabular}
-\caption{At a call rate of 95\%, SoCal achieved 99.71\% concordance rate
-in the leave-one-out cross-validation with HapMap reference calls.}
+\caption{At a call rate of 100\%, SoCal achieved 95.10\% concordance rate
+with the calls made by CRLMM. Training samples for SoCal were excluded in the
+comparison.}
 \label{table:cmp_socal_crlmm}
 \end{table}
 
