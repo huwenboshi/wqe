@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  6 JUL 2014 19:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  6 JUL 2014 19:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -406,9 +406,6 @@ LaTeX Warning: Label `fig:gauss_region_no_noise' multiply defined.
 
 LaTeX Warning: Label `sub@fig:gauss_region_no_noise' multiply defined.
 
-
-LaTeX Warning: Label `fig:defined_sparse_cluster' multiply defined.
-
 )
 \openout1 = `huwenbo_shi_wqe.aux'.
 
@@ -745,7 +742,7 @@ File: result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf Graphic file
 
 <use result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noi
-se.pdf used on input line 525.
+se.pdf used on input line 526.
 (pdftex.def)             Requested size: 184.18767pt x 151.56587pt.
 
 <result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf, id=75, 367.3725pt 
@@ -754,7 +751,7 @@ File: result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf Graphic file (
 type pdf)
  <use result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise
-.pdf used on input line 530.
+.pdf used on input line 531.
 (pdftex.def)             Requested size: 183.68579pt x 151.56587pt.
 
 <result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf, id=76, 368.37625pt 
@@ -763,7 +760,7 @@ File: result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf Graphic file (t
 ype pdf)
  <use result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.
-pdf used on input line 536.
+pdf used on input line 537.
 (pdftex.def)             Requested size: 184.18767pt x 151.56587pt.
 
 <result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf, id=77, 368.37625pt x 
@@ -772,7 +769,7 @@ File: result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf Graphic file (typ
 e pdf)
  <use result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pd
-f used on input line 541.
+f used on input line 542.
 (pdftex.def)             Requested size: 184.18767pt x 151.56587pt.
 
 
@@ -811,7 +808,7 @@ File: result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf Graphic file
 
 <use result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_nois
-e.pdf used on input line 552.
+e.pdf used on input line 561.
 (pdftex.def)             Requested size: 278.53993pt x 228.10162pt.
 
 
@@ -826,7 +823,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 557.
+(scrartcl)              by `\normalfont \slshape ' on input line 567.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -840,7 +837,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 557.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 567.
 
 [9 <./result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf> <./result_f
 igs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf> <./result_figs/cmp_socal_ga
@@ -858,7 +855,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 608.
+(scrartcl)              by `\normalfont \slshape ' on input line 618.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -872,7 +869,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 608.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 618.
 
 [10 <./result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf>]
 Missing character: There is no Ã in font cmr10!
@@ -890,7 +887,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 655.
+(scrartcl)              by `\normalfont \slshape ' on input line 665.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -904,7 +901,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 655.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 665.
 
 [11] (./huwenbo_shi_wqe.aux)
 
@@ -919,10 +916,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5752 strings out of 494985
- 87583 string characters out of 6180357
- 192862 words of memory out of 5000000
- 8867 multiletter control sequences out of 15000+600000
+ 5753 strings out of 494985
+ 87604 string characters out of 6180357
+ 192870 words of memory out of 5000000
+ 8868 multiletter control sequences out of 15000+600000
  18142 words of font info for 62 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  50i,13n,54p,796b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -943,7 +940,7 @@ live/texmf-dist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (11 pages, 312145 bytes).
+Output written on huwenbo_shi_wqe.pdf (11 pages, 312554 bytes).
 PDF statistics:
  193 PDF objects out of 1000 (max. 8388607)
  130 compressed objects within 2 object streams

@@ -498,12 +498,13 @@ To simulate outliers, for each SNP, I first estimated $\mu_g$, the mean of
 the log transformed allele intensities of each genotype cluster, and then
 drew one outlier for each genotype cluster from the Gaussian distribution
 $N(\mu_g, \gamma I)$, where $I$ is the identity matrix and $\gamma$ a
-positive constant controlling the variance of the distribution.
-By increasing $\gamma$, one increases the effect of outliers.
+positive constant controlling the variance of the distribution---by increasing
+$\gamma$, one increases the effect of outliers.
+In total, I simulated 3 outliers for each SNP, one for each genotype cluster.
 
 \par
-Figure~\ref{fig:defined_sparse_cluster} shows the ellipsoidal decision regions
-obtained by SoCal and the level curves of the Gaussian decision regions
+As an example, figure~\ref{fig:cmp_shape_noise} shows the ellipsoidal decision
+regions obtained by SoCal and the level curves of the Gaussian decision regions
 obtained by RLMM before and after an outlier is introduced to the genotype AA
 cluster.
 Before an outlier is introduced, both SoCal and RLMM can make accurate
@@ -542,8 +543,16 @@ it can still classify most SNPs into correct genotypes.
     \caption{Each dot in the plots above represents a sample, with
              samples having HapMap reference genotype calls marked red.
              The ellipsoids were obtained using only the reference calls.}
-    \label{fig:defined_sparse_cluster}
+    \label{fig:cmp_shape_noise}
 \end{figure}
+
+\par
+Figure~\ref{fig:result_cmp_noise} shows the decrease in concordance rate of
+SoCal and RLMM in leave-one-out cross-validation with HapMap reference
+genotype calls as the variance of simulated outliers varies from 0 to 10.
+Clearly, the concordance rate of SoCal decreases much more slowly than does
+the RLMM method.
+Thus, SoCal is in general more robust to outliers than RLMM. 
 
 % accuracy as function of noise variance
 \begin{figure}[H]
@@ -551,11 +560,12 @@ it can still classify most SNPs into correct genotypes.
 \includegraphics[scale=0.75]
 {result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf}
 \caption{Concordance rate of SoCal and RLMM in the leave-one-out
-cross-validation with HapMap reference calls as a function of noise variance.}
+cross-validation with HapMap reference calls as a function of outlier
+variance.}
 \label{fig:result_cmp_noise}
 \end{figure}
 
-
+% comparison with crlmm
 \subsection{Comparison with CRLMM calls}
 TODO: Compare with CRLMM
 concordance rate
