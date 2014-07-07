@@ -485,11 +485,32 @@ HapMap reference calls as a function of call rate.}
 
 \par
 As another way of evaluating the accuracy of SoCal, I compared the genotype
-calls made by SoCal and those made by CRLMM, a widely used state-or-the-art
-genotype calling method.
-I first trained SoCal using all the samples with HapMap reference calls to
-obtain the ellipsoidal decision regions, then I made genotype calls on the
-rest of the samples that are not in the reference set.
+calls made by SoCal and those made by CRLMM, a widely used state-of-the-art
+genotype calling method for SNP microarrays.
+
+\par
+I first trained SoCal using all the samples with HapMap reference calls, and
+then I made genotype calls on the rest of the samples not present in the
+reference set.
+When comparing SoCal with CRLMM, I excluded the training samples, and compared
+these two methods only at samples not present in the training samples.
+Table~\ref{table:cmp_socal_crlmm} shows the detailed comparison between SoCal
+and CRLMM at a call rate of 100\%.
+
+% detail comparison between socal and crlmm
+\begin{table}[H]
+\centering
+\begin{tabular}{l*{5}{r}r}
+    \hline
+    CRLMM/SoCal   & AA       & AB      & BB      & No Call \\ \hline
+    AA            & 781,903  & 23,244  & 10,405  & 0  \\
+    AB            & 22,340   & 564,280 & 22,533  & 0  \\
+    BB            & 7,730    & 24,771  & 788,685 & 0  \\ \hline
+\end{tabular}
+\caption{At a call rate of 95\%, SoCal achieved 99.71\% concordance rate
+in the leave-one-out cross-validation with HapMap reference calls.}
+\label{table:cmp_socal_crlmm}
+\end{table}
 
 % comparison with rlmm
 \subsection{Comparison with RLMM in the presence of outliers}
