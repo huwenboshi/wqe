@@ -10,6 +10,7 @@
 \usepackage{subfig}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+%\usepackage[margin=1.25in]{geometry}
 \pagestyle{fancy}
 \setlength{\parskip}{0em}
 \setlength{\parindent}{2em}
@@ -424,12 +425,15 @@ I repeated this process until all the samples in the reference set were used
 as validation data exactly once.
 
 \par
+First, I compared the accuracy of SoCal under different choices of $\beta_i$,
+which are the weights assigned to the criteria of finding the ellipsoidal
+decision regions for each genotype cluster.
 Figure~\ref{fig:result_sh_crvacc} shows the concordance rate of SoCal in the
 leave-one-out cross-validation for a wide range of call rates when different
-values of $\beta_i$, weights assigned to each criterion of finding
-the ellipsoids, were used.
+values of $\beta_i$ were used.
 Because the choice of weights, $\beta_1=1$, $\beta_2=10^4$, $\beta_3=10^2$,
-had the best performance, it's set to be the default choice of SoCal.
+had the highest call rate at fixed concordance rates, it's set to be the
+default choice of SoCal.
 And all future experiments presented in this article used this choice
 of weights.
 
@@ -633,43 +637,44 @@ Source code of SoCal is available at
 \section{Discussion}
 
 \par
-SoCal demonstrates the possibility of using ellipsoids as decision
-regions for classifying SNPs into genotypes.
-In experiments involving HapMap data, SoCal is able to achieve $97.5\%$
-genotype calling accuracy using only a small portion of reference genotype
-calls.
+I have presented SoCal, a supervised genotype calling algorithm for Affymetrix
+SNP microarray.
+Unlike many existing supervised genotype calling algorithms that try to fit
+generative models (mostly Gaussian mixture models) on summarized allele
+intensities with reference genotype calls, SoCal uses these data to efficiently
+finds ellipsoidal decision regions for each genotype cluster by solving a conic
+programming problem.
+Both cross-validation of SoCal with HapMap reference calls and comparison with
+genotype calls made by CRLMM show that SoCal is comparable in accuracy to many
+of the state-of-the-art genotype calling methods.
+Also, when there are outliers in training data, SoCal outperforms RLMM, a
+genotype calling method that uses Gaussian decision regions to call genotypes,
+demonstrating the robustness of SoCal in the presence of outliers over
+existing methods.
+Overall, SoCal proves to be a promising alternative genotype caller for
+Affymetrix SNP microarray.
 
 \par
-SoCal is different from many other genotype calling algorithms in different
-aspects.
-First, SoCal is a supervised genotype caller that uses reference genotype calls
-to form decisions regions and then call genotypes for future SNPs.
-Second, SoCal is efficient - the problem of finding separating ellipsoids
-can be formulated as a conic programming problem and solved in polynomial time,
-and is guaranteed to find a global optimum.
-Third, the decision regions of SoCal can be used repeatedly.
-Once the decision regions of a SNP for a particular SNP array are found,
-future genotype calls can repeatedly use these regions without having to
-first train a genotype caller.
-
-\par
-SoCal can be improved and extended in many ways.
-First, for a SNP with low minor allele frequencies, the ellipsoid learned 
-directly from one genotype may not be the best ellipsoid for classification
-because of limited amount of data.
-Instead, one can use the ellipsoids learned for other genotypes, which have
-more data, to infer the ellipsoid for the genotype with relatively less data.
-Second, SoCal can be extended to detect copy number variations in samples.
-Individual samples with copy number variations may have extra A's or B's at
-a SNP location. And if one plots the allele intensities $(I_A,I_B)$ for these
-individuals, these data point will appear as outliers.
-SoCal can use the ellipsoids learned from reference genotype calls to detect
-outliers and then call copy number variations accordingly.
-
-\par
-In summary, SoCal is an efficient and accurate genotype caller for Affymetrix
-SNP arrays. It can also be extended and improved to have more and
-better functionalities.
+Like many supervised genotype callers, SoCal has its limitations.
+First, SoCal is not directly applicable to SNP microarrays that don't have
+reference genotype calls.
+Second, SoCal is, in general, not directly applicable to the same SNP
+microarray across different laboratories because different laboratory
+protocols can generate different allele intensities for even the same
+SNP microarray.
+In these scenarios, one can first call genotypes from microarrays using
+unsupervised genotype calling algorithms.
+One can then use these calls as training data for SoCal and use SoCal to
+form refined ellipsoidal decision regions for each genotype cluster.
+Because SoCal is robust to outliers in the training data, the refined
+ellipsoidal decision regions can be used to accurately call genotypes for
+future SNPs.
+Another limitation of SoCal is that users need to fine tune the weights
+assigned to the criteria of finding the ellipsoids.
+However, experiments with SoCal show that SoCal is mostly sensitive to the
+choice of $\beta_2$ and $\beta_3$.
+And optimal values for parameters can be estimated efficiently
+through experiments.
 
 %-----------------------------------------------------------------------------
 
