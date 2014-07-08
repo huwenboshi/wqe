@@ -10,6 +10,7 @@
 \usepackage{subfig}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage[margin=0.75in]{geometry}
 \pagestyle{fancy}
 \setlength{\parskip}{0em}
 \setlength{\parindent}{2em}
@@ -50,14 +51,26 @@ separation for Affymetrix SNP microarray}
 \vspace*{\baselineskip}
 
 \par
-In this article, I present SoCal, a supervised genotype calling algorithm for
-Affymetrix SNP microarray.
-For each SNP, SoCal first efficiently identify ellipsoidal decision regions for
-each genotype from reference genotype calls, and then uses these regions to
-classify future SNPs into different genotypes.
-Using only a small portion of training genotype calls from the HapMap Project,
-SoCal achieves an accuracy of $97.5\%$ during validation.
-
+Genotype calling for SNP microarray is an important step in array-based
+association studies.
+Traditional supervised genotype calling algorithms for SNP microarray fit
+generative models (mostly Gaussian mixture models) on allele intensities of
+samples having reference genotype calls.
+In this article, I present SoCal, a supervised genotype calling method that
+efficiently finds ellipsoidal decision regions for each genotype cluster
+via ellipsoid separation.
+By specifying different weights to the criteria of finding separating
+ellipsoids, SoCal can control the effect of outliers in training data.
+In leave-one-out cross-validation with HapMap reference calls, SoCal achieved a
+concordance rate of 99.71\% at a call rate of 95\%, comparable to many
+state-of-the-art methods.
+By training SoCal using HapMap reference calls, SoCal achieved 95.10\%
+concordance rate with the genotype calls made by CRLMM at a call rate of
+100\% on a set of samples excluding the training samples.
+SoCal also shows more robustness than RLMM, a method that forms Gaussian
+decision regions from training data to call genotypes, when there are outliers
+in the training data.
+SoCal proves to be a novel and promising alternative genotype caller.
 \end{abstract}
 %-----------------------------------------------------------------------------
 
