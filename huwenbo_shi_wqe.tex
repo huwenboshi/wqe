@@ -10,7 +10,7 @@
 \usepackage{subfig}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
-\usepackage[margin=0.75in]{geometry}
+\usepackage[margin=1.25in]{geometry}
 \pagestyle{fancy}
 \setlength{\parskip}{0em}
 \setlength{\parindent}{2em}
@@ -31,7 +31,7 @@
       \usefont{\encodingdefault}{\rmdefault}{r}{n}
       \fontsize{12}{20}
       \selectfont}
-\title{\TitleFont SoCal: supervised genotype calling via ellipsoid
+\title{\TitleFont SoCal: supervised genotype calling via ellipsoidal
 separation for Affymetrix SNP microarray}
 \author{\AuthorFont Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu}
 \date{}
@@ -51,26 +51,34 @@ separation for Affymetrix SNP microarray}
 \vspace*{\baselineskip}
 
 \par
-Genotype calling for SNP microarray is an important step in array-based
-association studies.
-Traditional supervised genotype calling algorithms for SNP microarray fit
-generative models (mostly Gaussian mixture models) on allele intensities of
-samples having reference genotype calls.
-In this article, I present SoCal, a supervised genotype calling method that
-efficiently finds ellipsoidal decision regions for each genotype cluster
-via ellipsoid separation.
-By specifying different weights to the criteria of finding separating
+\noindent
+\textbf{Background:} Genotype calling for SNP microarray is an important
+step in array-based association studies.
+Most supervised genotype calling algorithms for SNP microarray fit
+generative models (e.g. Gaussian models) on log-transformed allele intensities
+of samples having reference genotype calls.
+
+\par
+\noindent
+\textbf{Methods:} In this article, I present SoCal, a supervised genotype
+calling method that efficiently finds ellipsoidal decision regions for each
+genotype via ellipsoidal separation instead of fitting a generative model.
+By assigning different weights to the criteria of finding separating
 ellipsoids, SoCal can control the effect of outliers in training data.
-In leave-one-out cross-validation with HapMap reference calls, SoCal achieved a
-concordance rate of 99.71\% at a call rate of 95\%, comparable to many
+
+\par
+\noindent
+\textbf{Results:} In leave-one-out cross-validation with HapMap reference
+calls, SoCal achieved a concordance rate of 98.94\% at a call rate if 100\%
+and 99.71\% at a call rate of 95\%, comparable to many
 state-of-the-art methods.
 By training SoCal using HapMap reference calls, SoCal achieved 95.10\%
-concordance rate with the genotype calls made by CRLMM at a call rate of
-100\% on a set of samples excluding the training samples.
-SoCal also shows more robustness than RLMM, a method that forms Gaussian
-decision regions from training data to call genotypes, when there are outliers
-in the training data.
-SoCal proves to be a novel and promising alternative genotype caller.
+concordance rate with genotype calls made by CRLMM at a call rate of
+100\% on a set of validation calls excluding the training calls.
+SoCal also shows more robustness than RLMM, a method that uses Gaussian
+decision regions to call genotypes, when there are outliers in training data.
+Overall, SoCal is a novel and promising genotype calling algorithm.
+
 \end{abstract}
 %-----------------------------------------------------------------------------
 
