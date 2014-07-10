@@ -94,14 +94,14 @@ Overall, SoCal is a novel and promising genotype calling method.
 \par
 % broad background
 Accurate genotyping of SNPs is essential to discovering true causal variants
-in association studies.
+in association studies \cite{gordon2005}.
 Although next generation sequencing technology provides cheap whole-genome
 sequences for genotyping SNPs, SNP microarray is still a cost-effective
-genotyping technology for many specific association studies.
+genotyping technology for many specific association studies \cite{rho2010}.
 In an Affymetrix SNP microarray, oligonucleotide probes are used to match and
 bind DNA fragments containing biallelic SNPs.
 Then a fluorescence scanner scans the microarray to quantify perfect 
-match and mismatch of these fragments.
+match and mismatch for these fragments.
 Most genotype calling procedures for Affymetrix SNP microarray consist of
 two steps.
 In the first step, raw information from microarray is summarized to obtain
@@ -123,52 +123,58 @@ samples, normally 3 ellipsoidal clusters can be observed, one for each
 genotype, as shown in Figure~\ref{fig:intro_genclus}.
 % state the problem
 Many genotype calling algorithms use model-based unsupervised clustering
-to identify these clusters and then assign genotypes to each cluster.
-Although these methods are applicable to a wide range of microarrays, they
-don't take advantage of genotype calls that are already available.
+to identify these clusters and then assign genotypes to each cluster 
+\cite{norlen2008,lin2008,fujisawa2004}.
+Although these methods are applicable to a wide range of microarrays because
+they only require information from microarrays, they don't take advantage of
+genotype calls that are already available.
 Also, these methods use EM algorithm to estimate model parameters, which is
-sensitive to starting parameters and slow to converge.
+sensitive to starting parameters and slow to converge \cite{wu1983}.
 To utilize reference genotype calls, Rabbee and Speed proposed the RLMM
 algorithm, a supervised genotype calling method that forms
 decision regions for each genotype by fitting bivariate Gaussian
-distributions on allele intensities with reference genotype calls.
+distributions on log-transformed allele intensities with reference
+genotype calls \cite{rabbee2005}.
 These Gaussian decision regions are then used to call SNPs for samples with
 unknown genotypes.
-However, fitting a Gaussian distribution is known to be sensitive to outliers,
-which, for SNP microarrays, can be caused by genomic structural variations.
+However, fitting a Gaussian distribution is known to be sensitive to outliers 
+\cite{huber1981}.
+And for SNP microarrays, outliers can be caused by genomic structural
+variations \cite{marioni2007}.
 
 % intro genotype cluster figure
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.75]{intro_figs/intro_genotype_clusters.pdf}
-\caption{Genotype clusters obtained from Affymetrix SNP array
-allele intensity values}
+\caption{Genotype clusters obtained by plotting log-transformed allele
+intensities of the two alleles of a SNP for a number of samples.
+Each point in the plot represents a sample.}
 \label{fig:intro_genclus}
 \end{figure}
 
 \par
 % state my solution
-In this article, I present SoCal, a supervised genotype calling algorithm
+In this article, I present SoCal, a supervised genotype calling method
 for Affymetrix SNP microarray.
-Instead of fitting Gaussian distributions on allele intensities with reference
-genotype calls, SoCal efficiently finds ellipsoidal decision regions for each
-genotype of a SNP via ellipsoidal separation by solving a conic programming
-problem.
+Instead of fitting Gaussian distributions on log-transformed allele
+intensities with reference genotype calls, SoCal efficiently finds ellipsoidal
+decision regions for each genotype via ellipsoidal separation by solving a
+conic programming problem.
 SoCal can control the effect of outliers by assigning different weights to 
-the criteria of finding the ellipsoids---separation ratio, ellipsoid
+the criteria of finding separating ellipsoids---separation ratio, ellipsoid
 volume, and number of enclosed points. 
-After SoCal finds the ellipsoidal decision regions for each genotype of
-a SNP, it uses them to call SNPs for samples with unknown genotypes using
-minimum distance classification.
+After SoCal finds the ellipsoidal decision regions for each genotype, it uses
+them to call SNPs for samples with unknown genotypes using minimum distance
+classification.
 
 \par
 % state the result
 Using reference genotype calls from the HapMap Project as training and
 validation data, SoCal achieved a concordance rate of 98.94\% at a call rate
-of 100\% and $99.71\%$ at a call rate of $95\%$ in leave-one-out
+of 100\% and 99.71\% at a call rate of 95\% in leave-one-out
 cross-validation.
-Furthermore, SoCal shows more robustness than the RLMM method when there are
-outliers in the training data.
+Furthermore, SoCal showed more robustness than the RLMM method when outliers
+were present in training data.
 %-----------------------------------------------------------------------------
 
 
@@ -744,31 +750,37 @@ functionality.
 %-----------------------------------------------------------------------------
 % references
 \begin{thebibliography}{9}
+\bibitem{gordon2005}
+Gordon D, Finch SJ. Factors affecting statistical power in the detection of
+genetic association. J Clin Invest. 2005;115(6):1408-18.
 \bibitem{rho2010}
-Rho, S. W., Abell, G. C., Kim, K., Nam, Y., \& Bae, J. (2010).
-Comparing microarrays and next-generation sequencing technologies for microbial
-ecology research. Trends in Biotechnology, 28, 291-299.
+Roh SW, Abell GC, Kim KH, Nam YD, Bae JW. Comparing microarrays and
+next-generation sequencing technologies for microbial ecology research.
+Trends Biotechnol. 2010;28(6):291-9.
 \bibitem{norlen2008}
 Norl\'{e}n, H., Pettersson, E., Ahmadian, A., Lundeberg, J., \& Sundberg, R.
 (2008). Classification of SNP genotypes by a Gaussian mixture model in
 competitive enzymatic assays.
 Mathematical Statistics Stockholm University Research Report, 3, 1-26.
 \bibitem{lin2008}
-Lin, Y., Tseng, G. C., Cheong, S. Y., Bean, L. J., Sherman, S. L., \&
-Feingold, E. (2008). Smarter clustering methods for SNP genotype calling.
-Bioinformatics, 24, 2665-2671.
+Lin Y, Tseng GC, Cheong SY, Bean LJ, Sherman SL, Feingold E. Smarter
+clustering methods for SNP genotype calling.
+Bioinformatics. 2008;24(23):2665-71.
+\bibitem{fujisawa2004}
+Fujisawa H, Eguchi S, Ushijima M, et al. Genotyping of single nucleotide
+polymorphism using model-based clustering. Bioinformatics. 2004;20(5):718-26.
 \bibitem{wu1983}
 Wu, C. F. (1983). On the Convergence Properties of the EM Algorithm.
 The Annals of Statistics, 11, 95-103.
 \bibitem{rabbee2005}
-Rabbee, N., \& Speed, T. P. (2005).
-A genotype calling algorithm for affymetrix SNP arrays.
-Bioinformatics, 22, 7-12.
-\bibitem{zhou2014}
-Zhou, X., \& Stephens, M. (2014).
-Efficient multivariate linear mixed model algorithms for genome-wide
-association studies.
-Nature Methods, 11, 407-409.
+Rabbee N, Speed TP. A genotype calling algorithm for affymetrix SNP arrays.
+Bioinformatics. 2006;22(1):7-12.
+\bibitem{huber1981}
+Huber, P.J., 1981. Robust Statistics. Wiley, New York.
+\bibitem{marioni2007}
+Marioni JC, Thorne NP, Valsesia A, et al. Breaking the waves: improved
+detection of copy number variation from microarray-based comparative genomic
+hybridization. Genome Biol. 2007;8(10):R228.
 \bibitem{glineur1998}
 Glineur F. (1998). Pattern separation via ellipsoids and conic programming.
 (MS Thesis). Faculté Polytechnique de Mons, Mons, Belgium.
