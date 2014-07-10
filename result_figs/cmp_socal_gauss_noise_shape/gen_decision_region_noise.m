@@ -3,12 +3,12 @@ addpath('../../genotype_caller_matlab/');
 data = dlmread('SNP_A-1721275int.txt');
 train_data = dlmread('SNP_A-1721275_train.txt');
 
-outlier = [12.5 14.5 1];
+outlier = [14 9 1];
 train_data = [train_data; outlier];
 
 % find the ellipsoids
 c1 = 1;
-c2 = 20000;
+c2 = 10000;
 c3 = 100;
 c4 = 2;
 
@@ -55,14 +55,14 @@ ellipse_plot(E_bb, c_bb);
 hold on;
 
 % plot the outlier
-plot(outlier(1), outlier(2),'d','color',[0 0.75 0],'MarkerFaceColor',...
-    [0 0.75 0],'MarkerSize',7.5);
+plot(outlier(:,1), outlier(:,2),'d','color',[0 0.5 0],...
+    'MarkerFaceColor',[0 0.5 0],'MarkerSize',7.5);
 
 % add label
 xlabel('log(allele A intensity)');
 ylabel('log(allele B intensity)');
 xlim([10 15]);
-ylim([9.5 15])
+ylim([8.5 15])
 axis equal;
 
 %-------------------------------------------------------------------------
@@ -100,12 +100,12 @@ plot(elpt(:,1:2:end),elpt(:,2:2:end),'k', m_bb(1), m_bb(2), 'ko',...
 hold on;
 
 % plot the outlier
-plot(outlier(1), outlier(2),'d','color',[0 0.75 0],'MarkerFaceColor',...
-    [0 0.75 0],'MarkerSize',7.5);
+plot(outlier(:,1), outlier(:,2),'v','color',[0 0.5 0],...
+    'MarkerFaceColor',[0 0.5 0],'MarkerSize',7.5);
 
 % add label
 xlabel('log(allele A intensity)');
 ylabel('log(allele B intensity)');
 xlim([10 15]);
-ylim([9.5 15])
+ylim([8.5 15])
 axis equal;

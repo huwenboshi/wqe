@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.21)  9 JUL 2014 17:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  9 JUL 2014 23:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **huwenbo_shi_wqe.tex
 (./huwenbo_shi_wqe.tex
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 2 languages loaded.
+Babel <3.9h> and hyphenation patterns for 4 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2013/12/19 v3.12 KOMA-Script document class (article)
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -907,23 +907,23 @@ Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise
 .pdf used on input line 614.
 (pdftex.def)             Requested size: 183.68579pt x 151.56587pt.
 
-<result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf, id=179, 368.37625pt
- x 303.1325pt>
+<result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf, id=179, 359.3425pt 
+x 303.1325pt>
 File: result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf Graphic file (t
 ype pdf)
  <use result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.
 pdf used on input line 620.
-(pdftex.def)             Requested size: 184.18767pt x 151.56587pt.
+(pdftex.def)             Requested size: 179.6708pt x 151.56587pt.
 
-<result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf, id=180, 368.37625pt x
- 303.1325pt>
+<result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf, id=180, 359.3425pt x 
+303.1325pt>
 File: result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf Graphic file (typ
 e pdf)
  <use result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf>
 Package pdftex.def Info: result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pd
 f used on input line 625.
-(pdftex.def)             Requested size: 184.18767pt x 151.56587pt.
+(pdftex.def)             Requested size: 179.6708pt x 151.56587pt.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\sl'!
@@ -1077,12 +1077,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 9835 strings out of 495028
- 149746 string characters out of 6181497
- 285018 words of memory out of 5000000
- 12862 multiletter control sequences out of 15000+600000
+ 9835 strings out of 494985
+ 149746 string characters out of 6180357
+ 285168 words of memory out of 5000000
+ 12869 multiletter control sequences out of 15000+600000
  18618 words of font info for 64 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 36 hyphenation exceptions out of 8191
  50i,13n,54p,796b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/huwenbo/.texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/share/texliv
@@ -1103,10 +1103,10 @@ ist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (11 pages, 344422 bytes).
+Output written on huwenbo_shi_wqe.pdf (11 pages, 344825 bytes).
 PDF statistics:
- 328 PDF objects out of 1000 (max. 8388607)
- 263 compressed objects within 3 object streams
+ 336 PDF objects out of 1000 (max. 8388607)
+ 267 compressed objects within 3 object streams
  51 named destinations out of 1000 (max. 500000)
  179 words of extra memory for PDF output out of 10000 (max. 10000000)
 
