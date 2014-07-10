@@ -46,7 +46,7 @@ separation for Affymetrix SNP microarray}
 % abstract
 \begin{abstract}
 
-\centerline{ABSTRACT}
+\centerline{Abstract}
 
 \vspace*{\baselineskip}
 
@@ -54,9 +54,9 @@ separation for Affymetrix SNP microarray}
 \noindent
 \textbf{Background:} Genotype calling for SNP microarray is an important
 step in array-based association studies.
-Most supervised genotype calling algorithms for SNP microarray fit
+Most supervised genotype calling methods for SNP microarray fit
 generative models (e.g. Gaussian models) on log-transformed allele intensities
-of samples having reference genotype calls.
+of SNPs from samples having reference genotype calls.
 
 \par
 \noindent
@@ -69,15 +69,16 @@ ellipsoids, SoCal can control the effect of outliers in training data.
 \par
 \noindent
 \textbf{Results:} In leave-one-out cross-validation with HapMap reference
-calls, SoCal achieved a concordance rate of 98.94\% at a call rate if 100\%
+calls, SoCal achieved a concordance rate of 98.94\% at a call rate of 100\%
 and 99.71\% at a call rate of 95\%, comparable to many
 state-of-the-art methods.
-By training SoCal using HapMap reference calls, SoCal achieved 95.10\%
-concordance rate with genotype calls made by CRLMM at a call rate of
+After being trained using HapMap reference calls, SoCal achieved a concordance
+rate of 95.10\% with genotype calls made by CRLMM at a call rate of
 100\% on a set of validation calls excluding the training calls.
-SoCal also shows more robustness than RLMM, a method that uses Gaussian
-decision regions to call genotypes, when there are outliers in training data.
-Overall, SoCal is a novel and promising genotype calling algorithm.
+SoCal also shows more robustness than RLMM, a supervised method that uses
+Gaussian decision regions to call genotypes, when outliers are present in
+training data.
+Overall, SoCal is a novel and promising genotype calling method.
 
 \end{abstract}
 %-----------------------------------------------------------------------------
@@ -92,8 +93,8 @@ Overall, SoCal is a novel and promising genotype calling algorithm.
 
 \par
 % broad background
-Accurate genotyping of SNPs is essential to discovering true signals in
-association studies.
+Accurate genotyping of SNPs is essential to discovering true causal variants
+in association studies.
 Although next generation sequencing technology provides cheap whole-genome
 sequences for genotyping SNPs, SNP microarray is still a cost-effective
 genotyping technology for many specific association studies.
@@ -101,10 +102,11 @@ In an Affymetrix SNP microarray, oligonucleotide probes are used to match and
 bind DNA fragments containing biallelic SNPs.
 Then a fluorescence scanner scans the microarray to quantify perfect 
 match and mismatch of these fragments.
-Most genotype calling procedures for SNP microarray consists of two steps.
-In the first step, raw information from microarray is summarized to obtain the
-intensities, $\theta_A$ and $\theta_B$, of the two alleles, denoted by A and B,
-of each SNP.
+Most genotype calling procedures for Affymetrix SNP microarray consist of
+two steps.
+In the first step, raw information from microarray is summarized to obtain
+the intensities, $\theta_A$ and $\theta_B$, of the two alleles, denoted
+by A and B, of each SNP.
 In the second step, SNPs are classified into genotype AA, AB, or BB based on
 the allele intensities they generate.
 The focus of this article is on the second step of the genotype calling
@@ -124,14 +126,14 @@ Many genotype calling algorithms use model-based unsupervised clustering
 to identify these clusters and then assign genotypes to each cluster.
 Although these methods are applicable to a wide range of microarrays, they
 don't take advantage of genotype calls that are already available.
-Also, these methods use the EM algorithm to estimate model parameters, which is
+Also, these methods use EM algorithm to estimate model parameters, which is
 sensitive to starting parameters and slow to converge.
-To utilize reference genotype calls, Rabbee et al. proposed the RLMM algorithm,
-a supervised genotype calling method that uses reference genotype calls to form
-decision regions by fitting bivariate Gaussian distributions on observed
-allele intensities for each genotype.
-These Gaussian decision regions are then used to call SNPs with unknown
-genotype.
+To utilize reference genotype calls, Rabbee and Speed proposed the RLMM
+algorithm, a supervised genotype calling method that forms
+decision regions for each genotype by fitting bivariate Gaussian
+distributions on allele intensities with reference genotype calls.
+These Gaussian decision regions are then used to call SNPs for samples with
+unknown genotypes.
 However, fitting a Gaussian distribution is known to be sensitive to outliers,
 which, for SNP microarrays, can be caused by genomic structural variations.
 
@@ -147,21 +149,24 @@ allele intensity values}
 \par
 % state my solution
 In this article, I present SoCal, a supervised genotype calling algorithm
-for Affymetrix SNP microarrays.
+for Affymetrix SNP microarray.
 Instead of fitting Gaussian distributions on allele intensities with reference
 genotype calls, SoCal efficiently finds ellipsoidal decision regions for each
-genotype of a SNP by solving a conic programming problem.
-SoCal can control the effect of outliers by assigning different weights to each
-of the criteria for finding the ellipsoids---separation ratio, ellipsoid
+genotype of a SNP via ellipsoidal separation by solving a conic programming
+problem.
+SoCal can control the effect of outliers by assigning different weights to 
+the criteria of finding the ellipsoids---separation ratio, ellipsoid
 volume, and number of enclosed points. 
 After SoCal finds the ellipsoidal decision regions for each genotype of
-a SNP, it uses them to call the same SNP with unknown genotype.
+a SNP, it uses them to call SNPs for samples with unknown genotypes using
+minimum distance classification.
 
 \par
 % state the result
 Using reference genotype calls from the HapMap Project as training and
-validation data, SoCal achieved $99.71\%$ accuracy at a call rate of $95\%$
-during leave-one-out cross-validation.
+validation data, SoCal achieved a concordance rate of 98.94\% at a call rate
+of 100\% and $99.71\%$ at a call rate of $95\%$ in leave-one-out
+cross-validation.
 Furthermore, SoCal shows more robustness than the RLMM method when there are
 outliers in the training data.
 %-----------------------------------------------------------------------------
