@@ -265,14 +265,14 @@ Derivation of the problem formulation is largely followed from
 \cite{glineur1998}.
 For the sake of space, detailed derivation of the problem formulation is not
 presented here.
-In the problem formulation $\beta_{i} > 0$ are the weights assigned to the 
-criteria of finding separating ellipsoid---separation ratio,
+In the problem formulation above, $\beta_{i} > 0$ are the weights assigned to
+the criteria of finding separating ellipsoid---separation ratio,
 ellipsoid volume, and inclusion of points.
 By increasing $\beta_2$, one finds ellipsoid with
 smaller volume.
 And by increasing $\beta_3$, one finds ellipsoid that tries to
 include more data points.
-In SoCal, the default values for $\beta_1$, $\beta_2$, $\beta_3$ are
+In SoCal, default values for $\beta_1$, $\beta_2$, $\beta_3$ are
 empirically set to 1, $10^4$, and $10^2$ respectively.
 
 \par
@@ -295,30 +295,41 @@ $X_{AA} \cup X_{BB}$, one sets $\{a_i\}=X_{AB}$ and
 $\{b_j\}=X_{AA} \cup X_{BB}$, and solves the above conic programming problem.
 The same procedure also applies to finding the ellipsoid that includes $X_{BB}$
 and excludes $X_{AA} \cup X_{AB}$.
+
 % handling missing clusters
-\subsection{Rescuing missing genotype clusters}
+\subsection{Handling sparse or missing genotype clusters}
 \par
 If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
 that SNP are well defined, and SoCal obtains three ellipsoidal decision
-regions for that SNP, one for each genotype (Figure \ref{fig:defined_cluster}).
-However, if a SNP has lower MAF, some genotype cluster may not be well defined.
+regions for that SNP, one for each genotype cluster
+(Figure \ref{fig:defined_cluster}).
+However, if a SNP has lower MAF, some genotype cluster may be sparse
+or missing.
 For these SNPs, SoCal estimates the ellipsoid for the missing genotype cluster
 using the ellipsoids for the other two genotypes through simple geometric
 transformations (Figure \ref{fig:sparse_cluster}).
 
 \begin{figure}[H]
     \centering
-    \subfloat[SNP with well defined genotype clusters] {
+    \subfloat[SNP with 3 well defined genotype clusters.
+              SoCal obtains one ellipsoid for each genotype cluster.] {
         \includegraphics[scale=0.5]{method_figs/defined_cluster.pdf}
         \label{fig:defined_cluster}
     }
-    \subfloat[SNP with sparse BB genotype cluster] {
+    \qquad
+    \subfloat[SNP with sparse genotype BB cluster.
+              SoCal first obtains ellipsoids for genotype AA and AB clusters,
+              and then estimates the ellipsoid (drawn in dashed line) for
+              genotype BB cluster.] {
         \includegraphics[scale=0.5]{method_figs/sparse_cluster.pdf}
         \label{fig:sparse_cluster}
     }
-    \caption{Each dot in the plots above represents a sample, with
-             samples having HapMap reference genotype calls marked red.
-             The ellipsoids were obtained using only the reference calls.}
+    \caption{Ellipsoids obtained by SoCal for SNPs with well-defined and
+             sparse genotype clusters.
+             Each dot in the plots represents a sample, with samples having
+             HapMap reference genotype calls marked red.
+             The ellipsoids were obtained using all the reference calls.}
+             
     \label{fig:defined_sparse_cluster}
 \end{figure}
 
