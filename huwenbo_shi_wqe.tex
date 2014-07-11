@@ -137,7 +137,7 @@ distributions on log-transformed allele intensities with reference
 genotype calls \cite{rabbee2005}.
 These Gaussian decision regions are then used to call SNPs for samples with
 unknown genotypes.
-However, fitting a Gaussian distribution is known to be sensitive to outliers 
+However, fitting a Gaussian distribution is known to be non-robust to outliers 
 \cite{huber1981}.
 And for SNP microarrays, outliers can be caused by genomic structural
 variations \cite{marioni2007}.
@@ -189,13 +189,14 @@ were present in training data.
 \subsection{Overview of SoCal's genotype calling procedure}
 
 \par
-SNP allele intensities are first summarized from raw microarray data using
-SNPRMA, which removes non-biological effect from the data.
-After this step, SoCal calls genotypes in two steps.
-In the first step, SoCal finds ellipsoidal decision regions for each of the
-genotype of a SNP using reference genotype calls.
-In the second step, SoCal classifies SNPs with unknown genotypes using
-minimum distance classification.
+SNP allele intensities are first normalized and summarized from raw microarray
+data using RMA, an important preprocessing step that reduces cross-chip and
+cross-lab non-biological effects from raw data \cite{carvalho2007}.
+After the preprocessing step, SoCal calls genotypes in two steps.
+In the first step, SoCal finds ellipsoidal decision regions for each genotype
+of a SNP using reference genotype calls.
+In the second step, SoCal uses these ellipsoidal decision regions to call SNPs
+for samples with unknown genotypes through minimum distance classification.
 
 % pattern separation via ellipsoids
 \subsection{Pattern separation by ellipsoid}
@@ -781,6 +782,10 @@ Huber, P.J., 1981. Robust Statistics. Wiley, New York.
 Marioni JC, Thorne NP, Valsesia A, et al. Breaking the waves: improved
 detection of copy number variation from microarray-based comparative genomic
 hybridization. Genome Biol. 2007;8(10):R228.
+\bibitem{carvalho2007}
+Carvalho B, Bengtsson H, Speed TP, Irizarry RA. Exploration, normalization,
+and genotype calls of high-density oligonucleotide SNP array data.
+Biostatistics. 2007;8(2):485-99.
 \bibitem{glineur1998}
 Glineur F. (1998). Pattern separation via ellipsoids and conic programming.
 (MS Thesis). Faculté Polytechnique de Mons, Mons, Belgium.
