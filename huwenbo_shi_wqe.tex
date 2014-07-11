@@ -190,13 +190,20 @@ were present in training data.
 
 \par
 SNP allele intensities are first normalized and summarized from raw microarray
-data using RMA, an important preprocessing step that reduces cross-chip and
-cross-lab non-biological effects from raw data \cite{carvalho2007}.
+data using RMA method, an important preprocessing step that reduces cross-chip
+and cross-lab non-biological effects from raw data
+\cite{bolstad2003,carvalho2007}.
 After the preprocessing step, SoCal calls genotypes in two steps.
 In the first step, SoCal finds ellipsoidal decision regions for each genotype
 of a SNP using reference genotype calls.
 In the second step, SoCal uses these ellipsoidal decision regions to call SNPs
 for samples with unknown genotypes through minimum distance classification.
+
+\par
+In this section, I first introduce the problem of pattern separation by
+ellipsoid.
+Then I describe how SoCal finds ellipsoidal decision regions for each
+genotype and then calls genotypes using these ellipsoidal decision regions.
 
 % pattern separation via ellipsoids
 \subsection{Pattern separation by ellipsoid}
@@ -215,24 +222,20 @@ $(b_j-c)^TE(b_j-c)>1 \, \forall j$.
 \subsection{Forming ellipsoidal decision regions for each genotype}
 
 \par
-Let $G=\{AA,AB,BB\}$ be the set of genotypes of a SNP, and $J_{AA}$, $J_{AB}$,
-$J_{BB}$ the index set of samples with the corresponding genotype.
+Let $G=\{AA,AB,BB\}$ be the set of genotypes of SNP $n$, and $J_{AA}$,
+$J_{AB}$, $J_{BB}$ the index set of samples with the corresponding genotype.
 Let $X=\{(log(\theta_A),log(\theta_B))_i|i=1,\cdots,
 |J_{AA}|+|J_{AB}|+|J_{BB}|\}$ be the set of log transformed allele intensities
 of all the samples, and $X_{AA}=\{x_j|x_j \in X, j \in J_{AA}\}$,
 $X_{AB}=\{x_j|x_j \in X, j \in J_{AB}\}$,
 $X_{BB}=\{x_j|x_j \in X, j \in J_{BB}\}$ the set of log transformed allele
-intensities from samples having the corresponding genotype.
+intensities from samples having the corresponding genotype for SNP $n$.
 
 \par
 To find the ellipsoid that includes $X_{AA}$ and excludes
 $X_{AB} \cup X_{BB}$, one
 sets $\{a_i\}=X_{AA}$ and $\{b_j\}=X_{AB} \cup X_{BB}$, and
 solves the following conic programming problem.
-The derivation of the problem formulation is largely followed from
-\cite{glineur1998}.
-For the sake of space, detailed derivation of the problem formulation is not
-presented here.
 \begin{equation*}
 \begin{aligned}
 & \text{minimize}
@@ -257,11 +260,20 @@ presented here.
 \end{equation*}
 
 \par
-In the problem formulation above $\beta_{i} > 0$ are the weights assigned to
-each criteria of finding the ellipsoid---separation ratio, ellipsoid volume,
-and number of enclosed points.
-In SoCal, $\beta_1$, $\beta_2$, $\beta_3$ are empirically set to 1, $10^4$,
-and $10^2$ respectively.
+Here, $I$ denotes the identity matrix.
+Derivation of the problem formulation is largely followed from
+\cite{glineur1998}.
+For the sake of space, detailed derivation of the problem formulation is not
+presented here.
+In the problem formulation $\beta_{i} > 0$ are the weights assigned to the 
+criteria of finding separating ellipsoid---separation ratio,
+ellipsoid volume, and inclusion of points.
+By increasing $\beta_2$, one finds ellipsoid with
+smaller volume.
+And by increasing $\beta_3$, one finds ellipsoid that tries to
+include more data points.
+In SoCal, the default values for $\beta_1$, $\beta_2$, $\beta_3$ are
+empirically set to 1, $10^4$, and $10^2$ respectively.
 
 \par
 Let 
@@ -782,6 +794,10 @@ Huber, P.J., 1981. Robust Statistics. Wiley, New York.
 Marioni JC, Thorne NP, Valsesia A, et al. Breaking the waves: improved
 detection of copy number variation from microarray-based comparative genomic
 hybridization. Genome Biol. 2007;8(10):R228.
+\bibitem{bolstad2003}
+Bolstad BM, Irizarry RA, Astrand M, Speed TP. A comparison of normalization
+methods for high density oligonucleotide array data based on variance and
+bias. Bioinformatics. 2003;19(2):185-93.
 \bibitem{carvalho2007}
 Carvalho B, Bengtsson H, Speed TP, Irizarry RA. Exploration, normalization,
 and genotype calls of high-density oligonucleotide SNP array data.
