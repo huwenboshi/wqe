@@ -305,9 +305,9 @@ regions for that SNP, one for each genotype cluster
 (Figure \ref{fig:defined_cluster}).
 However, if a SNP has lower MAF, some genotype cluster may be sparse
 or missing.
-For these SNPs, SoCal estimates the ellipsoid for the missing genotype cluster
-using the ellipsoids for the other two genotypes through simple geometric
-transformations (Figure \ref{fig:sparse_cluster}).
+For these SNPs, SoCal estimates the ellipsoid for the sparse or missing
+genotype cluster using the ellipsoids for the other two genotypes through
+simple geometric transformations (Figure \ref{fig:sparse_cluster}).
 
 \begin{figure}[H]
     \centering
@@ -328,7 +328,7 @@ transformations (Figure \ref{fig:sparse_cluster}).
              sparse genotype clusters.
              Each dot in the plots represents a sample, with samples having
              HapMap reference genotype calls marked red.
-             The ellipsoids were obtained using all the reference calls.}
+             The ellipsoids are obtained using all the reference calls.}
              
     \label{fig:defined_sparse_cluster}
 \end{figure}
@@ -337,9 +337,9 @@ transformations (Figure \ref{fig:sparse_cluster}).
 \subsubsection{Missing genotype AA or BB cluster}
 
 \par
-If genotype $AA$ cluster of a SNP has less than 3 reference calls, SoCal
-first finds the ellipsoids for genotype $AB$ and $BB$ clusters, and then
-estimates that for genotype $AA$ cluster through simple geometric
+If genotype AA cluster of a SNP has less than 3 reference calls, SoCal
+first finds the ellipsoids for genotype AB and BB clusters, and then
+estimates that for genotype AA cluster through simple geometric
 transformations.
 
 \par
@@ -347,11 +347,11 @@ Let $\mathcal{E}_{AB}=
 \{x \in \mathbbm{R}^{n}|(x-c_{AB})^TE_{AB}(x-c_{AB}) \leqslant 1\}$
 and $\mathcal{E}_{BB}=
 \{x \in \mathbbm{R}^{n}|(x-c_{BB})^TE_{BB}(x-c_{BB}) \leqslant 1\}$
-be the ellipsoids obtained for genotype $AB$ and $BB$ clusters,
+be the ellipsoids obtained for genotype AB and BB clusters,
 and $n_{AB}$, $n_{BB}$ the unit vectors pointing in the direction of
 the major axis of the corresponding ellipsoid.
 SoCal estimates the center of $\mathcal{E}_{AA}$, the ellipsoid for genotype
-$AA$ cluster, by reflecting $c_{BB}$, the center of $\mathcal{E}_{BB}$, across
+AA cluster, by reflecting $c_{BB}$, the center of $\mathcal{E}_{BB}$, across
 the major axis of $\mathcal{E}_{AB}$.
 To estimate the orientation of $\mathcal{E}_{AA}$, SoCal first determines the
 angle between $n_{AB}$ and $n_{BB}$, and then applies a rotation matrix of
@@ -360,17 +360,17 @@ that angle on $E_{AB}$.
 \par
 Formally, let $\mathcal{E}_{AA}=
 \{x \in \mathbbm{R}^{n}|(x-c_{AA})^TE_{AA}(x-c_{AA}) \leqslant 1\}$ be the
-estimated ellipsoid for genotype $AA$ cluster, and $\alpha$ the angle between
+estimated ellipsoid for genotype AA cluster, and $\alpha$ the angle between
 $n_{AB}$ and $n_{BB}$, then
 $c_{AA}=-c_{BB}+2c_{AB}+2n_{AB}((c_{BB}-c_{AB})^{T}n_{AB})$, and
 $E_{AA}=R^{T}E_{AB}R$, where $R$ is a rotation matrix of angle $\alpha$.
 
 \par
-If genotype $BB$ cluster is missing, the center and orientation of the
+If genotype BB cluster is missing, the center and orientation of the
 ellipsoid for that cluster is estimated in a similar way.
 Formally, let $\mathcal{E}_{BB}=
 \{x \in \mathbbm{R}^{n}|(x-c_{BB})^TE_{BB}(x-c_{BB}) \leqslant 1\}$ be the
-estimated ellipsoid for genotype $BB$ cluster, and $\alpha$ the angle between
+estimated ellipsoid for genotype BB cluster, and $\alpha$ the angle between
 $n_{AB}$ and $n_{AA}$, then
 $c_{BB}=-c_{AA}+2c_{AB}+2n_{AB}((c_{AA}-c_{AB})^{T}n_{AB})$, and
 $E_{BB}=R^{T}E_{AB}R$, where $R$ is a rotation matrix of angle $-\alpha$.
@@ -378,10 +378,10 @@ $E_{BB}=R^{T}E_{AB}R$, where $R$ is a rotation matrix of angle $-\alpha$.
 % missing genotype ab cluster
 \subsubsection{Missing genotype AB cluster}
 
-Although SNPs with genotype $AB$ cluster missing were not observed in HapMap
+Although SNPs with genotype AB cluster missing were not observed in HapMap
 reference genotype calls, for completeness, for these SNPs SoCal first
 obtains, $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$,
-the ellipsoids for genotype $AA$ and $BB$ cluster, and then estimates the
+the ellipsoids for genotype AA and BB cluster, and then estimates the
 center of $\mathcal{E}_{AB}$, the ellipsoid for the missing cluster, using
 the mid-point between the centers of $\mathcal{E}_{AA}$ and $\mathcal{E}_{BB}$.
 The orientation of $\mathcal{E}_{AB}$ is obtained by applying a rotation
@@ -391,7 +391,7 @@ $\mathcal{E}_{BB}$.
 \par
 Formally, let $\mathcal{E}_{AB}=
 \{x \in \mathbbm{R}^{n}|(x-c_{AB})^TE_{AB}(x-c_{AB}) \leqslant 1\}$ be the
-estimated ellipsoid for genotype $AB$ cluster, and $\alpha$ the angle between
+estimated ellipsoid for genotype AB cluster, and $\alpha$ the angle between
 $n_{AA}$ and $n_{BB}$, then
 $c_{AB}=(c_{AA}+c_{BB})/2$, and
 $E_{AB}=R^{T}\hat{E}R$, where $\hat{E}$ is the matrix of the ellipsoid
@@ -401,7 +401,7 @@ The sign of the angle of rotation is dependent on the choise of ellipsoid on
 which rotation is applied---positive for $\mathcal{E}_{AA}$ and negative
 for $\mathcal{E}_{BB}$.
 
-% genotype calling and outlier detection
+% genotype calling
 \subsection{Genotype calling}
 
 \par
@@ -412,12 +412,12 @@ $\mathcal{E}_{g}=
 SNPs with unknown genotypes using minimum distance classification.
 
 \par
-If a sample has allele intensity $\theta_A$ and $\theta_B$ at SNP $n$,
+If a sample has allele intensities $\theta_A$ and $\theta_B$ at SNP $n$,
 SoCal first computes
 $D_g=\sqrt{(x-c_g)^TE_g(x-c_g)}$,
 where $x=(log(\theta_A), log(\theta_B))$, for each $g\in\{AA,AB,BB\}$.
 SoCal then calls the genotype, $\mathcal{G}$, of that sample at SNP $n$
-as the genotype having the minimum $D_g$, that is,
+as the genotype having minimum $D_g$, that is,
 $\mathcal{G}=\operatorname*{arg\,min}_{g\in \{AA,AB,BB\}}D_g$.
 
 \par
@@ -438,12 +438,13 @@ accuracy at the cost of decreasing call rate.
 \par
 The microarray used for evaluation in this project was the Affymetrix GeneChip
 Human Mapping 50K Xba Array, which contains 58,960 SNPs.
-Raw microarray data for 270 samples was obtained from HapMap FTP.
-And reference genotype calls were obtained from HapMap using HapMart.
+Raw microarray data for 270 samples was obtained from HapMap FTP, and
+reference genotype calls were obtained from HapMap using
+HapMart \cite{hapmap2003}.
 
 \par
-After removing strand-ambiguous SNPs and SNPs not present on HapMart from
-the microarry, 16,387 SNPs were left.
+After removing strand-ambiguous SNPs and SNPs not present on HapMart from the
+set of SNPs on the microarry, 16,387 SNPs were left.
 Figure~\ref{fig:data_maf_dist} shows the minor allele frequency distribution
 for these SNPs.
 
@@ -456,11 +457,10 @@ for these SNPs.
 \label{fig:data_maf_dist}
 \end{figure}
 
-
 \par
 From the 16,387 SNPs, 4,064 SNPs with two genotype clusters having less than
-3 reference genotype calls were further removed from the microarry.
-Among these SNPs, 3,596 are monomorphic SNPs.
+3 reference genotype calls were further removed.
+Among these SNPs, 3,596 are monomorphic SNPs with MAF equal to 0.
 In total, 12,323 SNPs were left for evaluation.
 On average, each of these SNPs has 83 reference genotype calls.
 %-----------------------------------------------------------------------------
@@ -816,6 +816,9 @@ Biostatistics. 2007;8(2):485-99.
 \bibitem{glineur1998}
 Glineur F. (1998). Pattern separation via ellipsoids and conic programming.
 (MS Thesis). Faculté Polytechnique de Mons, Mons, Belgium.
+\bibitem{hapmap2003}
+The International HapMap Consortium. The International HapMap Project.
+Nature 426, 789-796 (2003).
 \end{thebibliography}
 %-----------------------------------------------------------------------------
 
