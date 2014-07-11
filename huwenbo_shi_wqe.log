@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.21)  11 JUL 2014 15:11
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.21)  11 JUL 2014 15:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1045,7 +1045,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 [11]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 827.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 830.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\sl'!
@@ -1059,7 +1059,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 827.
+(scrartcl)              by `\normalfont \slshape ' on input line 830.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -1073,13 +1073,13 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 827.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 830.
 
 [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 827.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 830.
  (./huwenbo_shi_wqe.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 827.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 827.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 830.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 830.
 Package rerunfilecheck Info: File `huwenbo_shi_wqe.out' has not changed.
 (rerunfilecheck)             Checksum: 9DE4915119CCE070D5F52E310AD74527;1179.
 
@@ -1095,10 +1095,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 9848 strings out of 495028
- 149929 string characters out of 6181497
- 284393 words of memory out of 5000000
- 12868 multiletter control sequences out of 15000+600000
+ 9850 strings out of 495028
+ 149960 string characters out of 6181497
+ 284428 words of memory out of 5000000
+ 12869 multiletter control sequences out of 15000+600000
  18618 words of font info for 64 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  50i,13n,54p,796b,421s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1121,10 +1121,10 @@ ist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (12 pages, 350256 bytes).
+Output written on huwenbo_shi_wqe.pdf (12 pages, 350553 bytes).
 PDF statistics:
- 373 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
- 58 named destinations out of 1000 (max. 500000)
+ 375 PDF objects out of 1000 (max. 8388607)
+ 298 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
  179 words of extra memory for PDF output out of 10000 (max. 10000000)
 
