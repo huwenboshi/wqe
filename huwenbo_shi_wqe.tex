@@ -229,10 +229,10 @@ $(b_j-c)^TE(b_j-c)>1 \, \forall j$.
 Let $G=\{AA,AB,BB\}$ be the set of genotypes of SNP $n$, and $J_{AA}$,
 $J_{AB}$, $J_{BB}$ the index set of samples with the corresponding genotype.
 Let $X=\{(log(\theta_A),log(\theta_B))_i|i=1,\cdots,
-|J_{AA}|+|J_{AB}|+|J_{BB}|\}$ be the set of log transformed allele intensities
+|J_{AA}|+|J_{AB}|+|J_{BB}|\}$ be the set of log-transformed allele intensities
 of all the samples, and $X_{AA}=\{x_j|x_j \in X, j \in J_{AA}\}$,
 $X_{AB}=\{x_j|x_j \in X, j \in J_{AB}\}$,
-$X_{BB}=\{x_j|x_j \in X, j \in J_{BB}\}$ the set of log transformed allele
+$X_{BB}=\{x_j|x_j \in X, j \in J_{BB}\}$ the set of log-transformed allele
 intensities from samples having the corresponding genotype for SNP $n$.
 
 \par
@@ -572,7 +572,7 @@ across SNPs and across chips \cite{carvalho2007}.
 \par
 I first trained SoCal using all the samples with HapMap reference calls, and
 then made genotype calls on the rest of the samples.
-I excluded the training samples when comparing SoCal with CRLMM, and compared
+When comparing SoCal with CRLMM, I excluded the training samples and compared
 these two methods only at samples not in the training samples.
 
 \par
@@ -603,19 +603,19 @@ comparison.}
 \subsection{Comparison with RLMM in the presence of outliers}
 
 \par
-I investigated how robust SoCal is when there are outliers in the
-training data.
-For comparison, I implemented the RLMM algorithm, which independently
-fits bivariate Gaussian distributions on the log transformed allele intensities
+I investigated how robust SoCal is when outliers are present in training data.
+For comparison, I implemented the RLMM algorithm, which fits bivariate
+Gaussian distributions on log-transformed allele intensities
 of each genotype cluster and then classifies SNPs with unknown genotype into
-the distribution having minimum Mahalanobis distance. 
+the distribution having minimum Mahalanobis distance based on the allele
+intensities they generate \cite{rabbee2005}.
 
 \par
 For accurate comparison, I selected a subset of 3,442 SNPs that have
-more than 10 reference calls for each of the genotype cluster from the set of
-12,323 SNPs used for evaluation in the previous section.
+more than 10 reference calls for each genotype cluster from the set of
+12,323 SNPs used for evaluation in previous experiments.
 To simulate outliers, for each SNP, I first estimated $\mu_g$, the mean of
-the log transformed allele intensities of each genotype cluster, and then
+log-transformed allele intensities of each genotype cluster, and then
 drew one outlier for each genotype cluster from the Gaussian distribution
 $N(\mu_g, \gamma I)$, where $I$ is the identity matrix and $\gamma$ a
 positive constant controlling the variance of the distribution---by increasing
@@ -627,14 +627,15 @@ As an example, Figure~\ref{fig:cmp_shape_noise} shows the ellipsoidal decision
 regions obtained by SoCal and the level curves of the Gaussian decision regions
 obtained by RLMM before and after an outlier is introduced to the genotype AA
 cluster.
-Before an outlier is introduced, both SoCal and RLMM can make accurate
-genotype calls.
+Before an outlier is introduced, both SoCal and RLMM can find good decision
+regions for each genotype cluster and make accurate genotype calls.
 However, after an outlier is introduced into the genotype AA cluster, the
 variance of the Gaussian decision region obtained by RLMM is significantly
-affected, making the classificatoin much less accurate.
-On the other hand, because SoCal not only puts penalty on outliers but also
-jointly uses data from other genotype clusters to form the decision region,
-it can still classify most SNPs into correct genotypes.
+affected, making genotype calling much less accurate.
+On the other hand, because SoCal not only considers outliers but also
+jointly uses data points from other genotype clusters to form the decision
+regions, the decision regions, although affected, are still accurate enough to
+classify most SNPs into correct genotypes.
 
 % figure to illustrate socal vs gauss in terms of noise
 \begin{figure}[H]
