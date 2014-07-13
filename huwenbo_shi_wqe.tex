@@ -494,11 +494,11 @@ First, I compared the accuracy of SoCal under different choices of $\beta_i$,
 the weights assigned to the criteria of finding ellipsoidal decision regions
 for each genotype cluster.
 Figure~\ref{fig:result_sh_crvacc} shows the concordance rate of SoCal in the
-leave-one-out cross-validation for a wide range of call rates when different
-values of $\beta_i$ were used.
-Because the choice of weights, $\beta_1=1$, $\beta_2=10^4$, $\beta_3=10^2$,
-had the highest call rate at fixed concordance rates, it's set to be the
-default choice of SoCal.
+leave-one-out cross-validation at a wide range of call rates for different
+values of $\beta_i$.
+Because the weights, $\beta_1=1$, $\beta_2=10^4$, $\beta_3=10^2$,
+had the highest call rates at fixed concordance rates, they are set to be the
+default of SoCal.
 And all future experiments presented in this article used this choice
 of weights.
 
@@ -515,7 +515,7 @@ $\beta_i$}
 
 \par
 Table~\ref{table:cmp_hapmap_socal_100} shows the genotype calls made by SoCal
-and those available on HapMap during leave-one-out cross-validation.
+and the reference calls on HapMap during leave-one-out cross-validation.
 At a call rate of 100\%, SoCal made 1,081,319 calls in total, out of which
 1,069,857 were concordant with HapMap calls, achieving a concordance
 rate of 98.94\%.
@@ -541,7 +541,8 @@ SoCal and HapMap calls at a call rate of 95\%.
 At a call rate of 95\%, SoCal made 1,028,258 calls in total, out of which
 1,025,242 were concordant with HapMap calls, achieving a concordance
 rate of 99.71\%.
-These results are comparable to those of many state-of-the-art methods.
+These results are comparable to those achieved by previous methods
+\cite{rabbee2005,di2005}.
 
 % 95% call rate result
 \begin{table}[H]
@@ -563,12 +564,14 @@ in the leave-one-out cross-validation with HapMap reference calls.}
 
 \par
 As another way of evaluating the accuracy of SoCal, I compared the genotype
-calls made by SoCal and those made by CRLMM, a widely used state-of-the-art
-genotype calling method for SNP microarrays.
+calls made by SoCal and those made by CRLMM, a state-of-the-art
+supervised genotype calling method for SNP microarrays that uses a two-level
+hierarchical model to model variations in log-transformed allele intensities
+across SNPs and across chips \cite{carvalho2007}.
 
 \par
 I first trained SoCal using all the samples with HapMap reference calls, and
-then I made genotype calls on the rest of the samples not in the reference set.
+then made genotype calls on the rest of the samples.
 I excluded the training samples when comparing SoCal with CRLMM, and compared
 these two methods only at samples not in the training samples.
 
@@ -577,7 +580,7 @@ Table~\ref{table:cmp_socal_crlmm} shows detailed comparison between SoCal
 and CRLMM at a call rate of 100\%.
 In total, SoCal made 2,245,891 calls, out of which 2,134,868 were concordant
 with those made by CRLMM, achieving a concordance rate of 95.10\%.
-The high concordance rate between SoCal and CRLMM implies that SoCal has the
+The high concordance rate between SoCal and CRLMM suggests that SoCal has the
 potential to become an alternative genotype caller.
 
 % detail comparison between socal and crlmm
@@ -842,6 +845,11 @@ Nature 426, 789-796 (2003).
 \bibitem{andersen2014}
 M. S. Andersen, J. Dahl, and L. Vandenberghe. CVXOPT: A Python package for
 convex optimization, version 1.1.7.  Available at cvxopt.org, 2014.
+
+\bibitem{di2005}
+Di X, Matsuzaki H, Webster TA, et al. Dynamic model based algorithms for
+screening and genotyping over 100 K SNPs on oligonucleotide microarrays.
+Bioinformatics. 2005;21(9):1958-63.
 
 \end{thebibliography}
 %-----------------------------------------------------------------------------
