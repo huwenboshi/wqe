@@ -623,42 +623,52 @@ $\gamma$, one increases the effect of outliers.
 In total, I simulated 3 outliers for each SNP, one for each genotype cluster.
 
 \par
-As an example, Figure~\ref{fig:cmp_shape_noise} shows the ellipsoidal decision
+To illustrate the robustness of SoCal and RLMM,
+Figure~\ref{fig:cmp_shape_noise} shows the ellipsoidal decision
 regions obtained by SoCal and the level curves of the Gaussian decision regions
 obtained by RLMM before and after an outlier is introduced to the genotype AA
 cluster.
-Before an outlier is introduced, both SoCal and RLMM can find good decision
-regions for each genotype cluster and make accurate genotype calls.
+Before an outlier is introduced, both SoCal and RLMM can find appropriate
+decision regions for each genotype cluster and make accurate genotype calls.
 However, after an outlier is introduced into the genotype AA cluster, the
-variance of the Gaussian decision region obtained by RLMM is significantly
-affected, making genotype calling much less accurate.
+variance of the Gaussian decision region obtained by RLMM for the genotype AA
+cluster is significantly affected, making genotype calling much less accurate.
 On the other hand, because SoCal not only considers outliers but also
-jointly uses data points from other genotype clusters to form the decision
-regions, the decision regions, although affected, are still accurate enough to
-classify most SNPs into correct genotypes.
+jointly uses data points from other genotype clusters when forming the decision
+regions, the decision region for the genotype AA cluster, although affected, is
+still accurate enough to classify all samples into correct genotypes.
 
 % figure to illustrate socal vs gauss in terms of noise
 \begin{figure}[H]
     \centering
-    \subfloat[Decision regions found by SoCal when there is no outlier] {
+    \subfloat[Decision regions formed by SoCal when there is no outlier.] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/ellipse_no_noise.pdf}
         \label{fig:socal_region_no_noise}
     }
     \qquad
-    \subfloat[Decision regions found by RLMM when there is no outlier] {
+    \subfloat[Decision regions formed by RLMM when there is no outlier.] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/gauss_no_noise.pdf}
         \label{fig:gauss_region_no_noise}
     }
     \\
-    \subfloat[Decision regions found by SoCal when there is no outlier] {
+    \subfloat[Decision regions formed by SoCal when an outlier
+              (diamond-shaped point) is introduced into the genotype AA
+              cluster.
+              Although affected, these decision regions can still classify all
+              samples into correct genotypes.] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/ellipse_noise.pdf}
         \label{fig:socal_region_no_noise}
     }
     \qquad
-    \subfloat[Decision regions found by RLMM when there is no outlier] {
+    \subfloat[Decision regions formed by RLMM when an outlier
+              (diamond-shaped point) is introduced into the genotype
+              AA cluster.
+              The variance of the bivariate Gaussian distribution is
+              significantly affected, and RLMM may mistakenly
+              classify samples with genotype AB into genotype AA.] {
         \includegraphics[scale=0.5]
             {result_figs/cmp_socal_gauss_noise_shape/gauss_noise.pdf}
         \label{fig:gauss_region_no_noise}
