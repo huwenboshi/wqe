@@ -16,7 +16,7 @@ hold on;
 
 tbl_1_1_10 = dlmread('cr_vs_ac_1_1_10.txt');
 tbl_1_1_10(:,2) = tbl_1_1_10(:,2)*100;
-plot(tbl_1_1_10(:,1),tbl_1_1_10(:,2),'m-x',...
+plot(tbl_1_1_10(:,1),tbl_1_1_10(:,2),'m-s',...
     'MarkerFaceColor', 'm');
 hold on;
 
