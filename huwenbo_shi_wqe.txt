@@ -565,7 +565,7 @@ No Call
 Table 3: At a call rate of 100%, SoCal achieved 95.10% concordance rate with the calls
 made by CRLMM. Training samples for SoCal were excluded during comparison.
 
-4.3 Comparison with RLMM in the presence of outliers
+4.3 Comparison with RLMM in the presence of outliers in training data
 I investigated how robust SoCal is when outliers are present in training data. For
 comparison, I implemented the RLMM algorithm, which fits bivariate Gaussian distributions on log-transformed allele intensities of each genotype cluster and then classifies
 SNPs with unknown genotype into the distribution having minimum Mahalanobis distance based on the allele intensities they generate [7].
@@ -752,7 +752,7 @@ reference genotype calls marked red. The ellipsoids were obtained using only
 the reference calls.
 Figure 6 shows the decrease in concordance rate of SoCal and RLMM at call rate
 of 100% in leave-one-out cross-validation with HapMap reference genotype calls as the
-variance of simulated outliers varies from 0 to 10. Clearly, the concordance rate of SoCal
+variance of simulated outliers varies from 1 to 10. Clearly, the concordance rate of SoCal
 decreases much more slowly than does the RLMM method. Thus, SoCal is in general
 more robust to outliers than RLMM.
 
