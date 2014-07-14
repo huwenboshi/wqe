@@ -9,6 +9,6 @@ h1 = plot(vars,socal,'-b.',vars,gauss,'-rd','MarkerFaceColor',[1 0 0 ]);
 legend('SoCal', 'RLMM');
 xlim([1 10]);
 ylim([88 98.5]);
-xlabel('noise variance');
+xlabel('variance of simulated outlier');
 ylabel('concordance rate (%)');
 
