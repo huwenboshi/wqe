@@ -64,6 +64,7 @@ ylabel('log(allele B intensity)');
 xlim([10 15]);
 ylim([8.5 15])
 axis equal;
+title('SNP\_A-1721275');
 
 %-------------------------------------------------------------------------
 
@@ -109,3 +110,4 @@ ylabel('log(allele B intensity)');
 xlim([10 15]);
 ylim([8.5 15])
 axis equal;
+title('SNP\_A-1721275');

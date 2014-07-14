@@ -5,9 +5,9 @@ train_data = dlmread('SNP_A-1721275_train.txt');
 
 % find the ellipsoids
 c1 = 1;
-c2 = 1;
-c3 = 0.5;
-c4 = 1;
+c2 = 10000;
+c3 = 100;
+c4 = 2;
 
 train_aa_idx = train_data(:,3)==1;
 num_aa = sum(train_aa_idx);
@@ -57,6 +57,7 @@ ylabel('log(allele B intensity)');
 xlim([10 15]);
 ylim([9.5 15])
 axis equal;
+title('SNP\_A-1721275');
 
 %-------------------------------------------------------------------------
 
@@ -98,3 +99,4 @@ ylabel('log(allele B intensity)');
 xlim([10 15]);
 ylim([9.5 15])
 axis equal;
+title('SNP\_A-1721275');
