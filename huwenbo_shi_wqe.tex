@@ -706,12 +706,23 @@ variance.}
 
 % implementation
 \subsection{Software implementation and running time}
+
+\par
 SoCal is implemented in Python.
 To solve the conic programming problem of finding separating ellipsoids,
 SoCal uses CVXOPT \cite{andersen2014}.
 Source code of SoCal is available at
 \url{https://github.com/huwenboshi/wqe/tree/master/genotype_caller}.
 
+\par
+On average, SoCal takes 0.2 CPU second to obtain ellipsoidal decision
+regions for each SNP.
+For a SNP microarray that has 100,000 SNPs, SoCal will take approximately
+5.56 CPU hours to obtain decision regions for all the SNPs.
+This is a reasonable time investment.
+And the training process of SoCal is easily parallelizable.
+After the decision regions of all the SNPs are obtained, SoCal can call
+future SNPs in linear time.
 %-----------------------------------------------------------------------------
 
 
