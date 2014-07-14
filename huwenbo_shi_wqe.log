@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  13 JUL 2014 20:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  13 JUL 2014 22:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -997,7 +997,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 754.
+(scrartcl)              by `\normalfont \slshape ' on input line 755.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -1011,7 +1011,7 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 754.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 755.
 
 [10 <./result_figs/cmp_socal_gauss_noise/socal_gauss_cmp_noise.pdf>]
 
@@ -1026,7 +1026,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 842.
+(scrartcl)              by `\normalfont \slshape ' on input line 843.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -1040,12 +1040,12 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 842.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 843.
 
 [11]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 872.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 873.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\sl'!
@@ -1059,7 +1059,7 @@ Class scrartcl Warning: Usage of deprecated font command `\sl'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\sl' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\sl'
-(scrartcl)              by `\normalfont \slshape ' on input line 872.
+(scrartcl)              by `\normalfont \slshape ' on input line 873.
 
 
 Class scrartcl Warning: Usage of deprecated font command `\rm'!
@@ -1073,13 +1073,13 @@ Class scrartcl Warning: Usage of deprecated font command `\rm'!
 (scrartcl)              Note also, that KOMA-Script will remove the definition
 (scrartcl)              of `\rm' anytime until release of about version 3.20.
 (scrartcl)              But for now, KOMA-Script will replace deprecated `\rm'
-(scrartcl)              by `\normalfont \rmfamily ' on input line 872.
+(scrartcl)              by `\normalfont \rmfamily ' on input line 873.
 
 [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 872.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 873.
  (./huwenbo_shi_wqe.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 872.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 872.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 873.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 873.
 Package rerunfilecheck Info: File `huwenbo_shi_wqe.out' has not changed.
 (rerunfilecheck)             Checksum: 9DE4915119CCE070D5F52E310AD74527;1179.
 
@@ -1121,10 +1121,10 @@ ist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (12 pages, 352954 bytes).
+Output written on huwenbo_shi_wqe.pdf (12 pages, 353024 bytes).
 PDF statistics:
- 383 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
+ 384 PDF objects out of 1000 (max. 8388607)
+ 306 compressed objects within 4 object streams
  60 named destinations out of 1000 (max. 500000)
  179 words of extra memory for PDF output out of 10000 (max. 10000000)
 

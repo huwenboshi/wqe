@@ -722,9 +722,10 @@ I have presented SoCal, a supervised genotype calling algorithm for Affymetrix
 SNP microarray.
 Unlike most existing supervised genotype calling algorithms that try to fit
 generative models (e.g. Gaussian models) on log-transformed allele
-intensities of samples with reference genotype calls, SoCal uses these data
-to efficiently finds ellipsoidal decision regions for each genotype cluster
-via ellipsoidal separation by solving a conic programming problem.
+intensities of SNPs from samples with reference genotype calls,
+SoCal uses these data to efficiently finds ellipsoidal decision regions for
+each genotype cluster via ellipsoidal separation by solving a conic
+programming problem.
 Both cross-validation of SoCal with HapMap reference calls and comparison with
 genotype calls made by CRLMM show that SoCal is comparable in accuracy to many
 of the state-of-the-art genotype calling methods.
@@ -747,10 +748,10 @@ Because SoCal is robust to outliers in training data, the refined
 ellipsoidal decision regions can be directly used to accurately call genotypes
 for future samples.
 Another limitation of SoCal is that users need to tune the weights
-($\beta_i$) assigned to the criteria of finding the separating ellipsoids
+assigned to the criteria of finding the separating ellipsoids
 for different microarrays.
-However, experiments with SoCal show that it's not sensitive to weight
-parameters if $\beta_3$ is set to $10^2$.
+However, experiments with SoCal using different weights show that SoCal is not
+sensitive to weight parameters if $\beta_3$ is set to $10^2$.
 
 \par
 SoCal is still in development, and can be improved and extended in
@@ -771,9 +772,9 @@ However, allele intensities data for samples having structural variations is
 also available from the HapMap Project \cite{hapmap2003}.
 A possible improvement for SoCal is to include these data in finding the
 ellipsoidal decision regions for each genotype cluster to further refine the
-decision regions.
-These refined decision regions can then be also used to detect outliers and
-possible structural variations.
+decision regions of each genotype.
+These refined decision regions can then be used to call genotypes more
+accurately and to detect outliers and possible structural variations.
 
 \par
 To summarize, SoCal presents a novel and promising method for genotype calling.
@@ -782,8 +783,8 @@ ellipsoidal separation by solving a conic programming problem, which is
 solvable in polynomial time with guaranteed global optimum \cite{glineur1998}.
 Also, SoCal is comparable in accuracy with many state-of-the-art methods.
 Although SoCal has the limitation that training data must be available, this
-limitation is also present in other supervised genotype callers, and has been
-addressed.
+limitation is also present in other supervised genotype calling methods, and
+has been addressed previously \cite{carvalho2007}.
 Finally, SoCal can also be extended and improved to be more accurate and to
 have more functionality.
 %-----------------------------------------------------------------------------
