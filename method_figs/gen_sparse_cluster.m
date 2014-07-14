@@ -29,7 +29,7 @@ plot(data(:,1),data(:,2),'b.');
 hold on;
 
 % plot aa training data
-plot(train_data(:,1),train_data(:,2),'r.');
+plot(train_data(:,1),train_data(:,2),'rv','MarkerFaceColor','r');
 hold on;
 
 % plot aa ellipsoid
