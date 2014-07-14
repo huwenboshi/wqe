@@ -166,7 +166,7 @@ decision regions for each genotype via ellipsoidal separation by solving a
 conic programming problem.
 SoCal can control the effect of outliers by assigning different weights to 
 the criteria of finding separating ellipsoids---separation ratio, ellipsoid
-volume, and number of enclosed points. 
+volume, and inclusion of points. 
 After SoCal finds the ellipsoidal decision regions for each genotype, it uses
 them to call SNPs for samples with unknown genotypes using minimum distance
 classification.
@@ -413,7 +413,7 @@ After the ellipsoidal decision regions,
 $\mathcal{E}_{g}=
 \{x \in \mathbbm{R}^{n} | (x-c_g)^TE_g(x-c_g) \leqslant 1\},
 \forall g\in\{AA,AB,BB\}$ of a SNP are obtained, SoCal uses them to classify
-SNPs with unknown genotypes using minimum distance classification.
+SNPs for samples with unknown genotypes using minimum distance classification.
 
 \par
 If a sample has allele intensities $\theta_A$ and $\theta_B$ at SNP $n$,
@@ -488,6 +488,9 @@ For each SNP, I used one sample from the reference set as validation data and
 the rest as training data.
 I repeated this process until all the samples in the reference set were used
 as validation data exactly once.
+Concordance rate is defined as the ratio between the number of calls that are
+concordant with HapMap reference calls and the total number of calls made by
+SoCal.
 
 \par
 First, I compared the accuracy of SoCal under different choices of $\beta_i$,
@@ -499,7 +502,7 @@ values of $\beta_i$.
 Because the weights, $\beta_1=1$, $\beta_2=10^4$, $\beta_3=10^2$,
 had the highest call rates at fixed concordance rates, they are set to be the
 default of SoCal.
-And all future experiments presented in this article used this choice
+And all other experiments presented in this article used this choice
 of weights.
 
 % accuracy as function of call rate
@@ -515,7 +518,7 @@ $\beta_i$}
 
 \par
 Table~\ref{table:cmp_hapmap_socal_100} shows the genotype calls made by SoCal
-and the reference calls on HapMap during leave-one-out cross-validation.
+and the reference calls from HapMap in leave-one-out cross-validation.
 At a call rate of 100\%, SoCal made 1,081,319 calls in total, out of which
 1,069,857 were concordant with HapMap calls, achieving a concordance
 rate of 98.94\%.
@@ -531,7 +534,7 @@ rate of 98.94\%.
     BB            & 851      & 2,347   & 368,556 & 0  \\ \hline
 \end{tabular}
 \caption{At a call rate of 100\%, SoCal achieved 98.94\% concordance rate
-in the leave-one-out cross-validation with HapMap reference calls.}
+in leave-one-out cross-validation with HapMap reference calls.}
 \label{table:cmp_hapmap_socal_100}
 \end{table}
 
@@ -555,7 +558,7 @@ These results are comparable to those achieved by previous methods
     BB            & 410      & 427     & 357,627 & 13,290  \\ \hline
 \end{tabular}
 \caption{At a call rate of 95\%, SoCal achieved 99.71\% concordance rate
-in the leave-one-out cross-validation with HapMap reference calls.}
+in leave-one-out cross-validation with HapMap reference calls.}
 \label{table:cmp_hapmap_socal_95}
 \end{table}
 
@@ -566,14 +569,14 @@ in the leave-one-out cross-validation with HapMap reference calls.}
 As another way of evaluating the accuracy of SoCal, I compared the genotype
 calls made by SoCal and those made by CRLMM, a state-of-the-art
 supervised genotype calling method for SNP microarrays that uses a two-level
-hierarchical model to model variations in log-transformed allele intensities
+hierarchical model to model variations in allele intensities
 across SNPs and across chips \cite{carvalho2007}.
 
 \par
 I first trained SoCal using all the samples with HapMap reference calls, and
 then made genotype calls on the rest of the samples.
 When comparing SoCal with CRLMM, I excluded the training samples and compared
-these two methods only at samples not in the training samples.
+these two methods only at samples not in the training set.
 
 \par
 Table~\ref{table:cmp_socal_crlmm} shows detailed comparison between SoCal
@@ -726,14 +729,13 @@ intensities of SNPs from samples with reference genotype calls,
 SoCal uses these data to efficiently finds ellipsoidal decision regions for
 each genotype cluster via ellipsoidal separation by solving a conic
 programming problem.
-Both cross-validation of SoCal with HapMap reference calls and comparison with
+Both cross-validation with HapMap reference calls and comparison with
 genotype calls made by CRLMM show that SoCal is comparable in accuracy to many
 of the state-of-the-art genotype calling methods.
 Also, when outliers are present in training data, SoCal outperforms RLMM, a
 genotype calling method that uses Gaussian decision regions to call genotypes,
-demonstrating the robustness of SoCal in the presence of outliers over
-existing methods.
-Overall, SoCal proves to be a novel and promising genotype caller for
+demonstrating the robustness of SoCal over existing methods.
+Overall, SoCal is a novel and promising genotype caller for
 Affymetrix SNP microarray.
 
 \par
@@ -741,7 +743,7 @@ Like many supervised genotype calling methods, SoCal has its limitations.
 First, SoCal is not directly applicable to SNPs that don't have
 reference genotype calls.
 In this case, one can first call genotypes from microarrays using
-unsupervised genotype calling algorithms.
+unsupervised genotype calling methods.
 Then one can treat these calls as training data and use SoCal to
 form refined ellipsoidal decision regions for each genotype cluster.
 Because SoCal is robust to outliers in training data, the refined
@@ -750,8 +752,9 @@ for future samples.
 Another limitation of SoCal is that users need to tune the weights
 assigned to the criteria of finding the separating ellipsoids
 for different microarrays.
-However, experiments with SoCal using different weights show that SoCal is not
-sensitive to weight parameters if $\beta_3$ is set to $10^2$.
+However, experiments with SoCal using different weights show that SoCal is
+relatively less sensitive to weight parameters if $\beta_3$, the weight
+assigned to the criterion of inclusion of points, is set to $10^2$.
 
 \par
 SoCal is still in development, and can be improved and extended in
@@ -781,7 +784,7 @@ To summarize, SoCal presents a novel and promising method for genotype calling.
 It's efficient in that it finds decision regions for each genotype via
 ellipsoidal separation by solving a conic programming problem, which is
 solvable in polynomial time with guaranteed global optimum \cite{glineur1998}.
-Also, SoCal is comparable in accuracy with many state-of-the-art methods.
+Also, SoCal is comparable in accuracy to many state-of-the-art methods.
 Although SoCal has the limitation that training data must be available, this
 limitation is also present in other supervised genotype calling methods, and
 has been addressed previously \cite{carvalho2007}.
