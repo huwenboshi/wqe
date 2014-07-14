@@ -10,14 +10,14 @@ hold on;
 
 tbl_1_1_1000 = dlmread('cr_vs_ac_1_1_1000.txt');
 tbl_1_1_1000(:,2) = tbl_1_1_1000(:,2)*100;
-plot(tbl_1_1_1000(:,1),tbl_1_1_1000(:,2),'c-*',...
-    'MarkerFaceColor', 'c');
+plot(tbl_1_1_1000(:,1),tbl_1_1_1000(:,2),'-p','Color',[0.5 0.5 0.5],...
+    'MarkerFaceColor', [0.5 0.5 0.5]);
 hold on;
 
 tbl_1_1000_100 = dlmread('cr_vs_ac_1_1000_100.txt');
 tbl_1_1000_100(:,2) = tbl_1_1000_100(:,2)*100;
-plot(tbl_1_1000_100(:,1),tbl_1_1000_100(:,2),'y-^',...
-    'MarkerFaceColor', 'y');
+plot(tbl_1_1000_100(:,1),tbl_1_1000_100(:,2),'-^','Color',[0.75 0.75 0],...
+    'MarkerFaceColor', [0.75 0.75 0]);
 hold on;
 
 tbl_1_1_10 = dlmread('cr_vs_ac_1_1_10.txt');
