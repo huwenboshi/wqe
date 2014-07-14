@@ -583,8 +583,9 @@ Table~\ref{table:cmp_socal_crlmm} shows detailed comparison between SoCal
 and CRLMM at a call rate of 100\%.
 In total, SoCal made 2,245,891 calls, out of which 2,134,868 were concordant
 with those made by CRLMM, achieving a concordance rate of 95.10\%.
-The high concordance rate between SoCal and CRLMM suggests that SoCal has the
-potential to become an alternative genotype caller.
+The high concordance rate between SoCal and CRLMM suggests that genotype
+calling via ellipsoidal separation instead of fitting generative models
+is a promising approach.
 
 % detail comparison between socal and crlmm
 \begin{table}[H]
@@ -710,7 +711,9 @@ variance.}
 \par
 SoCal is implemented in Python.
 To solve the conic programming problem of finding separating ellipsoids,
-SoCal uses CVXOPT \cite{andersen2014}.
+SoCal uses CVXOPT, a Python wrapper for optimization problem solvers written
+in C, that can solve conic programming problems in polynomial
+time \cite{andersen2014}.
 Source code of SoCal is available at
 \url{https://github.com/huwenboshi/wqe/tree/master/genotype_caller}.
 
