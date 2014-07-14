@@ -14,6 +14,12 @@ plot(tbl_1_100000_100(:,1),tbl_1_100000_100(:,2),'-v','Color',[0 0.5 0],...
     'MarkerFaceColor', [0 0.5 0]);
 hold on;
 
+tbl_1_1_10 = dlmread('cr_vs_ac_1_1_10.txt');
+tbl_1_1_10(:,2) = tbl_1_1_10(:,2)*100;
+plot(tbl_1_1_10(:,1),tbl_1_1_10(:,2),'m-x',...
+    'MarkerFaceColor', 'm');
+hold on;
+
 ylim([98.5 100]);
 xlabel('call rate (%)');
 ylabel('concordance rate (%)');
@@ -21,5 +27,6 @@ ylabel('concordance rate (%)');
 hl = legend('\beta_1=1, \beta_2=10^4, \beta_3=10^2', ...
             '\beta_1=1, \beta_2=1, \beta_3=10^2', ...
             '\beta_1=1, \beta_2=10^5, \beta_3=10^2',...
+            '\beta_1=1, \beta_2=1, \beta_3=10',...
             'Location', 'Best');
 set(hl, 'Interpreter', 'tex');
