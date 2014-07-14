@@ -600,7 +600,7 @@ comparison.}
 \end{table}
 
 % comparison with rlmm
-\subsection{Comparison with RLMM in the presence of outliers}
+\subsection{Comparison with RLMM in the presence of outliers in training data}
 
 \par
 I investigated how robust SoCal is when outliers are present in training data.
@@ -683,7 +683,7 @@ still accurate enough to classify all samples into correct genotypes.
 Figure~\ref{fig:result_cmp_noise} shows the decrease in concordance rate of
 SoCal and RLMM at call rate of 100\% in leave-one-out cross-validation with
 HapMap reference genotype calls as the variance of simulated outliers varies
-from 0 to 10.
+from 1 to 10.
 Clearly, the concordance rate of SoCal decreases much more slowly than does
 the RLMM method.
 Thus, SoCal is in general more robust to outliers than RLMM.

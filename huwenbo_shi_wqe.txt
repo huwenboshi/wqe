@@ -1,53 +1,58 @@
-SoCal: supervised genotype calling via ellipsoid separation for
-A↵ymetrix SNP microarray
+SoCal: supervised genotype calling via ellipsoidal
+separation for Affymetrix SNP microarray
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
-ABSTRACT
-Genotype calling for SNP microarray is an important step in array-based association studies. Traditional supervised genotype calling algorithms for SNP microarray fit generative
-models (mostly Gaussian mixture models) on allele intensities of samples having reference
-genotype calls. In this article, I present SoCal, a supervised genotype calling method that
-efficiently finds ellipsoidal decision regions for each genotype cluster via ellipsoid separation. By specifying di↵erent weights to the criteria of finding separating ellipsoids, SoCal
-can control the e↵ect of outliers in training data. In leave-one-out cross-validation with
-HapMap reference calls, SoCal achieved a concordance rate of 99.71% at a call rate of 95%,
-comparable to many state-of-the-art methods. By training SoCal using HapMap reference
-calls, SoCal achieved 95.10% concordance rate with the genotype calls made by CRLMM
-at a call rate of 100% on a set of samples excluding the training samples. SoCal also shows
-more robustness than RLMM, a method that forms Gaussian decision regions from training
-data to call genotypes, when there are outliers in the training data. SoCal proves to be a
-novel and promising alternative genotype caller.
+Abstract
+Background: Genotype calling for SNP microarray is an important step in
+array-based association studies. Most supervised genotype calling methods
+for SNP microarray fit generative models (e.g. Gaussian models) on logtransformed allele intensities of SNPs from samples having reference genotype calls.
+Methods: In this article, I present SoCal, a supervised genotype calling
+method that efficiently finds ellipsoidal decision regions for each genotype
+via ellipsoidal separation instead of fitting a generative model. By assigning
+different weights to the criteria of finding separating ellipsoids, SoCal can
+control the effect of outliers in training data.
+Results: In leave-one-out cross-validation with HapMap reference calls, SoCal achieved a concordance rate of 98.94% at a call rate of 100% and 99.71%
+at a call rate of 95%, comparable to many state-of-the-art methods. After
+being trained using HapMap reference calls, SoCal achieved a concordance
+rate of 95.10% with genotype calls made by CRLMM at a call rate of 100%
+on a set of validation calls excluding the training calls. SoCal also shows
+more robustness than RLMM, a supervised method that uses Gaussian decision regions to call genotypes, when outliers are present in training data.
+Overall, SoCal is a novel and promising genotype calling method.
 
 1 Introduction
-Accurate genotyping of SNPs is essential to discovering true signals in association studies. Although
-next generation sequencing technology provides cheap whole-genome sequences for genotyping SNPs,
-SNP microarray is still a cost-e↵ective genotyping technology for many specific association studies. In
-an A↵ymetrix SNP microarray, oligonucleotide probes are used to match and bind DNA fragments
-containing biallelic SNPs. Then a fluorescence scanner scans the microarray to quantify perfect match
-and mismatch of these fragments. Most genotype calling procedures for SNP microarray consists of two
-steps. In the first step, raw information from microarray is summarized to obtain the intensities, ✓A
-and ✓B , of the two alleles, denoted by A and B, of each SNP. In the second step, SNPs are classified into
-genotype AA, AB, or BB based on the allele intensities they generate. The focus of this article is on the
-second step of the genotype calling procedure—genotype calling using summarized allele intensities.
-For a specific SNP, if a sample has genotype AA or BB, the allele intensity, ✓A or ✓B , will be
-higher respectively. If a sample has genotype AB, the intensities, ✓A and ✓B , will be similar. If one
-plots logp✓A q versus logp✓B q of a SNP for a number of samples, normally 3 ellipsoidal clusters can be
-observed, one for each genotype, as shown in Figure 1. Many genotype calling algorithms use modelbased unsupervised clustering to identify these clusters and then assign genotypes to each cluster.
-Although these methods are applicable to a wide range of microarrays, they don’t take advantage
-of genotype calls that are already available. Also, these methods use the EM algorithm to estimate
-model parameters, which is sensitive to starting parameters and slow to converge. To utilize reference
-genotype calls, Rabbee et al. proposed the RLMM algorithm, a supervised genotype calling method
-that uses reference genotype calls to form decision regions by fitting bivariate Gaussian distributions
-on observed allele intensities for each genotype. These Gaussian decision regions are then used to call
-SNPs with unknown genotype. However, fitting a Gaussian distribution is known to be sensitive to
-outliers, which, for SNP microarrays, can be caused by genomic structural variations.
+Accurate genotyping of SNPs is essential to discovering true causal variants in association studies [1]. Although next generation sequencing technology provides cheap
+whole-genome sequences for genotyping SNPs, SNP microarray is still a cost-effective
+genotyping technology for many specific association studies [2]. In an Affymetrix SNP
+microarray, oligonucleotide probes are used to match and bind DNA fragments containing biallelic SNPs. Then a fluorescence scanner scans the microarray to quantify
+perfect match and mismatch for these fragments. Most genotype calling procedures for
+Affymetrix SNP microarray consist of two steps. In the first step, raw information from
+microarray is summarized to obtain the intensities, θA and θB , of the two alleles, denoted
+by A and B, of each SNP. In the second step, SNPs are classified into genotype AA,
+AB, or BB based on the allele intensities they generate. The focus of this article is on
+the second step of the genotype calling procedure—genotype calling using summarized
+allele intensities.
 
 1
 
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
-2
+1
 
-METHODS
+INTRODUCTION
 
+For a specific SNP, if a sample has genotype AA or BB, the allele intensity, θA or
+θB , will be higher respectively. If a sample has genotype AB, the intensities, θA and
+θB , will be similar. If one plots logpθA q versus logpθB q of a SNP for a number of samples, normally 3 ellipsoidal clusters can be observed, one for each genotype, as shown
+in Figure 1. Many genotype calling algorithms use model-based unsupervised clustering
+to identify these clusters and then assign genotypes to each cluster [3, 4, 5]. Although
+these methods are applicable to a wide range of microarrays because they only require
+information from microarrays, they don’t take advantage of genotype calls that are already available. Also, these methods use EM algorithm to estimate model parameters,
+which is sensitive to starting parameters and slow to converge [6]. To utilize reference
+genotype calls, Rabbee and Speed proposed the RLMM algorithm, a supervised genotype calling method that forms decision regions for each genotype by fitting bivariate
+Gaussian distributions on log-transformed allele intensities with reference genotype calls
+[7]. These Gaussian decision regions are then used to call SNPs for samples with unknown genotypes. However, fitting a Gaussian distribution is known to be non-robust
+to outliers [8]. And for SNP microarrays, outliers can be caused by genomic structural
+variations [9].
 14
 13.5
 
@@ -58,7 +63,6 @@ log(allele B intensity)
 genotype BB cluster
 12
 genotype AB cluster
-
 11.5
 11
 10.5
@@ -86,35 +90,17 @@ log(allele A intensity)
 
 13.5
 
-Figure 1: Genotype clusters obtained from A↵ymetrix SNP array allele intensity values
-In this article, I present SoCal, a supervised genotype calling algorithm for A↵ymetrix SNP microarrays. Instead of fitting Gaussian distributions on allele intensities with reference genotype calls,
-SoCal efficiently finds ellipsoidal decision regions for each genotype of a SNP by solving a conic programming problem. SoCal can control the e↵ect of outliers by assigning di↵erent weights to each of the
-criteria for finding the ellipsoids—separation ratio, ellipsoid volume, and number of enclosed points.
-After SoCal finds the ellipsoidal decision regions for each genotype of a SNP, it uses them to call the
-same SNP with unknown genotype.
-Using reference genotype calls from the HapMap Project as training and validation data, SoCal
-achieved 99.71% accuracy at a call rate of 95% during leave-one-out cross-validation. Furthermore,
-SoCal shows more robustness than the RLMM method when there are outliers in the training data.
-
-2 Methods
-2.1 Overview of SoCal’s genotype calling procedure
-SNP allele intensities are first summarized from raw microarray data using SNPRMA, which removes non-biological e↵ect from the data. After this step, SoCal calls genotypes in two steps. In the
-first step, SoCal finds ellipsoidal decision regions for each of the genotype of a SNP using reference
-genotype calls. In the second step, SoCal classifies SNPs with unknown genotypes using minimum
-distance classification.
-
-2.2 Pattern separation by ellipsoid
-An ellipsoid E Ñ n can be expressed as E “ tx P n |px ´ cqT Epx ´ cq § 1u, where c is the center
-of the ellipsoid, and E a positive definite matrix denoting the shape and orientation of the ellipsoid. Let
-tai u be the points to be included in an ellipsoid, and tbj u be the points to be excluded, the problem of
-ellipsoidal separation is to find c and E such that pai ´cqT Epai ´cq § 1 @i and pbj ´cqT Epbj ´cq ° 1 @j.
-
-2.3 Forming ellipsoidal decision regions for each genotype
-Let G “ tAA, AB, BBu be the set of genotypes of a SNP, and JAA , JAB , JBB the index set of
-samples with the corresponding genotype. Let X “ tplogp✓A q, logp✓B qqi |i “ 1, ¨ ¨ ¨ , |JAA |`|JAB |`|JBB |u
-be the set of log transformed allele intensities of all the samples, and XAA “ txj |xj P X, j P JAA u,
-XAB “ txj |xj P X, j P JAB u, XBB “ txj |xj P X, j P JBB u the set of log transformed allele intensities
-from samples having the corresponding genotype.
+Figure 1: Genotype clusters obtained by plotting log-transformed allele intensities of the
+two alleles of a SNP for a number of samples. Each point in the plot represents
+a sample.
+In this article, I present SoCal, a supervised genotype calling method for Affymetrix
+SNP microarray. Instead of fitting Gaussian distributions on log-transformed allele intensities with reference genotype calls, SoCal efficiently finds ellipsoidal decision regions
+for each genotype via ellipsoidal separation by solving a conic programming problem.
+SoCal can control the effect of outliers by assigning different weights to the criteria of
+finding separating ellipsoids—separation ratio, ellipsoid volume, and number of enclosed
+points. After SoCal finds the ellipsoidal decision regions for each genotype, it uses them
+to call SNPs for samples with unknown genotypes using minimum distance classification.
+Using reference genotype calls from the HapMap Project as training and validation
 
 2
 
@@ -124,59 +110,90 @@ from samples having the corresponding genotype.
 
 METHODS
 
-To find the ellipsoid that includes XAA and excludes XAB Y XBB , one sets tai u “ XAA and
-tbj u “ XAB Y XBB , and solves the following conic programming problem. The derivation of the
-problem formulation is largely followed from [7]. For the sake of space, detailed derivation of the
-problem formulation is not presented here.
-minimize
-subject to
+data, SoCal achieved a concordance rate of 98.94% at a call rate of 100% and 99.71% at
+a call rate of 95% in leave-one-out cross-validation. Furthermore, SoCal showed more
+robustness than the RLMM method when outliers were present in training data.
 
-´
+2 Methods
+2.1 Overview of SoCal’s genotype calling procedure
+SNP allele intensities are first normalized and summarized from raw microarray
+data using RMA method, an important preprocessing step that reduces cross-chip and
+cross-lab non-biological effects from raw data [10, 11]. After the preprocessing step,
+SoCal calls genotypes in two steps. In the first step, SoCal finds ellipsoidal decision
+regions for each genotype of a SNP using reference genotype calls. In the second step,
+SoCal uses these ellipsoidal decision regions to call SNPs for samples with unknown
+genotypes through minimum distance classification.
+In this section, I first introduce the problem of pattern separation by ellipsoid. Then
+I describe how SoCal finds ellipsoidal decision regions for each genotype and then calls
+genotypes using these ellipsoidal decision regions.
 
-1 k ` 2 tracepT q ` 3 }u
-˜ ai q § ui @i
-p1, ai qT Ep1,
-˜ bj q • k @j
+2.2 Pattern separation by ellipsoid
+An ellipsoid E Ď ❘n can be expressed as E “ tx P ❘n |px ´ cqT Epx ´ cq ď 1u, where
+c is the center of the ellipsoid, and E a positive definite matrix denoting the shape and
+orientation of the ellipsoid. Let tai u be the points to be included in an ellipsoid, and
+tbj u be the points to be excluded, the problem of ellipsoidal separation is to find c and
+E such that pai ´ cqT Epai ´ cq ď 1 @i and pbj ´ cqT Epbj ´ cq ą 1 @j.
+
+2.3 Forming ellipsoidal decision regions for each genotype
+Let G “ tAA, AB, BBu be the set of genotypes of SNP n, and JAA , JAB , JBB the
+index set of samples with the corresponding genotype. Let X “ tplogpθA q, logpθB qqi |i “
+1, ¨ ¨ ¨ , |JAA | ` |JAB | ` |JBB |u be the set of log-transformed allele intensities of all the
+samples, and XAA “ txj |xj P X, j P JAA u, XAB “ txj |xj P X, j P JAB u, XBB “
+txj |xj P X, j P JBB u the set of log-transformed allele intensities from samples having
+the corresponding genotype for SNP n.
+To find the ellipsoid that includes XAA and excludes XAB Y XBB , one sets tai u “
+XAA and tbj u “ XAB Y XBB , and solves the following conic programming problem.
+´ β1 k ` β2 tracepT q ` β3 }u ´ ✶}1
+˜ ai q ď ui @i
+subject to p1, ai qT Ep1,
+˜ bj q ě k @j
 p1, bj qT Ep1,
 „
-⇢
-s vT
-
+
+T
+s
+v
 ˜“
 E
+ľ0
+v F
 „
-F
-I
+
+F I
+ľ0
+I T
 
-v
+minimize
 
-I
-T
+Here, I denotes the identity matrix. Derivation of the problem formulation is largely
+followed from [12]. For the sake of space, detailed derivation of the problem formulation
+is not presented here. In the problem formulation above, βi ą 0 are the weights assigned
 
-⇢
+3
 
-´ }1
+Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
-©0
+2
 
-F
+METHODS
 
-©0
-
-In the problem formulation above i ° 0 are the weights assigned to each criteria of finding the
-ellipsoid—separation ratio, ellipsoid volume, and number of enclosed points. In SoCal, 1 , 2 , 3 are
-empirically set„to 1, 104⇢, and 102 respectively.
+to the criteria of finding separating ellipsoid—separation ratio, ellipsoid volume, and
+inclusion of points. By increasing β2 , one finds ellipsoid with smaller volume. And by
+increasing β3 , one finds ellipsoid that tries to include more data points. In SoCal, default
+values for β1 , β„2 , β3 areempirically set to 1, 104 , and 102 respectively.
 T
 ˜˚ “ s v
 Let E
-be the optimal solution to the problem above. The separating ellipsoid E ˚ is
+be the optimal solution to the problem above. The separating
 v F
-defined as E ˚ “ tx P n |px ´ c˚ qT E ˚ px ´ c˚ q § 2p1 ` kqu, where c˚ “ ´F ´1 v, E ˚ “ p1´s`cF˚ T F c˚ q .
-To find the ellipsoid that includes XAB and excludes XAA Y XBB , one sets tai u “ XAB and
-tbj u “ XAA Y XBB , and solves the above conic programming problem. The same procedure also
-applies to finding the ellipsoid that includes XBB and excludes XAA Y XAB .
+ellipsoid E ˚ is defined as E ˚ “ tx P ❘n |px ´ c˚ qT E ˚ px ´ c˚ q ď 2p1 ` kqu, where c˚ “
+´F ´1 v, E ˚ “ p1´s`cF˚ T F c˚ q .
+To find the ellipsoid that includes XAB and excludes XAA Y XBB , one sets tai u “
+XAB and tbj u “ XAA Y XBB , and solves the above conic programming problem. The
+same procedure also applies to finding the ellipsoid that includes XBB and excludes
+XAA Y XAB .
 
-2.4 Rescuing missing genotype clusters
+2.4 Handling sparse or missing genotype clusters
 
 15
 
@@ -197,11 +214,12 @@ log(allele B intensity)
 
 log(allele B intensity)
 
-If a SNP has moderate minor allele frequency (MAF), the genotype clusters of that SNP are well
-defined, and SoCal obtains three ellipsoidal decision regions for that SNP, one for each genotype (Figure
-2a). However, if a SNP has lower MAF, some genotype cluster may not be well defined. For these
-SNPs, SoCal estimates the ellipsoid for the missing genotype cluster using the ellipsoids for the other
-two genotypes through simple geometric transformations (Figure 2b).
+If a SNP has moderate minor allele frequency (MAF), the genotype clusters of
+that SNP are well defined, and SoCal obtains three ellipsoidal decision regions for that
+SNP, one for each genotype cluster (Figure 2a). However, if a SNP has lower MAF,
+some genotype cluster may be sparse or missing. For these SNPs, SoCal estimates the
+ellipsoid for the sparse or missing genotype cluster using the ellipsoids for the other two
+genotypes through simple geometric transformations (Figure 2b).
 
 13
 12.5
@@ -222,9 +240,13 @@ two genotypes through simple geometric transformations (Figure 2b).
 10.5
 
 10
-9.5
 
 10
+
+9.5
+
+9.5
+
 9
 
 10
@@ -237,11 +259,10 @@ log(allele A intensity)
 
 14
 
-9.5
-
 15
 
-(a) SNP with well defined genotype clusters
+(a) SNP with 3 well defined genotype clusters.
+SoCal obtains one ellipsoid for each genotype cluster.
 
 9
 
@@ -256,18 +277,20 @@ log(allele A intensity)
 
 15
 
-(b) SNP with sparse BB genotype cluster
+(b) SNP with sparse genotype BB cluster. SoCal first obtains ellipsoids for genotype AA
+and AB clusters, and then estimates the ellipsoid (drawn in dashed line) for genotype
+BB cluster.
 
-Figure 2: Each dot in the plots above represents a sample, with samples having HapMap reference
-genotype calls marked red. The ellipsoids were obtained using only the reference calls.
+Figure 2: Ellipsoids obtained by SoCal for SNPs with well-defined and sparse genotype
+clusters. Each dot in the plots represents a sample, with samples having
+HapMap reference genotype calls marked red. The ellipsoids are obtained
+using all the reference calls.
 2.4.1 Missing genotype AA or BB cluster
-If genotype AA cluster of a SNP has less than 3 reference calls, SoCal first finds the ellipsoids
-for genotype AB and BB clusters, and then estimates that for genotype AA cluster through simple
-geometric transformations.
-Let EAB “ tx P n |px´cAB qT EAB px´cAB q § 1u and EBB “ tx P n |px´cBB qT EBB px´cBB q § 1u
-be the ellipsoids obtained for genotype AB and BB clusters, and nAB , nBB the unit vectors pointing
+If genotype AA cluster of a SNP has less than 3 reference calls, SoCal first finds
+the ellipsoids for genotype AB and BB clusters, and then estimates that for genotype
+AA cluster through simple geometric transformations.
 
-3
+4
 
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
@@ -275,52 +298,54 @@ be the ellipsoids obtained for genotype AB and BB clusters, and nAB , nBB the un
 
 MATERIALS
 
-in the direction of the major axis of the corresponding ellipsoid. SoCal estimates the center of EAA , the
-ellipsoid for genotype AA cluster, by reflecting cBB , the center of EBB , across the major axis of EAB .
-To estimate the orientation of EAA , SoCal first determines the angle between nAB and nBB , and then
-applies a rotation matrix of that angle on EAB .
-Formally, let EAA “ tx P n |px ´ cAA qT EAA px ´ cAA q § 1u be the estimated ellipsoid for genotype
-AA cluster, and ↵ the angle between nAB and nBB , then cAA “ ´cBB `2cAB `2nAB ppcBB ´cAB qT nAB q,
-and EAA “ RT EAB R, where R is a rotation matrix of angle ↵.
-If genotype BB cluster is missing, the center and orientation of the ellipsoid for that cluster is
-estimated in a similar way. Formally, let EBB “ tx P n |px ´ cBB qT EBB px ´ cBB q § 1u be the
-estimated ellipsoid for genotype BB cluster, and ↵ the angle between nAB and nAA , then cBB “
-´cAA ` 2cAB ` 2nAB ppcAA ´ cAB qT nAB q, and EBB “ RT EAB R, where R is a rotation matrix of angle
-´↵.
+Let EAB “ tx P ❘n |px ´ cAB qT EAB px ´ cAB q ď 1u and EBB “ tx P ❘n |px ´
+cBB qT EBB px ´ cBB q ď 1u be the ellipsoids obtained for genotype AB and BB clusters,
+and nAB , nBB the unit vectors pointing in the direction of the major axis of the corresponding ellipsoid. SoCal estimates the center of EAA , the ellipsoid for genotype AA
+cluster, by reflecting cBB , the center of EBB , across the major axis of EAB . To estimate
+the orientation of EAA , SoCal first determines the angle between nAB and nBB , and
+then applies a rotation matrix of that angle on EAB .
+Formally, let EAA “ tx P ❘n |px ´ cAA qT EAA px ´ cAA q ď 1u be the estimated
+ellipsoid for genotype AA cluster, and α the angle between nAB and nBB , then cAA “
+´cBB ` 2cAB ` 2nAB ppcBB ´ cAB qT nAB q, and EAA “ RT EAB R, where R is a rotation
+matrix of angle α.
+If genotype BB cluster is missing, the center and orientation of the ellipsoid for that
+cluster is estimated in a similar way. Formally, let EBB “ tx P ❘n |px ´ cBB qT EBB px ´
+cBB q ď 1u be the estimated ellipsoid for genotype BB cluster, and α the angle between nAB and nAA , then cBB “ ´cAA ` 2cAB ` 2nAB ppcAA ´ cAB qT nAB q, and EBB “
+RT EAB R, where R is a rotation matrix of angle ´α.
 2.4.2 Missing genotype AB cluster
-Although SNPs with genotype AB cluster missing were not observed in HapMap reference genotype
-calls, for completeness, for these SNPs SoCal first obtains, EAA and EBB , the ellipsoids for genotype
-AA and BB cluster, and then estimates the center of EAB , the ellipsoid for the missing cluster, using
-the mid-point between the centers of EAA and EBB . The orientation of EAB is obtained by applying a
-rotation to the ellipsoid with the minimum volume among EAA and EBB .
-Formally, let EAB “ tx P n |px ´ cAB qT EAB px ´ cAB q § 1u be the estimated ellipsoid for genotype
+Although SNPs with genotype AB cluster missing were not observed in HapMap
+reference genotype calls, for completeness, for these SNPs SoCal first obtains, EAA and
+EBB , the ellipsoids for genotype AA and BB cluster, and then estimates the center of
+EAB , the ellipsoid for the missing cluster, using the mid-point between the centers of
+EAA and EBB . The orientation of EAB is obtained by applying a rotation to the ellipsoid
+with the minimum volume among EAA and EBB .
+Formally, let EAB “ tx P ❘n |px ´ cAB qT EAB px ´ cAB q ď 1u be the estimated
+ellipsoid for genotype AB cluster, and α the angle between nAA and nBB , then cAB “
 ˆ
-AB cluster, and ↵ the angle between nAA and nBB , then cAB “ pcAA ` cBB q{2, and EAB “ RT ER,
-ˆ
-where E is the matrix of the ellipsoid with the minimum volumne among EAA and EBB , and R a
-rotation matrix of angle ˘↵{2. The sign of the angle of rotation is dependent on the choise of ellipsoid
-on which rotation is applied—positive for EAA and negative for EBB .
+ˆ is the matrix of the ellipsoid with the
+pcAA ` cBB q{2, and EAB “ RT ER,
+where E
+minimum volumne among EAA and EBB , and R a rotation matrix of angle ˘α{2. The
+sign of the angle of rotation is dependent on the choise of ellipsoid on which rotation is
+applied—positive for EAA and negative for EBB .
 
 2.5 Genotype calling
-After the ellipsoidal decision regions, Eg “ tx P n |px ´ cg qT Eg px ´ cg q § 1u, @g P tAA, AB, BBu
-of a SNP are obtained, SoCal uses them to classify SNPs with unknown genotypes using minimum
-distance classification.
-a
-If a sample has allele intensity ✓A and ✓B at SNP n, SoCal first computes Dg “ px ´ cg qT Eg px ´ cg q,
-where x “ plogp✓A q, logp✓B qq, for each g P tAA, AB, BBu. SoCal then calls the genotype, G, of that
-sample at SNP n as the genotype having the minimum Dg , that is, G “ arg mingPtAA,AB,BBu Dg .
-SoCal defines “ 1 ´ DG {pDAA ` DAB ` DBB q to quantify the confidence of each genotype call.
-By increasing the threshold for , SoCal can achieve higher call accuracy at the cost of decreasing call
-rate.
+After the ellipsoidal decision regions, Eg “ tx P ❘n |px ´ cg qT Eg px ´ cg q ď 1u, @g P
+tAA, AB, BBu of a SNP are obtained, SoCal uses them to classify SNPs with unknown
+genotypes using minimum distance classification.
+a If a sample has allele intensities θA and θB at SNP n, SoCal first computes Dg “
+px ´ cg qT Eg px ´ cg q, where x “ plogpθA q, logpθB qq, for each g P tAA, AB, BBu. SoCal
+then calls the genotype, G, of that sample at SNP n as the genotype having minimum
+Dg , that is, G “ arg mingPtAA,AB,BBu Dg .
+SoCal defines λ “ 1 ´ DG {pDAA ` DAB ` DBB q to quantify the confidence of each
+genotype call. By increasing the threshold for λ, SoCal can achieve higher call accuracy
+at the cost of decreasing call rate.
 
 3 Materials
-The microarray used for evaluation in this project was the A↵ymetrix GeneChip Human Mapping
-50K Xba Array, which contains 58,960 SNPs. Raw microarray data for 270 samples was obtained from
-HapMap FTP. And reference genotype calls were obtained from HapMap using HapMart.
-After removing strand-ambiguous SNPs and SNPs not present on HapMart from the microarry,
-16,387 SNPs were left. Figure 3 shows the minor allele frequency distribution for these SNPs.
+The microarray used for evaluation in this project was the Affymetrix GeneChip
+Human Mapping 50K Xba Array, which contains 58,960 SNPs. Raw microarray data
 
-4
+5
 
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
@@ -328,6 +353,11 @@ After removing strand-ambiguous SNPs and SNPs not present on HapMart from the mi
 
 RESULTS
 
+for 270 samples was obtained from HapMap FTP, and reference genotype calls were
+obtained from HapMap using HapMart [13].
+After removing strand-ambiguous SNPs and SNPs not present on HapMart from
+the set of SNPs on the microarry, 16,387 SNPs were left. Figure 3 shows the minor allele
+frequency distribution for these SNPs.
 6000
 
 5000
@@ -361,25 +391,26 @@ minor allele frequency (MAF)
 0.5
 
 Figure 3: Minor allele frequency distribution for the 16,387 SNPs.
-From the 16,387 SNPs, 4,064 SNPs with two genotype clusters having less than 3 reference genotype
-calls were further removed from the microarry. Among these SNPs, 3,596 are monomorphic SNPs. In
-total, 12,323 SNPs were left for evaluation. On average, each of these SNPs has 83 reference genotype
-calls.
+From the 16,387 SNPs, 4,064 SNPs with two genotype clusters having less than 3
+reference genotype calls were further removed. Among these SNPs, 3,596 are monomorphic SNPs with MAF equal to 0. In total, 12,323 SNPs were left for evaluation. On
+average, each of these SNPs has 83 reference genotype calls.
 
 4 Results
 4.1 Cross-validation with HapMap reference calls
-To evaluate the accuracy of SoCal, I compared the genotype calls made by SoCal with the reference
-calls from HapMap through leave-one-out cross-validation. For each SNP, I used one sample from the
-reference set as validation data and the rest as training data. I repeated this process until all the
-samples in the reference set were used as validation data exactly once.
-First, I compared the accuracy of SoCal under di↵erent choices of i , which are the weights assigned
-to the criteria of finding the ellipsoidal decision regions for each genotype cluster. Figure 4 shows the
-concordance rate of SoCal in the leave-one-out cross-validation for a wide range of call rates when
-di↵erent values of i were used. Because the choice of weights, 1 “ 1, 2 “ 104 , 3 “ 102 , had the
-highest call rate at fixed concordance rates, it’s set to be the default choice of SoCal. And all future
-experiments presented in this article used this choice of weights.
+To evaluate the accuracy of SoCal, I compared the genotype calls made by SoCal
+with the reference calls from HapMap through leave-one-out cross-validation. For each
+SNP, I used one sample from the reference set as validation data and the rest as training
+data. I repeated this process until all the samples in the reference set were used as
+validation data exactly once.
+First, I compared the accuracy of SoCal under different choices of βi , the weights
+assigned to the criteria of finding ellipsoidal decision regions for each genotype cluster.
+Figure 4 shows the concordance rate of SoCal in the leave-one-out cross-validation at a
+wide range of call rates for different values of βi . Because the weights, β1 “ 1, β2 “ 104 ,
+β3 “ 102 , had the highest call rates at fixed concordance rates, they are set to be the
+default of SoCal. And all future experiments presented in this article used this choice
+of weights.
 
-5
+6
 
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
@@ -421,10 +452,12 @@ call rate (%)
 
 1
 
-Figure 4: Concordance rate of SoCal in the leave-one-out cross-validation with HapMap reference calls
-as a function of call rate, for di↵erent choices of i
-Table 1 shows the genotype calls made by SoCal and those available on HapMap during leave-oneout cross-validation. At a call rate of 100%, SoCal made 1,081,319 calls in total, out of which 1,069,857
-were concordant with HapMap calls, achieving a concordance rate of 98.94%.
+Figure 4: Concordance rate of SoCal in the leave-one-out cross-validation with HapMap
+reference calls as a function of call rate, for different choices of βi
+Table 1 shows the genotype calls made by SoCal and the reference calls on HapMap
+during leave-one-out cross-validation. At a call rate of 100%, SoCal made 1,081,319
+calls in total, out of which 1,069,857 were concordant with HapMap calls, achieving a
+concordance rate of 98.94%.
 HapMap/SoCal
 AA
 AB
@@ -450,11 +483,11 @@ No Call
 0
 0
 
-Table 1: At a call rate of 100%, SoCal achieved 98.94% concordance rate in the leave-one-out crossvalidation with HapMap reference calls.
-Table 2 shows detailed comparison between SoCal and HapMap calls at a call rate of 95%. At
-a call rate of 95%, SoCal made 1,028,258 calls in total, out of which 1,025,242 were concordant with
-HapMap calls, achieving a concordance rate of 99.71%. These results are comparable to those of many
-state-of-the-art methods.
+Table 1: At a call rate of 100%, SoCal achieved 98.94% concordance rate in the leaveone-out cross-validation with HapMap reference calls.
+Table 2 shows detailed comparison between SoCal and HapMap calls at a call rate of
+95%. At a call rate of 95%, SoCal made 1,028,258 calls in total, out of which 1,025,242
+were concordant with HapMap calls, achieving a concordance rate of 99.71%. These
+results are comparable to those achieved by previous methods [7, 15].
 HapMap/SoCal
 AA
 AB
@@ -480,19 +513,9 @@ No Call
 25,057
 13,290
 
-Table 2: At a call rate of 95%, SoCal achieved 99.71% concordance rate in the leave-one-out crossvalidation with HapMap reference calls.
+Table 2: At a call rate of 95%, SoCal achieved 99.71% concordance rate in the leaveone-out cross-validation with HapMap reference calls.
 
-4.2 Comparison with CRLMM calls
-As another way of evaluating the accuracy of SoCal, I compared the genotype calls made by
-SoCal and those made by CRLMM, a widely used state-of-the-art genotype calling method for SNP
-microarrays.
-I first trained SoCal using all the samples with HapMap reference calls, and then I made genotype
-calls on the rest of the samples not in the reference set. I excluded the training samples when comparing
-SoCal with CRLMM, and compared these two methods only at samples not in the training samples.
-Table 3 shows detailed comparison between SoCal and CRLMM at a call rate of 100%. In total,
-SoCal made 2,245,891 calls, out of which 2,134,868 were concordant with those made by CRLMM,
-
-6
+7
 
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
@@ -500,8 +523,20 @@ SoCal made 2,245,891 calls, out of which 2,134,868 were concordant with those ma
 
 RESULTS
 
-achieving a concordance rate of 95.10%. The high concordance rate between SoCal and CRLMM
-implies that SoCal has the potential to become an alternative genotype caller.
+4.2 Comparison with CRLMM calls
+As another way of evaluating the accuracy of SoCal, I compared the genotype calls
+made by SoCal and those made by CRLMM, a state-of-the-art supervised genotype
+calling method for SNP microarrays that uses a two-level hierarchical model to model
+variations in log-transformed allele intensities across SNPs and across chips [11].
+I first trained SoCal using all the samples with HapMap reference calls, and then
+made genotype calls on the rest of the samples. When comparing SoCal with CRLMM,
+I excluded the training samples and compared these two methods only at samples not
+in the training samples.
+Table 3 shows detailed comparison between SoCal and CRLMM at a call rate of
+100%. In total, SoCal made 2,245,891 calls, out of which 2,134,868 were concordant with
+those made by CRLMM, achieving a concordance rate of 95.10%. The high concordance
+rate between SoCal and CRLMM suggests that SoCal has the potential to become an
+alternative genotype caller.
 CRLMM/SoCal
 AA
 AB
@@ -527,224 +562,226 @@ No Call
 0
 0
 
-Table 3: At a call rate of 100%, SoCal achieved 95.10% concordance rate with the calls made by
-CRLMM. Training samples for SoCal were excluded during comparison.
+Table 3: At a call rate of 100%, SoCal achieved 95.10% concordance rate with the calls
+made by CRLMM. Training samples for SoCal were excluded during comparison.
 
 4.3 Comparison with RLMM in the presence of outliers
-I investigated how robust SoCal is when there are outliers in the training data. For comparison, I
-implemented the RLMM algorithm, which independently fits bivariate Gaussian distributions on the log
-transformed allele intensities of each genotype cluster and then classifies SNPs with unknown genotype
-into the distribution having minimum Mahalanobis distance.
-For accurate comparison, I selected a subset of 3,442 SNPs that have more than 10 reference
-calls for each of the genotype cluster from the set of 12,323 SNPs used for evaluation in the previous
-section. To simulate outliers, for each SNP, I first estimated µg , the mean of the log transformed
-allele intensities of each genotype cluster, and then drew one outlier for each genotype cluster from the
-Gaussian distribution N pµg , Iq, where I is the identity matrix and a positive constant controlling the
-variance of the distribution—by increasing , one increases the e↵ect of outliers. In total, I simulated
-3 outliers for each SNP, one for each genotype cluster.
-As an example, Figure 5 shows the ellipsoidal decision regions obtained by SoCal and the level
-curves of the Gaussian decision regions obtained by RLMM before and after an outlier is introduced to
-the genotype AA cluster. Before an outlier is introduced, both SoCal and RLMM can make accurate
-genotype calls. However, after an outlier is introduced into the genotype AA cluster, the variance of the
-Gaussian decision region obtained by RLMM is significantly a↵ected, making the classificatoin much
-less accurate. On the other hand, because SoCal not only puts penalty on outliers but also jointly
-uses data from other genotype clusters to form the decision region, it can still classify most SNPs into
-correct genotypes.
-
-7
-
-4
-
-15
-
-15
-
-14.5
-
-14.5
-
-14
-
-14
-
-13.5
-
-13.5
-log(allele B intensity)
-
-log(allele B intensity)
-
-Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
-
-13
-12.5
-12
-11.5
-
-13
-12.5
-12
-11.5
-
-11
-
-11
-
-10.5
-
-10.5
-
-10
-
-10
-
-9.5
-
-9.5
-
-9
-
-10
-
-11
-
-12
-13
-log(allele A intensity)
-
-14
-
-15
-
-RESULTS
-
-9
-
-10
-
-11
-
-12
-13
-log(allele A intensity)
-
-14
-
-15
-
-15
-
-15
-
-14.5
-
-14.5
-
-14
-
-14
-
-13.5
-
-13.5
-log(allele B intensity)
-
-log(allele B intensity)
-
-(a) Decision regions found by SoCal when there(b) Decision regions found by RLMM when
-is no outlier
-there is no outlier
-
-13
-12.5
-12
-11.5
-
-13
-12.5
-12
-11.5
-
-11
-
-11
-
-10.5
-
-10.5
-
-10
-
-10
-
-9.5
-
-9.5
-
-9
-
-10
-
-11
-12
-13
-log(allele A intensity)
-
-14
-
-15
-
-9
-
-10
-
-11
-
-12
-13
-log(allele A intensity)
-
-14
-
-15
-
-(c) Decision regions found by SoCal when there(d) Decision regions found by RLMM when
-is no outlier
-there is no outlier
-
-Figure 5: Each dot in the plots above represents a sample, with samples having HapMap reference
-genotype calls marked red. The ellipsoids were obtained using only the reference calls.
-Figure 6 shows the decrease in concordance rate of SoCal and RLMM at call rate of 100% in leaveone-out cross-validation with HapMap reference genotype calls as the variance of simulated outliers
-varies from 0 to 10. Clearly, the concordance rate of SoCal decreases much more slowly than does the
-RLMM method. Thus, SoCal is in general more robust to outliers than RLMM.
+I investigated how robust SoCal is when outliers are present in training data. For
+comparison, I implemented the RLMM algorithm, which fits bivariate Gaussian distributions on log-transformed allele intensities of each genotype cluster and then classifies
+SNPs with unknown genotype into the distribution having minimum Mahalanobis distance based on the allele intensities they generate [7].
+For accurate comparison, I selected a subset of 3,442 SNPs that have more than 10
+reference calls for each genotype cluster from the set of 12,323 SNPs used for evaluation
+in previous experiments. To simulate outliers, for each SNP, I first estimated µg , the
+mean of log-transformed allele intensities of each genotype cluster, and then drew one
+outlier for each genotype cluster from the Gaussian distribution N pµg , γIq, where I is the
+identity matrix and γ a positive constant controlling the variance of the distribution—by
+increasing γ, one increases the effect of outliers. In total, I simulated 3 outliers for each
+SNP, one for each genotype cluster.
+To illustrate the robustness of SoCal and RLMM, Figure 5 shows the ellipsoidal
+decision regions obtained by SoCal and the level curves of the Gaussian decision regions
+obtained by RLMM before and after an outlier is introduced to the genotype AA cluster.
+Before an outlier is introduced, both SoCal and RLMM can find appropriate decision
+regions for each genotype cluster and make accurate genotype calls. However, after
+an outlier is introduced into the genotype AA cluster, the variance of the Gaussian
+decision region obtained by RLMM for the genotype AA cluster is significantly affected,
+making genotype calling much less accurate. On the other hand, because SoCal not only
+considers outliers but also jointly uses data points from other genotype clusters when
+forming the decision regions, the decision region for the genotype AA cluster, although
 
 8
 
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
+4
+
+RESULTS
+
+15
+
+15
+
+14.5
+
+14.5
+
+14
+
+14
+
+13.5
+
+13.5
+log(allele B intensity)
+
+log(allele B intensity)
+
+affected, is still accurate enough to classify all samples into correct genotypes.
+
+13
+12.5
+12
+11.5
+
+13
+12.5
+12
+11.5
+
+11
+
+11
+
+10.5
+
+10.5
+
+10
+9.5
+
+10
+9
+
+10
+
+11
+
+12
+13
+log(allele A intensity)
+
+14
+
+9.5
+
+15
+
+10
+
+11
+
+12
+13
+log(allele A intensity)
+
+14
+
+15
+
+(b) Decision regions formed by RLMM when
+there is no outlier.
+
+15
+
+15
+
+14
+
+14
+
+13
+
+13
+
+log(allele B intensity)
+
+log(allele B intensity)
+
+(a) Decision regions formed by SoCal when
+there is no outlier.
+
+9
+
+12
+
+11
+
+10
+
+12
+
+11
+
+10
+
+9
+
+9
+8
+
+9
+
+10
+
+11
+12
+13
+log(allele A intensity)
+
+14
+
+15
+
+16
+
+9
+
+(c) Decision regions formed by SoCal when
+an outlier (diamond-shaped point) is introduced into the genotype AA cluster. Although affected, these decision regions can
+still classify all samples into correct genotypes.
+
+10
+
+11
+
+12
+13
+14
+log(allele A intensity)
+
+15
+
+16
+
+(d) Decision regions formed by RLMM when
+an outlier (diamond-shaped point) is introduced into the genotype AA cluster. The
+variance of the bivariate Gaussian distribution is significantly affected, and RLMM
+may mistakenly classify samples with genotype AB into genotype AA.
+
+Figure 5: Each dot in the plots above represents a sample, with samples having HapMap
+reference genotype calls marked red. The ellipsoids were obtained using only
+the reference calls.
+Figure 6 shows the decrease in concordance rate of SoCal and RLMM at call rate
+of 100% in leave-one-out cross-validation with HapMap reference genotype calls as the
+variance of simulated outliers varies from 0 to 10. Clearly, the concordance rate of SoCal
+decreases much more slowly than does the RLMM method. Thus, SoCal is in general
+more robust to outliers than RLMM.
+
+9
+
+Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
+
 5
-
-DISCUSSION
-
-100
-SoCal
-RLMM
-
-concordance rate (%)
 
 98
 
+DISCUSSION
+
+SoCal
+RLMM
+
+97
+
+concordance rate (%)
+
 96
-
+95
 94
-
+93
 92
-
+91
 90
-
+89
 88
-
-0
 
 1
 
@@ -753,6 +790,7 @@ concordance rate (%)
 3
 
 4
+
 5
 6
 noise variance
@@ -765,72 +803,100 @@ noise variance
 
 10
 
-Figure 6: Concordance rate of SoCal and RLMM in the leave-one-out cross-validation with HapMap
-reference calls as a function of outlier variance.
+Figure 6: Concordance rate of SoCal and RLMM in the leave-one-out cross-validation
+with HapMap reference calls as a function of outlier variance.
 
 4.4 Software implementation
-SoCal is implemented in Python. To solve the conic programming problem of finding separating ellipsoids, SoCal uses CVXOPT. Source code of SoCal is available at https://github.com/huwenboshi/
-wqe/tree/master/genotype_caller.
+SoCal is implemented in Python. To solve the conic programming problem of finding
+separating ellipsoids, SoCal uses CVXOPT [14]. Source code of SoCal is available at
+https://github.com/huwenboshi/wqe/tree/master/genotype_caller.
 
 5 Discussion
-I have presented SoCal, a supervised genotype calling algorithm for A↵ymetrix SNP microarray.
-Unlike many existing supervised genotype calling algorithms that try to fit generative models (mostly
-Gaussian mixture models) on summarized allele intensities with reference genotype calls, SoCal uses
-these data to efficiently finds ellipsoidal decision regions for each genotype cluster by solving a conic
-programming problem. Both cross-validation of SoCal with HapMap reference calls and comparison
-with genotype calls made by CRLMM show that SoCal is comparable in accuracy to many of the stateof-the-art genotype calling methods. Also, when there are outliers in training data, SoCal outperforms
-RLMM, a genotype calling method that uses Gaussian decision regions to call genotypes, demonstrating
-the robustness of SoCal in the presence of outliers over existing methods. Overall, SoCal proves to be
-a promising alternative genotype caller for A↵ymetrix SNP microarray.
-Like many supervised genotype callers, SoCal has its limitations. First, SoCal is not directly
-applicable to SNP microarrays that don’t have reference genotype calls. Second, SoCal is, in general,
-also not directly applicable to the same SNP microarray across di↵erent laboratories because di↵erent
-laboratory protocols can generate di↵erent allele intensities for even the same SNP microarray. In these
-scenarios, one can first call genotypes from microarrays using unsupervised genotype calling algorithms.
-One can then use these calls as training data for SoCal and use SoCal to form refined ellipsoidal decision
-regions for each genotype cluster. Because SoCal is robust to outliers in the training data, the refined
-ellipsoidal decision regions can be used to accurately call genotypes for future SNPs. Another limitation
-of SoCal is that users need to fine tune the weights ( i ) assigned to the criteria of finding the ellipsoids.
-However, experiments with SoCal show that SoCal is mostly sensitive to the choice of 2 and 3 . And
-optimal values for parameters can be estimated efficiently through experiments.
-SoCal is still in development, and can be improved and extended in many directions. First, the
-current method that SoCal uses to handle SNPs with missing genotype clusters is through simple and
-fixed geometric transformations. This method assumes that genotype AA cluter and genotype BB
-cluster are symmetric around genotype AB cluster. However, this is not true in general. Future e↵orts
+I have presented SoCal, a supervised genotype calling algorithm for Affymetrix SNP
+microarray. Unlike many existing supervised genotype calling algorithms that try to fit
+generative models (mostly Gaussian mixture models) on summarized allele intensities
+with reference genotype calls, SoCal uses these data to efficiently finds ellipsoidal decision
+regions for each genotype cluster by solving a conic programming problem. Both crossvalidation of SoCal with HapMap reference calls and comparison with genotype calls
+made by CRLMM show that SoCal is comparable in accuracy to many of the state-ofthe-art genotype calling methods. Also, when there are outliers in training data, SoCal
+outperforms RLMM, a genotype calling method that uses Gaussian decision regions to
+call genotypes, demonstrating the robustness of SoCal in the presence of outliers over
+existing methods. Overall, SoCal proves to be a promising alternative genotype caller
+for Affymetrix SNP microarray.
+Like many supervised genotype callers, SoCal has its limitations. First, SoCal is
+not directly applicable to SNP microarrays that don’t have reference genotype calls.
+Second, SoCal is, in general, also not directly applicable to the same SNP microarray
+across different laboratories because different laboratory protocols can generate different
+allele intensities for even the same SNP microarray. In these scenarios, one can first call
+genotypes from microarrays using unsupervised genotype calling algorithms. One can
+then use these calls as training data for SoCal and use SoCal to form refined ellipsoidal
+decision regions for each genotype cluster. Because SoCal is robust to outliers in the
 
-9
+10
 
 Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
 
 References
 
-should be spent on how to estimate ellipsoids for missing genotype clusters more accurately. Second,
-currently SoCal only uses allele intensities data for reference genotype calls. However, allele intensities
-data for samples having structual variations is also available. A possible improvement for SoCal is
-to include these data in finding the ellipsoids for each genotype cluster to further refine the decision
-regions. These refined decision regions can then be used to detect possible structural variations.
-To summarize, SoCal presents a novel and promising method for genotype calling. It’s efficient in
-that it finds decision regions by solving a conic programming problem, which is solvable in polynomial
-time with guaranteed global optimum. SoCal is comparable in accuracy with many state-of-the-art
-methods. Although SoCal has its limitations, these limitations are also present in other supervised
-genotype callers, and have been addressed previously. SoCal can also be extended and improved to be
-more accurate and to have more functionality.
+training data, the refined ellipsoidal decision regions can be used to accurately call
+genotypes for future SNPs. Another limitation of SoCal is that users need to fine tune
+the weights (βi ) assigned to the criteria of finding the ellipsoids. However, experiments
+with SoCal show that SoCal is mostly sensitive to the choice of β2 and β3 . And optimal
+values for parameters can be estimated efficiently through experiments.
+SoCal is still in development, and can be improved and extended in many directions. First, the current method that SoCal uses to handle SNPs with missing genotype
+clusters is through simple and fixed geometric transformations. This method assumes
+that genotype AA cluter and genotype BB cluster are symmetric around genotype AB
+cluster. However, this is not true in general. Future efforts should be spent on how to estimate ellipsoids for missing genotype clusters more accurately. Second, currently SoCal
+only uses allele intensities data for reference genotype calls. However, allele intensities
+data for samples having structual variations is also available. A possible improvement
+for SoCal is to include these data in finding the ellipsoids for each genotype cluster to
+further refine the decision regions. These refined decision regions can then be used to
+detect possible structural variations.
+To summarize, SoCal presents a novel and promising method for genotype calling.
+It’s efficient in that it finds decision regions by solving a conic programming problem,
+which is solvable in polynomial time with guaranteed global optimum. SoCal is comparable in accuracy with many state-of-the-art methods. Although SoCal has its limitations,
+these limitations are also present in other supervised genotype callers, and have been
+addressed previously. SoCal can also be extended and improved to be more accurate
+and to have more functionality.
 
 References
-[1] Rho, S. W., Abell, G. C., Kim, K., Nam, Y., & Bae, J. (2010). Comparing microarrays and nextgeneration sequencing technologies for microbial ecology research. Trends in Biotechnology, 28,
-291-299.
-[2] Norl´en, H., Pettersson, E., Ahmadian, A., Lundeberg, J., & Sundberg, R. (2008). Classification
-of SNP genotypes by a Gaussian mixture model in competitive enzymatic assays. Mathematical
-Statistics Stockholm University Research Report, 3, 1-26.
-[3] Lin, Y., Tseng, G. C., Cheong, S. Y., Bean, L. J., Sherman, S. L., & Feingold, E. (2008). Smarter
-clustering methods for SNP genotype calling. Bioinformatics, 24, 2665-2671.
-[4] Wu, C. F. (1983). On the Convergence Properties of the EM Algorithm. The Annals of Statistics,
-11, 95-103.
-[5] Rabbee, N., & Speed, T. P. (2005). A genotype calling algorithm for a↵ymetrix SNP arrays. Bioinformatics, 22, 7-12.
-[6] Zhou, X., & Stephens, M. (2014). Efficient multivariate linear mixed model algorithms for genomewide association studies. Nature Methods, 11, 407-409.
-[7] Glineur F. (1998). Pattern separation via ellipsoids and conic programming. (MS Thesis). Facult
-Polytechnique de Mons, Mons, Belgium.
+[1] Gordon D, Finch SJ. Factors affecting statistical power in the detection of genetic
+association. J Clin Invest. 2005;115(6):1408-18.
+[2] Roh SW, Abell GC, Kim KH, Nam YD, Bae JW. Comparing microarrays and nextgeneration sequencing technologies for microbial ecology research. Trends Biotechnol.
+2010;28(6):291-9.
+[3] Norl´en, H., Pettersson, E., Ahmadian, A., Lundeberg, J., & Sundberg, R. (2008).
+Classification of SNP genotypes by a Gaussian mixture model in competitive enzymatic assays. Mathematical Statistics Stockholm University Research Report, 3,
+1-26.
+[4] Lin Y, Tseng GC, Cheong SY, Bean LJ, Sherman SL, Feingold E. Smarter clustering
+methods for SNP genotype calling. Bioinformatics. 2008;24(23):2665-71.
+[5] Fujisawa H, Eguchi S, Ushijima M, et al. Genotyping of single nucleotide polymorphism using model-based clustering. Bioinformatics. 2004;20(5):718-26.
+[6] Wu, C. F. (1983). On the Convergence Properties of the EM Algorithm. The Annals
+of Statistics, 11, 95-103.
+[7] Rabbee N, Speed TP. A genotype calling algorithm for affymetrix SNP arrays. Bioinformatics. 2006;22(1):7-12.
+[8] Huber, P.J., 1981. Robust Statistics. Wiley, New York.
+[9] Marioni JC, Thorne NP, Valsesia A, et al. Breaking the waves: improved detection of
+copy number variation from microarray-based comparative genomic hybridization.
+Genome Biol. 2007;8(10):R228.
+[10] Bolstad BM, Irizarry RA, Astrand M, Speed TP. A comparison of normalization
 
-10
+11
+
+Huwenbo Shi (603-778-363) shihuwenbo@ucla.edu
+
+References
+
+methods for high density oligonucleotide array data based on variance and bias.
+Bioinformatics. 2003;19(2):185-93.
+[11] Carvalho B, Bengtsson H, Speed TP, Irizarry RA. Exploration, normalization,
+and genotype calls of high-density oligonucleotide SNP array data. Biostatistics.
+2007;8(2):485-99.
+[12] Glineur F. (1998). Pattern separation via ellipsoids and conic programming. (MS
+Thesis). Facult Polytechnique de Mons, Mons, Belgium.
+[13] The International HapMap Consortium. The International HapMap Project. Nature 426, 789-796 (2003).
+[14] M. S. Andersen, J. Dahl, and L. Vandenberghe. CVXOPT: A Python package for
+convex optimization, version 1.1.7. Available at cvxopt.org, 2014.
+[15] Di X, Matsuzaki H, Webster TA, et al. Dynamic model based algorithms for screening and genotyping over 100 K SNPs on oligonucleotide microarrays. Bioinformatics.
+2005;21(9):1958-63.
+
+12
 
 

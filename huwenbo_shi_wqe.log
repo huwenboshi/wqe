@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  13 JUL 2014 14:05
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.5)  13 JUL 2014 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1081,7 +1081,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 872.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 872.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 872.
 Package rerunfilecheck Info: File `huwenbo_shi_wqe.out' has not changed.
-(rerunfilecheck)             Checksum: 9DE4915119CCE070D5F52E310AD74527;1179.
+(rerunfilecheck)             Checksum: F3F722939B19CB2599ABE56B7B39A76A;1196.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1121,7 +1121,7 @@ ist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/mathabx-type1/matha8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/mathabx-type1/mathb10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/mathabx-type1/mathx10.pfb>
-Output written on huwenbo_shi_wqe.pdf (12 pages, 352782 bytes).
+Output written on huwenbo_shi_wqe.pdf (12 pages, 352808 bytes).
 PDF statistics:
  381 PDF objects out of 1000 (max. 8388607)
  303 compressed objects within 4 object streams
